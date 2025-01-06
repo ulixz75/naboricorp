@@ -1394,6 +1394,7 @@ The Clients
 .pricing-item-regular ul {
   list-style: none; /* Elimina las viñetas predeterminadas */
   padding: 0; /* Ajusta el espacio del contenedor */
+  text-align: left;
 }
 
 .pricing-item-regular ul li {
@@ -1402,6 +1403,7 @@ The Clients
   margin-bottom: 15px;
   position: relative; /* Permite usar posicionamiento relativo para el icono */
   padding-left: 25px; /* Añade espacio para el checkmark */
+  text-align: left;
 }
 
 .pricing-item-regular ul li::before {
@@ -1484,6 +1486,7 @@ The Clients
   list-style: none; /* Elimina las viñetas predeterminadas */
   padding: 0; /* Quita el espacio interno del contenedor de la lista */
   margin: 0; /* Quita el margen externo del contenedor */
+  text-align: left;
 }
 
 .pricing-item-pro ul li {
@@ -1492,6 +1495,7 @@ The Clients
   color: #4b8ef1;
   font-size: 15px;
   margin-bottom: 15px;
+  text-align: left;
 }
 
 .pricing-item-pro ul li::before {
