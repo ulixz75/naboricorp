@@ -1391,21 +1391,32 @@ The Clients
   margin-bottom: 30px;
 }
 
+.pricing-item-regular ul {
+  list-style: none; /* Elimina las viñetas predeterminadas */
+  padding: 0; /* Ajusta el espacio del contenedor */
+}
+
 .pricing-item-regular ul li {
   color: #4b8ef1;
   font-size: 15px;
   margin-bottom: 15px;
+  position: relative; /* Permite usar posicionamiento relativo para el icono */
+  padding-left: 25px; /* Añade espacio para el checkmark */
 }
 
-.pricing-item-regular ul li:last-child {
-  margin-bottom: 0px;
+.pricing-item-regular ul li::before {
+  content: '✔️'; /* Checkmark */
+  position: absolute; /* Posiciona el checkmark dentro del espacio reservado */
+  left: 0; /* Alineado a la izquierda */
+  top: 0; /* Asegura que quede verticalmente alineado */
+  color: #4b8ef1; /* Usa el mismo color del texto */
+  font-size: 15px; /* Tamaño acorde al texto */
 }
 
 .pricing-item-regular ul li.non-function {
   color: #afafaf;
   text-decoration: line-through;
 }
-
 .pricing-item-regular .border-button {
   position: relative;
   z-index: 1;
@@ -1469,20 +1480,32 @@ The Clients
   height: 106px;
   margin-bottom: 30px;
 }
+.pricing-item-pro ul {
+  list-style: none; /* Elimina las viñetas predeterminadas */
+  padding: 0; /* Quita el espacio interno del contenedor de la lista */
+  margin: 0; /* Quita el margen externo del contenedor */
+}
 
 .pricing-item-pro ul li {
+  position: relative; /* Permite posicionar los íconos con respecto a los elementos */
+  padding-left: 25px; /* Reserva espacio para los checkmarks */
   color: #4b8ef1;
   font-size: 15px;
   margin-bottom: 15px;
 }
 
-.pricing-item-pro ul li:last-child {
-  margin-bottom: 0px;
+.pricing-item-pro ul li::before {
+  content: '✔️'; /* Checkmark para elementos activos */
+  position: absolute; /* Posiciona el ícono dentro del espacio reservado */
+  left: 0; /* Alinea el ícono a la izquierda */
+  top: 0; /* Asegura la alineación vertical con el texto */
+  color: #4b8ef1; /* Color acorde al diseño */
+  font-size: 15px; /* Tamaño consistente con el texto */
 }
 
 .pricing-item-pro ul li.non-function {
-  color: #afafaf;
-  text-decoration: line-through;
+  color: #afafaf; /* Color gris para elementos no funcionales */
+  text-decoration: line-through; /* Tacha el texto */
 }
 
 .pricing-item-pro .border-button {
