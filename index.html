@@ -176,6 +176,52 @@
         padding: 20px 10px;  /* Slightly reduced padding for very small screens */
     }
 }
+     /* Base styles for the content container */
+.left-content.show-up.header-text {
+    position: relative;
+    width: 100%;
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    /* Target the column container */
+    .col-lg-12 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Specific styling for the h2 heading */
+    .left-content.show-up.header-text h2 {
+        text-align: left;
+        padding-left: 0;         /* Remove any existing padding */
+        margin-left: 0;          /* Remove any existing margin */
+        margin-bottom: 20px;     /* Add space between heading and paragraph */
+        font-size: 28px;         /* Adjust font size for mobile */
+    }
+
+    /* Style the paragraph text */
+    .left-content.show-up.header-text p {
+        text-align: left;
+        padding-left: 15px;      /* Add indentation for paragraph */
+        padding-right: 15px;     /* Balance the right side */
+        margin-bottom: 15px;     /* Space after paragraph */
+        line-height: 1.6;        /* Improve readability */
+    }
+
+    /* Ensure strong tags maintain the proper alignment */
+    .left-content.show-up.header-text p strong {
+        display: inline-block;    /* Helps maintain proper text wrapping */
+        width: 100%;             /* Full width for proper alignment */
+    }
+}
+
+/* Additional refinements for very small screens */
+@media screen and (max-width: 480px) {
+    .left-content.show-up.header-text h2 {
+        font-size: 24px;         /* Slightly smaller font for very small screens */
+        margin-bottom: 15px;     /* Adjust spacing for smaller screens */
+    }
+}
   </style>
 
 <body>
