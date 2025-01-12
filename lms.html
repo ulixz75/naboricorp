@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon"
-      href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
     <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp">
-    </script>
-    <title>LMS - Modern Platform</title>
+</script>
+
+    <title>College Board Practice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -18,7 +17,12 @@
             background: #f9f9f9;
             color: #333;
         }
-     
+
+        .logout-link {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
 
         .navbar {
             background: linear-gradient(45deg, #007bff, #00c6ff);
@@ -71,28 +75,63 @@
         .close-btn:hover {
             background: #cc0000;
         }
+
+        #pdf-container {
+            width: 100%;
+            height: 600px;
+            /* Ajusta la altura según necesites */
+            border: 1px solid #ccc;
+        }
+
+        #answer-sheet {
+            padding: 20px;
+            border: 1px solid #ccc;
+            height: 600px;
+            /* Iguala la altura del contenedor del PDF */
+            overflow-y: auto;
+            /* Permite el scroll si la hoja es muy larga */
+        }
+
+        .answer-item {
+            margin-bottom: 15px;
+        }
+
+        .answer-item label {
+            margin-right: 10px;
+        }
+
+        .correct-answer {
+            color: green;
+        }
+
+        .incorrect-answer {
+            color: red;
+        }
+
+        #correction-result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand" href="https://www.naboricorp.com">NABORI Corp-Logout</a>
-      
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="https://www.naboricorp.com">NABORI Corp- logout</a>
 
-       
-        <img src="https://static.wixstatic.com/media/af3a4a_a665fcdab6504bdbb769c99d7c095e64~mv2.png" alt="Logo" style="height: 40px; width: auto;">
-    </div>
-</nav>
-
+            <img src="https://static.wixstatic.com/media/af3a4a_a665fcdab6504bdbb769c99d7c095e64~mv2.png" alt="Logo"
+                style="height: 40px; width: auto;">
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="container my-5">
         <!-- Welcome Section -->
         <div class="text-center mb-4">
-            <h1>Bienvenido a tu plataforma de aprendizaje</h1>
-            <p>Selecciona una materia para comenzar tu examen.</p>
+            <h1>Bienvenido a tu plataforma de práctica de College Board</h1>
+            <p>Selecciona una materia para comenzar tu examen</p>
         </div>
 
         <!-- Subjects Grid -->
@@ -101,33 +140,30 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body text-center">
-                        <h5 class="card-title">College Board Practice</h5>
+                        <h5 class="card-title">Examen-1</h5>
+                        <p class="card-text">Ejercicios de práctica-Fundamentos matemáticos.</p>
+                        <button class="btn btn-primary"
+                            onclick="loadExam('collegeBoard', 'https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf')">Comenzar Examen</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Examen-2</h5>
                         <p class="card-text">Razonamiento matemático.</p>
                         <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/6781365ef20ae05adf275bd1')">Tomar
-                            examen</button>
+                            onclick="loadExam('quimicaBasica', 'https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_bbf4ec9d9db14b04932035fd82a14a23.pdf')">Comenzar Examen</button>
                     </div>
                 </div>
             </div>
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Química Básica</h5>
-                        <p class="card-text">Fundamentos de química.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/6762a54c9f2a81ef8619c697')">Tomar
-                            examen</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Materia 3</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/6783ed910362053377dcc0a7')">Tomar
-                            examen</button>
+                        <h5 class="card-title">Examen-3</h5>
+                        <p class="card-text">Prueba de College Board-práctica.</p>
+                        <button class="btn btn-primary" onclick="loadExam('materia3', 'https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_4b832627a8434714909e640f1cf6b277.pdf')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -136,9 +172,8 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 4</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/join')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia4', 'URL_DEL_PDF_MATERIA_4')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -147,9 +182,8 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 5</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/abcdef123456789abcdef1234')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia5', 'URL_DEL_PDF_MATERIA_5')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -158,9 +192,8 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 6</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/abcdef123456789abcdef1234')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia6', 'URL_DEL_PDF_MATERIA_6')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -169,9 +202,8 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 7</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/abcdef123456789abcdef1234')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia7', 'URL_DEL_PDF_MATERIA_7')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -180,9 +212,8 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 8</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/abcdef123456789abcdef1234')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia8', 'URL_DEL_PDF_MATERIA_8')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
@@ -191,52 +222,179 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Materia 9</h5>
                         <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary"
-                            onclick="showQuiz('https://quizizz.com/embed/quiz/abcdef123456789abcdef1234')">Tomar
-                            examen</button>
+                        <button class="btn btn-primary" onclick="loadExam('materia9', 'URL_DEL_PDF_MATERIA_9')">Comenzar
+                            Examen</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Quiz Section -->
-        <div id="quiz-section">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="text-center">Examen</h2>
-                <button class="close-btn" onclick="hideQuiz()">Cerrar</button>
+        <div id="quiz-section" class="mt-5">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Visor de Examen</h2>
+                    <iframe id="pdf-container" src="" frameborder="0"></iframe>
+                </div>
+                <div class="col-md-4">
+                    <h2>Hoja de Respuestas</h2>
+                    <div id="answer-sheet">
+                        <!-- Aquí se generarán las preguntas dinámicamente con JS -->
+                    </div>
+                    <button class="btn btn-primary mt-3" id="corregir-respuestas">Corregir Respuestas</button>
+                    <button class="btn btn-secondary mt-3 ml-2" id="borrar-respuestas">Borrar Respuestas</button>
+                    <div id="correction-result"></div>
+                </div>
             </div>
-            <div id="quiz-content" style="width:100%;display:flex;flex-direction:column;gap:8px;min-height:635px;">
-                <!-- Embedded content will load here -->
+            <div class="text-center mt-3">
+                <button class="btn close-btn" onclick="closeQuiz()">Cerrar Examen</button>
             </div>
         </div>
+
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 LMS Modern. Todos los derechos reservados.</p>
+        <p>© 2025 LMS Modern. Todos los derechos reservados.</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Function to show the quiz section
-        function showQuiz(embedUrl) {
-            const quizSection = document.getElementById('quiz-section');
-            const quizContent = document.getElementById('quiz-content');
+        const respuestasCorrectasPorMateria = {
+            'collegeBoard': {
+                'q1': 'a', 'q2': 'b', 'q3': 'c', 'q4': 'd', 'q5': 'e', 'q6': 'a', 'q7': 'b', 'q8': 'c', 'q9': 'd', 'q10': 'e',
+                'q11': 'a', 'q12': 'b', 'q13': 'c', 'q14': 'd', 'q15': 'e', 'q16': 'a', 'q17': 'b', 'q18': 'c', 'q19': 'd', 'q20': 'e',
+                'q21': 'a', 'q22': 'b', 'q23': 'c', 'q24': 'd', 'q25': 'e', 'q26': 'a', 'q27': 'b', 'q28': 'c', 'q29': 'd', 'q30': 'e',
+                'q31': 'a', 'q32': 'b', 'q33': 'c', 'q34': 'd', 'q35': 'e', 'q36': 'a', 'q37': 'b', 'q38': 'c', 'q39': 'd', 'q40': 'e',
+                'q41': 'a', 'q42': 'b', 'q43': 'c', 'q44': 'd', 'q45': 'e', 'q46': 'a', 'q47': 'b', 'q48': 'c', 'q49': 'd', 'q50': 'e',
+                'q51': 'a', 'q52': 'b', 'q53': 'c', 'q54': 'd', 'q55': 'e', 'q56': 'a', 'q57': 'b', 'q58': 'c', 'q59': 'd', 'q60': 'e',
+                'q61': 'a', 'q62': 'b', 'q63': 'c', 'q64': 'd', 'q65': 'e', 'q66': 'a', 'q67': 'b', 'q68': 'c', 'q69': 'd', 'q70': 'e',
+                'q71': 'a', 'q72': 'b', 'q73': 'c', 'q74': 'd', 'q75': 'e', 'q76': 'a', 'q77': 'b', 'q78': 'c', 'q79': 'd', 'q80': 'e',
+                'q81': 'a', 'q82': 'b', 'q83': 'c', 'q84': 'd', 'q85': 'e', 'q86': 'a', 'q87': 'b', 'q88': 'c', 'q89': 'd', 'q90': 'e',
+                'q91': 'a', 'q92': 'b', 'q93': 'c', 'q94': 'd', 'q95': 'e', 'q96': 'a', 'q97': 'b', 'q98': 'c', 'q99': 'd', 'q100': 'e'
+            },
+            'quimicaBasica': {
+                'q1': 'b', 'q2': 'c', 'q3': 'a', 'q4': 'e', 'q5': 'd', 'q6': 'b', 'q7': 'c', 'q8': 'a', 'q9': 'e', 'q10': 'd',
+                'q11': 'b', 'q12': 'c', 'q13': 'a', 'q14': 'e', 'q15': 'd', 'q16': 'b', 'q17': 'c', 'q18': 'a', 'q19': 'e', 'q20': 'd',
+                'q21': 'b', 'q22': 'c', 'q23': 'a', 'q24': 'e', 'q25': 'd', 'q26': 'b', 'q27': 'c', 'q28': 'a', 'q29': 'e', 'q30': 'd',
+                'q31': 'b', 'q32': 'c', 'q33': 'a', 'q34': 'e', 'q35': 'd', 'q36': 'b', 'q37': 'c', 'q38': 'a', 'q39': 'e', 'q40': 'd',
+                'q41': 'b', 'q42': 'c', 'q43': 'a', 'q44': 'e', 'q45': 'd', 'q46': 'b', 'q47': 'c', 'q48': 'a', 'q49': 'e', 'q50': 'd',
+                'q51': 'b', 'q52': 'c', 'q53': 'a', 'q54': 'e', 'q55': 'd', 'q56': 'b', 'q57': 'c', 'q58': 'a', 'q59': 'e', 'q60': 'd',
+                'q61': 'b', 'q62': 'c', 'q63': 'a', 'q64': 'e', 'q65': 'd', 'q66': 'b', 'q67': 'c', 'q68': 'a', 'q69': 'e', 'q70': 'd',
+                'q71': 'b', 'q72': 'c', 'q73': 'a', 'q74': 'e', 'q75': 'd', 'q76': 'b', 'q77': 'c', 'q78': 'a', 'q79': 'e', 'q80': 'd',
+                'q81': 'b', 'q82': 'c', 'q83': 'a', 'q84': 'e', 'q85': 'd', 'q86': 'b', 'q87': 'c', 'q88': 'a', 'q89': 'e', 'q90': 'd',
+                'q91': 'b', 'q92': 'c', 'q93': 'a', 'q94': 'e', 'q95': 'd', 'q96': 'b', 'q97': 'c', 'q98': 'a', 'q99': 'e', 'q100': 'd'
+            },
+            'materia3': {
+                'q1': 'c', 'q2': 'a', 'q3': 'e', 'q4': 'b', 'q5': 'd', 'q6': 'c', 'q7': 'a', 'q8': 'e', 'q9': 'b', 'q10': 'd',
+                'q11': 'c', 'q12': 'a', 'q13': 'e', 'q14': 'b', 'q15': 'd', 'q16': 'c', 'q17': 'a', 'q18': 'e', 'q19': 'b', 'q20': 'd',
+                'q21': 'c', 'q22': 'a', 'q23': 'e', 'q24': 'b', 'q25': 'd', 'q26': 'c', 'q27': 'a', 'q28': 'e', 'q29': 'b', 'q30': 'd',
+                'q31': 'c', 'q32': 'a', 'q33': 'e', 'q34': 'b', 'q35': 'd', 'q36': 'c', 'q37': 'a', 'q38': 'e', 'q39': 'b', 'q40': 'd',
+                'q41': 'c', 'q42': 'a', 'q43': 'e', 'q44': 'b', 'q45': 'd', 'q46': 'c', 'q47': 'a', 'q48': 'e', 'q49': 'b', 'q50': 'd',
+                'q51': 'c', 'q52': 'a', 'q53': 'e', 'q54': 'b', 'q55': 'd', 'q56': 'c', 'q57': 'a', 'q58': 'e', 'q59': 'b', 'q60': 'd',
+                'q61': 'c', 'q62': 'a', 'q63': 'e', 'q64': 'b', 'q65': 'd', 'q66': 'c', 'q67': 'a', 'q68': 'e', 'q69': 'b', 'q70': 'd',
+                'q71': 'c', 'q72': 'a', 'q73': 'e', 'q74': 'b', 'q75': 'd', 'q76': 'c', 'q77': 'a', 'q78': 'e', 'q79': 'b', 'q80': 'd',
+                'q81': 'c', 'q82': 'a', 'q83': 'e', 'q84': 'b', 'q85': 'd', 'q86': 'c', 'q87': 'a', 'q88': 'e', 'q89': 'b', 'q90': 'd',
+                'q91': 'c', 'q92': 'a', 'q93': 'e', 'q94': 'b', 'q95': 'd', 'q96': 'c', 'q97': 'a', 'q98': 'e', 'q99': 'b', 'q100': 'd'
+            },
+            'materia4': {},
+            'materia5': {},
+            'materia6': {},
+            'materia7': {},
+            'materia8': {},
+            'materia9': {}
+            // Agrega aquí las respuestas correctas para las demás materias
+        };
 
-            quizContent.innerHTML = `<iframe src="${embedUrl}" title="Quiz" style="flex:1;" frameborder="0" allowfullscreen></iframe>`;
-            quizSection.style.display = 'block';
-        }
+        let respuestasCorrectasActuales = {};
 
-        // Function to hide the quiz section
-        function hideQuiz() {
-            const quizSection = document.getElementById('quiz-section');
-            const quizContent = document.getElementById('quiz-content');
+        $(document).ready(function () {
+            const pdfContainer = $('#pdf-container');
+            const answerSheet = $('#answer-sheet');
+            const corregirBtn = $('#corregir-respuestas');
+            const borrarBtn = $('#borrar-respuestas');
+            const correctionResultDiv = $('#correction-result');
+            const quizSection = $('#quiz-section');
 
-            quizContent.innerHTML = ''; // Clear embedded content
-            quizSection.style.display = 'none';
-        }
+            function generateAnswerSheet() {
+                answerSheet.empty();
+                for (let i = 1; i <= 100; i++) {
+                    const answerItem = `
+                        <div class="answer-item" id="answer-item-${i}">
+                            ${i}.
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}a" value="a">
+                                <label class="form-check-label" for="q${i}a">a</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}b" value="b">
+                                <label class="form-check-label" for="q${i}b">b</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}c" value="c">
+                                <label class="form-check-label" for="q${i}c">c</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}d" value="d">
+                                <label class="form-check-label" for="q${i}d">d</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}e" value="e">
+                                <label class="form-check-label" for="q${i}e">e</label>
+                            </div>
+                            <span id="result-q${i}"></span>
+                        </div>
+                    `;
+                    answerSheet.append(answerItem);
+                }
+            }
+
+            window.loadExam = function (materia, pdfUrl) {
+                pdfContainer.attr('src', pdfUrl);
+                respuestasCorrectasActuales = respuestasCorrectasPorMateria[materia];
+                generateAnswerSheet();
+                correctionResultDiv.text('');
+                quizSection.show();
+            };
+
+            window.closeQuiz = function () {
+                quizSection.hide();
+                pdfContainer.attr('src', '');
+                answerSheet.empty();
+                correctionResultDiv.text('');
+            };
+
+            corregirBtn.click(function () {
+                let correctas = 0;
+                for (let i = 1; i <= 100; i++) {
+                    const preguntaName = `q${i}`;
+                    const respuestaSeleccionada = $(`input[name="${preguntaName}"]:checked`).val();
+                    const resultSpan = $(`#result-q${i}`);
+
+                    if (respuestaSeleccionada) {
+                        if (respuestasCorrectasActuales[preguntaName] === respuestaSeleccionada) {
+                            correctas++;
+                            resultSpan.html('<span class="correct-answer"> ✅</span>');
+                        } else {
+                            resultSpan.html('<span class="incorrect-answer"> ❌</span>');
+                        }
+                    } else {
+                        resultSpan.html('<span class="incorrect-answer"> ❌</span>');
+                    }
+                }
+                const porcentaje = (correctas / 100) * 100;
+                correctionResultDiv.html(`Tienes ${correctas} respuestas correctas de 100 (${porcentaje.toFixed(2)}%).`);
+            });
+
+            borrarBtn.click(function () {
+                answerSheet.find('input[type="radio"]').prop('checked', false);
+                $('.correct-answer').remove();
+                $('.incorrect-answer').remove();
+                correctionResultDiv.text('');
+            });
+        });
     </script>
+
 </body>
 
 </html>
