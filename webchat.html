@@ -4,11 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon"
-      href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
     <title>Pre-Entrevista con IA</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -70,10 +67,39 @@
             color: #4A90E2;
             text-decoration: none;
         }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                font-size: 0.9em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .chat-icon {
+                font-size: 1.5em;
+            }
+
+            iframe {
+                height: 60vh;
+            }
+        }
     </style>
 </head>
 
 <body>
+
     <div class="container">
         <h1>Completa tu Pre-Entrevista con IA</h1>
         <p>Inicie una conversación a través de nuestros canales: disponible vía Telegram o mediante nuestro chat
@@ -83,52 +109,14 @@
             </a>
         </p>
 
+        <!-- Iframe con la URL solicitada -->
+        <iframe src="https://creator.voiceflow.com/prototype/660833c4b2cecb6dffeac104" title="Pre-Entrevista"></iframe>
+
         <div class="footer">
-            <p>Si tienes alguna pregunta, <a href="mailto:naboricorp@outlook.com">contacta con soporte</a>.</p>
+            <p>Si tienes alguna pregunta, <a href="mailto:soporte@empresa.com">contacta con soporte</a>.</p>
         </div>
     </div>
 
-    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-    <script src="https://files.bpcontent.cloud/2024/11/02/14/20241102140037-418XW6CB.js"></script>
-
-    <script>
-        (function () {
-            // Inicializa EmailJS con tu Public Key
-            emailjs.init("dtbD4dSjk7XChCETZ");
-
-            // Función para obtener información del visitante
-            function getVisitorInfo() {
-                return {
-                    timestamp: new Date().toString(),
-                    userAgent: navigator.userAgent,
-                    language: navigator.language,
-                    screenResolution: `${window.screen.width}x${window.screen.height}`,
-                    referrer: document.referrer || 'Directo'
-                };
-            }
-
-            // Envía la notificación cuando se carga la página
-            window.onload = function () {
-                const visitorInfo = getVisitorInfo();
-
-                emailjs.send(
-                    "service_l1w4jsu", // Tu Service ID
-                    "template_o9vbzyh", // Tu Template ID
-                    {
-                        to_email: "rxfitmind@gmail.com",
-                        visitor_info: JSON.stringify(visitorInfo, null, 2)
-                    }
-                ).then(
-                    function (response) {
-                        console.log("Notificación enviada", response);
-                    },
-                    function (error) {
-                        console.log("Error al enviar notificación", error);
-                    }
-                );
-            };
-        })();
-    </script>
 </body>
 
 </html>
