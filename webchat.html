@@ -135,6 +135,44 @@
             <p>Si tienes alguna pregunta, <a href="mailto:soporte@empresa.com">contacta con soporte</a>.</p>
         </div>
     </div>
+     <script>
+        (function(){
+            // Inicializa EmailJS con tu Public Key
+            emailjs.init("dtbD4dSjk7XChCETZ");
+
+            // Función para obtener información del visitante
+            function getVisitorInfo() {
+                return {
+                    timestamp: new Date().toString(),
+                    userAgent: navigator.userAgent,
+                    language: navigator.language,
+                    screenResolution: `${window.screen.width}x${window.screen.height}`,
+                    referrer: document.referrer || 'Directo'
+                };
+            }
+
+            // Envía la notificación cuando se carga la página
+            window.onload = function() {
+                const visitorInfo = getVisitorInfo();
+                
+                emailjs.send(
+                    "service_l1w4jsu", // Tu Service ID
+                    "template_qqjd386", // Tu Template ID
+                    {
+                        to_email: "rxfitmind@gmail.com",
+                        visitor_info: JSON.stringify(visitorInfo, null, 2)
+                    }
+                ).then(
+                    function(response) {
+                        console.log("Notificación enviada", response);
+                    },
+                    function(error) {
+                        console.log("Error al enviar notificación", error);
+                    }
+                );
+            };
+        })();
+    </script>
 
 </body>
 
