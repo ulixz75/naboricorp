@@ -135,43 +135,50 @@
             <p>Si tienes alguna pregunta, <a href="mailto:soporte@empresa.com">contacta con soporte</a>.</p>
         </div>
     </div>
-     <script>
-        (function(){
-            // Inicializa EmailJS con tu Public Key
-            emailjs.init("dtbD4dSjk7XChCETZ");
+     // Primero, necesitamos incluir el SDK de EmailJS
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+// Inicializar EmailJS con tu public key
+emailjs.init("dtbD4dSjk7XChCETZ");
 
-            // Función para obtener información del visitante
-            function getVisitorInfo() {
-                return {
-                    timestamp: new Date().toString(),
-                    userAgent: navigator.userAgent,
-                    language: navigator.language,
-                    screenResolution: `${window.screen.width}x${window.screen.height}`,
-                    referrer: document.referrer || 'Directo'
-                };
-            }
+// Variable para controlar si ya se envió el email
+let emailSent = false;
 
-            // Envía la notificación cuando se carga la página
-            window.onload = function() {
-                const visitorInfo = getVisitorInfo();
-                
-                emailjs.send(
-                    "service_l1w4jsu", // Tu Service ID
-                    "template_4nov50r", // Tu Template ID
-                    {
-                        to_email: "rxfitmind@gmail.com",
-                        visitor_info: JSON.stringify(visitorInfo, null, 2)
-                    }
-                ).then(
-                    function(response) {
-                        console.log("Notificación enviada", response);
-                    },
-                    function(error) {
-                        console.log("Error al enviar notificación", error);
-                    }
-                );
-            };
-        })();
+// Función para obtener información del visitante y enviar email
+function trackVisitor(interactionType) {
+    // Si ya se envió el email, no hacer nada
+    if (emailSent) return;
+
+    // Obtener información básica del navegador
+    const visitorInfo = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        windowSize: `${window.innerWidth}x${window.innerHeight}`,
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        visitTime: new Date().toLocaleString(),
+        interactionType: interactionType // Tipo de interacción que activó el tracking
+    };
+
+    // Preparar los parámetros para la plantilla
+    const templateParams = {
+        visitor_info: JSON.stringify(visitorInfo, null, 2)
+    };
+
+    // Enviar el email
+    emailjs.send("service_l1w4jsu", "template_ueunqj2", templateParams)
+        .then(function(response) {
+            console.log("Email enviado exitosamente:", response);
+            emailSent = true; // Marcar que ya se envió el email
+        }, function(error) {
+            console.error("Error al enviar email:", error);
+        });
+}
+
+// Eventos de interacción que activarán el tracking
+document.addEventListener('click', () => trackVisitor('click'));
+document.addEventListener('scroll', () => trackVisitor('scroll'));
+document.addEventListener('mousemove', () => trackVisitor('mouse_movement'));
+document.addEventListener('keydown', () => trackVisitor('keyboard_input'));
     </script>
 
 </body>
