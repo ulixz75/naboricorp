@@ -4,14 +4,17 @@
 
   <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4NCGYV9CKG"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-4NCGYV9CKG');
+  // Activa Google Analytics solo si el usuario da consentimiento
+  if (document.cookie.includes("cookieconsent_status=allow")) {
+    gtag('config', 'G-4NCGYV9CKG');
+  }
 </script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -1004,6 +1007,27 @@
         t['claspo'] = t['claspo'] || f;
     }(window, document, 'script', 'C51391D227D0439D81A1681A10F9C628');
 </script><script>claspo('init');</script>
+  <!-- Cookie Consent by Osano -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.1/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener('load', function() {
+    window.cookieconsent.initialise({
+      palette: {
+        popup: { background: "#000" },
+        button: { background: "#f1d600" }
+      },
+      theme: "classic",
+      content: {
+        message: "Usamos cookies para mejorar tu experiencia.",
+        dismiss: "Aceptar",
+        link: "Más información",
+        href: "https://www.naboricorp.com/politica-de-privacidad.html"
+      }
+    });
+  });
+</script>
+
   
 </body>
 </html>
