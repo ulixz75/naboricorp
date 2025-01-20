@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp">
-    </script>
+</script>
     
-
     <title>LMS - Modern Platform</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -72,6 +71,7 @@
             padding: 8px 16px;
             border-radius: 5px;
         }
+        
 
         .close-btn:hover {
             background: #cc0000;
@@ -123,6 +123,44 @@
             font-weight: bold;
             margin-top: 10px;
         }
+          /* Nuevo estilo para botones deshabilitados */
+        .btn-primary:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .modal-btn {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #007bff, #00c6ff);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -153,10 +191,10 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-1</h5>
                         <p class="card-text">Ejercicios de práctica-Fundamentos matemáticos</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">Comenzar
-                            Examen</button>
-
+                        <button class="btn btn-primary load-exam-btn" data-exam="1" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
@@ -164,11 +202,11 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-2</h5>
-                        <p class="card-text">Razonamiento matemático</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="quimicaBasica"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_bbf4ec9d9db14b04932035fd82a14a23.pdf">Comenzar
-                            Examen</button>
-
+                        <p class="card-text">Razonamiento matmático</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="2" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
@@ -176,11 +214,11 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-3</h5>
-                        <p class="card-text">Prueba de College Board-práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia3"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_4b832627a8434714909e640f1cf6b277.pdf">Comenzar
-                            Examen</button>
-
+                        <p class="card-text">Práctica</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="3" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
@@ -188,10 +226,11 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-4</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia4"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_4">Comenzar
-                            Examen</button>
+                        <p class="card-text">Práctica</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="4" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
@@ -199,56 +238,70 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-5</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia5"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_5">Comenzar
-                            Examen</button>
+                        <p class="card-text">Práctica</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="5" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-6</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia6"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_6">Comenzar
-                            Examen</button>
-                    </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Examen-6</h5>
+                    <p class="card-text">Práctica</p>
+                    <button class="btn btn-primary load-exam-btn" data-exam="6" data-materia="collegeBoard"
+                        data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                        Comenzar Examen
+                    </button>
                 </div>
             </div>
+        </div>
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-7</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia7"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_7">Comenzar
-                            Examen</button>
+                        <p class="card-text">Práctica</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="7" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-8</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia8"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_8">Comenzar
-                            Examen</button>
-                    </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Examen-8</h5>
+                    <p class="card-text">Práctica</p>
+                    <button class="btn btn-primary load-exam-btn" data-exam="8" data-materia="collegeBoard"
+                        data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                        Comenzar Examen
+                    </button>
                 </div>
             </div>
+        </div>
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Examen-9</h5>
-                        <p class="card-text">Descripción breve de la materia.</p>
-                        <button class="btn btn-primary load-exam-btn" data-materia="materia9"
-                            data-pdf-url="URL_DEL_PDF_MATERIA_9">Comenzar
-                            Examen</button>
+                        <p class="card-text">Práctica</p>
+                        <button class="btn btn-primary load-exam-btn" data-exam="9" data-materia="collegeBoard"
+                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
+                            Comenzar Examen
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Agregar el modal -->
+        <div id="unlockModal" class="modal">
+            <div class="modal-content">
+                <h3>¡Felicitaciones!</h3>
+                <p id="modalMessage"></p>
+                <button class="modal-btn" onclick="closeModal()">Continuar</button>
             </div>
         </div>
 
@@ -279,10 +332,14 @@
             </div>
             <div class="text-center mt-3">
                 <button class="btn close-btn" onclick="closeQuiz()">Cerrar Examen</button>
+                <button onclick="resetProgress()" class="btn btn-warning">Reiniciar Progreso</button>
             </div>
+           
         </div>
+ 
 
     </div>
+    
 
     <!-- Footer -->
     <footer class="footer">
@@ -356,6 +413,71 @@
             const descargarPdfBtn = $('#descargar-pdf');
             // const descargarDocxBtn = $('#descargar-docx'); // Feature is more complex client-side
 
+             // Función para generar un ID de sesión único
+            function generateSessionId() {
+                return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+             // Función para verificar si es un nuevo usuario
+            function checkNewUser() {
+                const currentSession = sessionStorage.getItem('examSession');
+
+                if (!currentSession) {
+                    // Es un nuevo usuario o una nueva sesión
+                    const newSessionId = generateSessionId();
+                    sessionStorage.setItem('examSession', newSessionId);
+
+                    // Reiniciar el progreso de los exámenes
+                    localStorage.setItem('lastUnlockedExam', '1');
+
+                    console.log('Nueva sesión iniciada');
+                    return true;
+                }
+
+                return false;
+            }
+
+
+              // Esta función inicializa el estado de los botones al cargar la página  // Función modificada para inicializar los botones
+            function initializeExamButtons() {
+                // Siempre verificamos si es un nuevo usuario primero
+                checkNewUser();
+
+                // Obtener el último examen desbloqueado
+                const lastUnlockedExam = parseInt(localStorage.getItem('lastUnlockedExam')) || 1;
+
+                // Deshabilitar todos los botones excepto los desbloqueados
+                $('.load-exam-btn').each(function () {
+                    const examNumber = parseInt($(this).data('exam'));
+                    if (examNumber > lastUnlockedExam) {
+                        $(this).prop('disabled', true);
+                    } else {
+                        $(this).prop('disabled', false);
+                    }
+                });
+            }
+
+              // Función para reiniciar manualmente el progreso (opcional)
+            window.resetProgress = function () {
+                sessionStorage.removeItem('examSession');
+                localStorage.setItem('lastUnlockedExam', '1');
+                initializeExamButtons();
+                alert('Progreso reiniciado. Solo el Examen 1 está disponible.');
+            }
+             // Esta función muestra el modal cuando se completa un examen
+            function showUnlockModal(examNumber) {
+                const modal = document.getElementById('unlockModal');
+                const message = document.getElementById('modalMessage');
+                message.textContent = `¡Has completado el Examen ${examNumber}! El Examen ${examNumber + 1} está ahora disponible.`;
+                modal.style.display = 'block';
+
+                localStorage.setItem('lastUnlockedExam', examNumber + 1);
+                $(`.load-exam-btn[data-exam="${examNumber + 1}"]`).prop('disabled', false);
+            }
+              window.closeModal = function () {
+                document.getElementById('unlockModal').style.display = 'none';
+            }
+
             function generateAnswerSheet() {
                 answerSheet.empty();
                 for (let i = 1; i <= 100; i++) {
@@ -389,13 +511,18 @@
                 }
             }
 
+            // 4. Modificar la función loadExam existente
+            // Reemplaza la función loadExam actual con esta versión
             window.loadExam = function (materia, pdfUrl) {
+                const examNumber = parseInt($('.load-exam-btn[data-materia="' + materia + '"]').data('exam'));
+                $('#quiz-section').data('currentExam', examNumber);
+
                 pdfContainer.attr('src', pdfUrl);
                 respuestasCorrectasActuales = respuestasCorrectasPorMateria[materia];
                 generateAnswerSheet();
                 correctionResultDiv.text('');
                 quizSection.show();
-                clearInterval(timerInterval); // Clear any existing timer
+                clearInterval(timerInterval);
                 timerDisplay.text('');
             };
 
@@ -442,6 +569,8 @@
                 }
             });
 
+           // 5. Modificar el evento click del botón corregir
+            // Encuentra el evento click existente del corregirBtn y modifícalo así:
             corregirBtn.click(function () {
                 let correctas = 0;
                 for (let i = 1; i <= 100; i++) {
@@ -462,6 +591,12 @@
                 }
                 const porcentaje = (correctas / 100) * 100;
                 correctionResultDiv.html(`Tienes ${correctas} respuestas correctas de 100 (${porcentaje.toFixed(2)}%).`);
+
+                // Agregar esta parte nueva al final del evento click
+                const currentExam = parseInt($('#quiz-section').data('currentExam'));
+                if (currentExam < 9) { // 9 es el número total de exámenes
+                    showUnlockModal(currentExam);
+                }
             });
 
             borrarBtn.click(function () {
@@ -487,7 +622,9 @@
                 }
                 pdfDoc.save("respuestas_examen.pdf");
             });
+                initializeExamButtons();
         });
+      
     </script>
 
 </body>
