@@ -1,632 +1,487 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp">
 </script>
-    
-    <title>LMS - Modern Platform</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>NABORI Corp - Student Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f9f9f9;
-            color: #333;
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
         }
 
-        .logout-link {
-            position: absolute;
-            top: 10px;
-            right: 20px;
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
         }
 
         .navbar {
-            background: linear-gradient(45deg, #007bff, #00c6ff);
-        }
-
-        .navbar-brand {
-            font-weight: bold;
-            color: #fff !important;
-        }
-
-        .card {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #007bff, #00c6ff);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(45deg, #0056b3, #0099cc);
-        }
-
-        .footer {
-            background: #007bff;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        #quiz-section {
-            display: none;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .close-btn {
-            background: #ff4d4d;
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-        }
-        
-
-        .close-btn:hover {
-            background: #cc0000;
-        }
-
-        #pdf-container {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+            position: fixed;
+            top: 0;
             width: 100%;
-            height: 600px;
-            /* Ajusta la altura según necesites */
-            border: 1px solid #ccc;
+            z-index: 1000;
         }
 
-        #answer-sheet {
+        main {
+            margin-top: 80px;
             padding: 20px;
-            border: 1px solid #ccc;
-            height: 600px;
-            /* Iguala la altura del contenedor del PDF */
-            overflow-y: auto;
-            /* Permite el scroll si la hoja es muy larga */
         }
 
-        .answer-item {
-            margin-bottom: 15px;
+        .section {
+            display: none;
         }
 
-        .answer-item label {
-            margin-right: 10px;
+        .section.active {
+            display: block;
+        }
+
+        .exam-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        }
+
+        .timer {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            z-index: 1000;
+            display: none;
         }
 
         .correct-answer {
-            color: green;
+            background-color: #d4edda !important;
+            border: 1px solid #c3e6cb !important;
         }
 
         .incorrect-answer {
-            color: red;
+            background-color: #f8d7da !important;
+            border: 1px solid #f5c6cb !important;
         }
 
-        #correction-result {
-            margin-top: 20px;
-            font-weight: bold;
+        .navbar-collapse {
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
         }
 
-        #timer-controls {
-            margin-bottom: 10px;
-        }
-
-        #timer-display {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-          /* Nuevo estilo para botones deshabilitados */
-        .btn-primary:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-        }
-
-        /* Estilos para el modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .modal-btn {
-            margin-top: 15px;
-            padding: 8px 16px;
-            background: linear-gradient(45deg, #007bff, #00c6ff);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        @media (min-width: 992px) {
+            .navbar-collapse {
+                display: flex !important;
+                flex-basis: auto;
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="https://www.naboricorp.com">NABORI Corp- logout</a>
-
-            <img src="https://static.wixstatic.com/media/af3a4a_a665fcdab6504bdbb769c99d7c095e64~mv2.png" alt="Logo"
-                style="height: 40px; width: auto;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">NABORI Corp SmartLMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#exams"><i class="fas fa-file-alt"></i> Exámenes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#grades"><i class="fas fa-chart-bar"></i> Calificaciones</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container my-5">
-        <!-- Welcome Section -->
-        <div class="text-center mb-4">
-            <h1>Bienvenido a tu plataforma de aprendizaje</h1>
-            <p>Selecciona una materia para comenzar tu examen.</p>
-        </div>
+    <!-- Timer -->
+    <div class="timer">00:00</div>
 
-        <!-- Subjects Grid -->
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <!-- Dynamic Subject Cards -->
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-1</h5>
-                        <p class="card-text">Ejercicios de práctica-Fundamentos matemáticos</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="1" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-2</h5>
-                        <p class="card-text">Razonamiento matmático</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="2" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-3</h5>
-                        <p class="card-text">Práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="3" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-4</h5>
-                        <p class="card-text">Práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="4" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-5</h5>
-                        <p class="card-text">Práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="5" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Examen-6</h5>
-                    <p class="card-text">Práctica</p>
-                    <button class="btn btn-primary load-exam-btn" data-exam="6" data-materia="collegeBoard"
-                        data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                        Comenzar Examen
-                    </button>
-                </div>
-            </div>
-        </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-7</h5>
-                        <p class="card-text">Práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="7" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Examen-8</h5>
-                    <p class="card-text">Práctica</p>
-                    <button class="btn btn-primary load-exam-btn" data-exam="8" data-materia="collegeBoard"
-                        data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                        Comenzar Examen
-                    </button>
-                </div>
-            </div>
-        </div>
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Examen-9</h5>
-                        <p class="card-text">Práctica</p>
-                        <button class="btn btn-primary load-exam-btn" data-exam="9" data-materia="collegeBoard"
-                            data-pdf-url="https://af3a4ab2-557b-4d8e-8bae-8a1a5ac066a0.usrfiles.com/ugd/af3a4a_1988fa0e528f45caaa4cc60d8b264b54.pdf">
-                            Comenzar Examen
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Agregar el modal -->
-        <div id="unlockModal" class="modal">
-            <div class="modal-content">
-                <h3>¡Felicitaciones!</h3>
-                <p id="modalMessage"></p>
-                <button class="modal-btn" onclick="closeModal()">Continuar</button>
-            </div>
-        </div>
-
-        <div id="quiz-section" class="mt-5">
+    <!-- Contenido Principal -->
+    <main class="container-fluid">
+        <!-- Dashboard -->
+        <div class="container section active" id="dashboard">
+            <h3 class="mb-4">Dashboard</h3>
             <div class="row">
-                <div class="col-md-8">
-                    <h2>Visor de Examen</h2>
-                    <iframe id="pdf-container" src="" frameborder="0"></iframe>
+                <div class="col-md-6 mb-4">
+                    <div class="exam-card card bg-white p-4">
+                        <h5><i class="fas fa-bell text-primary"></i> Próximos Exámenes</h5>
+                        <ul class="list-group mt-3" id="upcoming-exams"></ul>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h2>Hoja de Respuestas</h2>
-                    <div id="timer-controls">
-                        <label for="timer-minutes">Tiempo (minutos):</label>
-                        <input type="number" id="timer-minutes" min="1" value="10">
-                        <button class="btn btn-sm btn-success" id="start-timer">Iniciar Timer</button>
-                        <div id="timer-display"></div>
-                    </div>
-                    <div id="answer-sheet">
-                        <!-- Aquí se generarán las preguntas dinámicamente con JS -->
-                    </div>
-                    <button class="btn btn-primary mt-3" id="corregir-respuestas">Corregir Respuestas</button>
-                    <button class="btn btn-secondary mt-3 ml-2" id="borrar-respuestas">Borrar Respuestas</button>
-                    <div id="correction-result"></div>
-                    <div class="mt-3">
-                        <button class="btn btn-info btn-sm" id="descargar-pdf">Descargar Respuestas (PDF)</button>
+                <div class="col-md-6 mb-4">
+                    <div class="exam-card card bg-white p-4">
+                        <h5><i class="fas fa-chart-line text-success"></i> Rendimiento</h5>
+                        <canvas class="mt-3" id="performanceChart" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-3">
-                <button class="btn close-btn" onclick="closeQuiz()">Cerrar Examen</button>
-                <button onclick="resetProgress()" class="btn btn-warning">Reiniciar Progreso</button>
-            </div>
-           
         </div>
- 
 
+        <!-- Exam List -->
+        <div class="container section" id="exams">
+            <h3 class="mb-4">Exámenes Disponibles</h3>
+            <div class="list-group" id="exam-list"></div>
+        </div>
+
+        <!-- Grades Section -->
+        <div class="container section" id="grades">
+            <h3 class="mb-4">Historial de Calificaciones</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Examen</th>
+                        <th>Calificación</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody id="grades-table"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Exam Interface Modal -->
+    <div class="modal fade" id="examModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="examTitle">Examen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="examQuestions"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="submitExam()">Entregar Examen</button>
+                </div>
+            </div>
+        </div>
     </div>
-    
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>© 2025 LMS Modern. Todos los derechos reservados.</p>
-    </footer>
+    <!-- Results Modal -->
+    <div class="modal fade" id="resultsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Resultados del Examen</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="mb-3">Puntuación: <span id="finalScore"></span>%</h5>
+                    <h6>Tiempo restante: <span id="timeUsed"></span></h6>
+                    <hr>
+                    <div id="resultsDetails"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-        const respuestasCorrectasPorMateria = {
-            'collegeBoard': {
-                'q1': 'a', 'q2': 'b', 'q3': 'c', 'q4': 'd', 'q5': 'e', 'q6': 'a', 'q7': 'b', 'q8': 'c', 'q9': 'd', 'q10': 'e',
-                'q11': 'a', 'q12': 'b', 'q13': 'c', 'q14': 'd', 'q15': 'e', 'q16': 'a', 'q17': 'b', 'q18': 'c', 'q19': 'd', 'q20': 'e',
-                'q21': 'a', 'q22': 'b', 'q23': 'c', 'q24': 'd', 'q25': 'e', 'q26': 'a', 'q27': 'b', 'q28': 'c', 'q29': 'd', 'q30': 'e',
-                'q31': 'a', 'q32': 'b', 'q33': 'c', 'q34': 'd', 'q35': 'e', 'q36': 'a', 'q37': 'b', 'q38': 'c', 'q39': 'd', 'q40': 'e',
-                'q41': 'a', 'q42': 'b', 'q43': 'c', 'q44': 'd', 'q45': 'e', 'q46': 'a', 'q47': 'b', 'q48': 'c', 'q49': 'd', 'q50': 'e',
-                'q51': 'a', 'q52': 'b', 'q53': 'c', 'q54': 'd', 'q55': 'e', 'q56': 'a', 'q57': 'b', 'q58': 'c', 'q59': 'd', 'q60': 'e',
-                'q61': 'a', 'q62': 'b', 'q63': 'c', 'q64': 'd', 'q65': 'e', 'q66': 'a', 'q67': 'b', 'q68': 'c', 'q69': 'd', 'q70': 'e',
-                'q71': 'a', 'q72': 'b', 'q73': 'c', 'q74': 'd', 'q75': 'e', 'q76': 'a', 'q77': 'b', 'q78': 'c', 'q79': 'd', 'q80': 'e',
-                'q81': 'a', 'q82': 'b', 'q83': 'c', 'q84': 'd', 'q85': 'e', 'q86': 'a', 'q87': 'b', 'q88': 'c', 'q89': 'd', 'q90': 'e',
-                'q91': 'a', 'q92': 'b', 'q93': 'c', 'q94': 'd', 'q95': 'e', 'q96': 'a', 'q97': 'b', 'q98': 'c', 'q99': 'd', 'q100': 'e'
+        // Datos de ejemplo con 6 exámenes
+        let exams = [
+            {
+                id: 1,
+                title: "Matemáticas Básicas",
+                duration: 30,
+                questions: [
+                    { question: "2 + 2 =", options: ["3", "4", "5", "6"], correct: 1 },
+                    { question: "√16 =", options: ["2", "3", "4", "5"], correct: 2 }
+                ],
+                status: "pending"
             },
-            'quimicaBasica': {
-                'q1': 'b', 'q2': 'c', 'q3': 'a', 'q4': 'e', 'q5': 'd', 'q6': 'b', 'q7': 'c', 'q8': 'a', 'q9': 'e', 'q10': 'd',
-                'q11': 'b', 'q12': 'c', 'q13': 'a', 'q14': 'e', 'q15': 'd', 'q16': 'b', 'q17': 'c', 'q18': 'a', 'q19': 'e', 'q20': 'd',
-                'q21': 'b', 'q22': 'c', 'q23': 'a', 'q24': 'e', 'q25': 'd', 'q26': 'b', 'q27': 'c', 'q28': 'a', 'q29': 'e', 'q30': 'd',
-                'q31': 'b', 'q32': 'c', 'q33': 'a', 'q34': 'e', 'q35': 'd', 'q36': 'b', 'q37': 'c', 'q38': 'a', 'q39': 'e', 'q40': 'd',
-                'q41': 'b', 'q42': 'c', 'q43': 'a', 'q44': 'e', 'q45': 'd', 'q46': 'b', 'q47': 'c', 'q48': 'a', 'q49': 'e', 'q50': 'd',
-                'q51': 'b', 'q52': 'c', 'q53': 'a', 'q54': 'e', 'q55': 'd', 'q56': 'b', 'q57': 'c', 'q58': 'a', 'q59': 'e', 'q60': 'd',
-                'q61': 'b', 'q62': 'c', 'q63': 'a', 'q64': 'e', 'q65': 'd', 'q66': 'b', 'q67': 'c', 'q68': 'a', 'q69': 'e', 'q70': 'd',
-                'q71': 'b', 'q72': 'c', 'q73': 'a', 'q74': 'e', 'q75': 'd', 'q76': 'b', 'q77': 'c', 'q78': 'a', 'q79': 'e', 'q80': 'd',
-                'q81': 'b', 'q82': 'c', 'q83': 'a', 'q84': 'e', 'q85': 'd', 'q86': 'b', 'q87': 'c', 'q88': 'a', 'q89': 'e', 'q90': 'd',
-                'q91': 'b', 'q92': 'c', 'q93': 'a', 'q94': 'e', 'q95': 'd', 'q96': 'b', 'q97': 'c', 'q98': 'a', 'q99': 'e', 'q100': 'd'
+            {
+                id: 2,
+                title: "Historia Universal",
+                duration: 45,
+                questions: [
+                    { question: "Año descubrimiento América", options: ["1492", "1502", "1487", "1510"], correct: 0 },
+                    { question: "Primera guerra mundial", options: ["1914", "1905", "1939", "1945"], correct: 0 }
+                ],
+                status: "pending"
             },
-            'materia3': {
-                'q1': 'c', 'q2': 'a', 'q3': 'e', 'q4': 'b', 'q5': 'd', 'q6': 'c', 'q7': 'a', 'q8': 'e', 'q9': 'b', 'q10': 'd',
-                'q11': 'c', 'q12': 'a', 'q13': 'e', 'q14': 'b', 'q15': 'd', 'q16': 'c', 'q17': 'a', 'q18': 'e', 'q19': 'b', 'q20': 'd',
-                'q21': 'c', 'q22': 'a', 'q23': 'e', 'q24': 'b', 'q25': 'd', 'q26': 'c', 'q27': 'a', 'q28': 'e', 'q29': 'b', 'q30': 'd',
-                'q31': 'c', 'q32': 'a', 'q33': 'e', 'q34': 'b', 'q35': 'd', 'q36': 'c', 'q37': 'a', 'q38': 'e', 'q39': 'b', 'q40': 'd',
-                'q41': 'c', 'q42': 'a', 'q43': 'e', 'q44': 'b', 'q45': 'd', 'q46': 'c', 'q47': 'a', 'q48': 'e', 'q49': 'b', 'q50': 'd',
-                'q51': 'c', 'q52': 'a', 'q53': 'e', 'q54': 'b', 'q55': 'd', 'q56': 'c', 'q57': 'a', 'q58': 'e', 'q59': 'b', 'q60': 'd',
-                'q61': 'c', 'q62': 'a', 'q63': 'e', 'q64': 'b', 'q65': 'd', 'q66': 'c', 'q67': 'a', 'q68': 'e', 'q69': 'b', 'q70': 'd',
-                'q71': 'c', 'q72': 'a', 'q73': 'e', 'q74': 'b', 'q75': 'd', 'q76': 'c', 'q77': 'a', 'q78': 'e', 'q79': 'b', 'q80': 'd',
-                'q81': 'c', 'q82': 'a', 'q83': 'e', 'q84': 'b', 'q85': 'd', 'q86': 'c', 'q87': 'a', 'q88': 'e', 'q89': 'b', 'q90': 'd',
-                'q91': 'c', 'q92': 'a', 'q93': 'e', 'q94': 'b', 'q95': 'd', 'q96': 'c', 'q97': 'a', 'q98': 'e', 'q99': 'b', 'q100': 'd'
+            {
+                id: 3,
+                title: "Geografía Mundial",
+                duration: 25,
+                questions: [
+                    { question: "Capital de Francia", options: ["Lyon", "Marsella", "París", "Toulouse"], correct: 2 },
+                    { question: "País más grande del mundo", options: ["China", "Rusia", "Canadá", "EE.UU"], correct: 1 }
+                ],
+                status: "pending"
             },
-            'materia4': {},
-            'materia5': {},
-            'materia6': {},
-            'materia7': {},
-            'materia8': {},
-            'materia9': {}
-            // Agrega aquí las respuestas correctas para las demás materias
-        };
+            {
+                id: 4,
+                title: "Gramática Española",
+                duration: 20,
+                questions: [
+                    { question: "'Había' es conjugación de:", options: ["Haber", "Hacer", "Hablar", "Hallar"], correct: 0 },
+                    { question: "Palabra aguda:", options: ["Árbol", "Canción", "Lápiz", "Mesa"], correct: 1 }
+                ],
+                status: "pending"
+            },
+            {
+                id: 5,
+                title: "Química Básica",
+                duration: 35,
+                questions: [
+                    { question: "Símbolo del Oro", options: ["Au", "Ag", "Fe", "Cu"], correct: 0 },
+                    { question: "pH del agua pura", options: ["5", "7", "8", "10"], correct: 1 }
+                ],
+                status: "pending"
+            },
+            {
+                id: 6,
+                title: "Informática General",
+                duration: 40,
+                questions: [
+                    { question: "Lenguaje de marcado web", options: ["Java", "HTML", "Python", "C++"], correct: 1 },
+                    { question: "Inventor de Linux", options: ["Bill Gates", "Linus Torvalds", "Steve Jobs", "Mark Zuckerberg"], correct: 1 }
+                ],
+                status: "pending"
+            }
+        ];
 
-        let respuestasCorrectasActuales = {};
-        let timerInterval;
-        let timeLeft;
+        let grades = [];
+        let currentExam = null;
+        let timeLeft = 0;
+        let timerInterval = null;
 
-        $(document).ready(function () {
-            const pdfContainer = $('#pdf-container');
-            const answerSheet = $('#answer-sheet');
-            const corregirBtn = $('#corregir-respuestas');
-            const borrarBtn = $('#borrar-respuestas');
-            const correctionResultDiv = $('#correction-result');
-            const quizSection = $('#quiz-section');
-            const timerMinutesInput = $('#timer-minutes');
-            const startTimerBtn = $('#start-timer');
-            const timerDisplay = $('#timer-display');
-            const descargarPdfBtn = $('#descargar-pdf');
-            // const descargarDocxBtn = $('#descargar-docx'); // Feature is more complex client-side
+        // Manejo de navegación
+        function handleNavigation() {
+            const hash = window.location.hash || "#dashboard";
 
-             // Función para generar un ID de sesión único
-            function generateSessionId() {
-                return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            if ($('#navbarNav').hasClass('show')) {
+                $('.navbar-toggler').addClass('collapsed');
+                $('#navbarNav').removeClass('show');
             }
 
-             // Función para verificar si es un nuevo usuario
-            function checkNewUser() {
-                const currentSession = sessionStorage.getItem('examSession');
+            $('.nav-link').removeClass('active');
+            $(`a[href="${hash}"]`).addClass('active');
 
-                if (!currentSession) {
-                    // Es un nuevo usuario o una nueva sesión
-                    const newSessionId = generateSessionId();
-                    sessionStorage.setItem('examSession', newSessionId);
+            $('.section').removeClass('active');
+            $(hash).addClass('active');
+        }
 
-                    // Reiniciar el progreso de los exámenes
-                    localStorage.setItem('lastUnlockedExam', '1');
+        $(window).on('hashchange', handleNavigation);
 
-                    console.log('Nueva sesión iniciada');
-                    return true;
+        $('.nav-link').click(function (e) {
+            e.preventDefault();
+            window.location.hash = $(this).attr('href');
+        });
+
+        // Inicializar Dashboard
+        function initDashboard() {
+            $('#upcoming-exams').html(exams.filter(e => e.status === 'pending')
+                .map(e => `<li class="list-group-item">${e.title} - ${e.duration} minutos</li>`).join(''));
+
+            new Chart($('#performanceChart'), {
+                type: 'line',
+                data: {
+                    labels: grades.map(g => g.date),
+                    datasets: [{
+                        label: 'Calificaciones',
+                        data: grades.map(g => g.score),
+                        borderColor: '#3498db'
+                    }]
                 }
-
-                return false;
-            }
-
-
-              // Esta función inicializa el estado de los botones al cargar la página  // Función modificada para inicializar los botones
-            function initializeExamButtons() {
-                // Siempre verificamos si es un nuevo usuario primero
-                checkNewUser();
-
-                // Obtener el último examen desbloqueado
-                const lastUnlockedExam = parseInt(localStorage.getItem('lastUnlockedExam')) || 1;
-
-                // Deshabilitar todos los botones excepto los desbloqueados
-                $('.load-exam-btn').each(function () {
-                    const examNumber = parseInt($(this).data('exam'));
-                    if (examNumber > lastUnlockedExam) {
-                        $(this).prop('disabled', true);
-                    } else {
-                        $(this).prop('disabled', false);
-                    }
-                });
-            }
-
-              // Función para reiniciar manualmente el progreso (opcional)
-            window.resetProgress = function () {
-                sessionStorage.removeItem('examSession');
-                localStorage.setItem('lastUnlockedExam', '1');
-                initializeExamButtons();
-                alert('Progreso reiniciado. Solo el Examen 1 está disponible.');
-            }
-             // Esta función muestra el modal cuando se completa un examen
-            function showUnlockModal(examNumber) {
-                const modal = document.getElementById('unlockModal');
-                const message = document.getElementById('modalMessage');
-                message.textContent = `¡Has completado el Examen ${examNumber}! El Examen ${examNumber + 1} está ahora disponible.`;
-                modal.style.display = 'block';
-
-                localStorage.setItem('lastUnlockedExam', examNumber + 1);
-                $(`.load-exam-btn[data-exam="${examNumber + 1}"]`).prop('disabled', false);
-            }
-              window.closeModal = function () {
-                document.getElementById('unlockModal').style.display = 'none';
-            }
-
-            function generateAnswerSheet() {
-                answerSheet.empty();
-                for (let i = 1; i <= 100; i++) {
-                    const answerItem = `
-                        <div class="answer-item" id="answer-item-${i}">
-                            ${i}.
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}a" value="a">
-                                <label class="form-check-label" for="q${i}a">a</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}b" value="b">
-                                <label class="form-check-label" for="q${i}b">b</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}c" value="c">
-                                <label class="form-check-label" for="q${i}c">c</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}d" value="d">
-                                <label class="form-check-label" for="q${i}d">d</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="q${i}" id="q${i}e" value="e">
-                                <label class="form-check-label" for="q${i}e">e</label>
-                            </div>
-                            <span id="result-q${i}"></span>
-                        </div>
-                    `;
-                    answerSheet.append(answerItem);
-                }
-            }
-
-            // 4. Modificar la función loadExam existente
-            // Reemplaza la función loadExam actual con esta versión
-            window.loadExam = function (materia, pdfUrl) {
-                const examNumber = parseInt($('.load-exam-btn[data-materia="' + materia + '"]').data('exam'));
-                $('#quiz-section').data('currentExam', examNumber);
-
-                pdfContainer.attr('src', pdfUrl);
-                respuestasCorrectasActuales = respuestasCorrectasPorMateria[materia];
-                generateAnswerSheet();
-                correctionResultDiv.text('');
-                quizSection.show();
-                clearInterval(timerInterval);
-                timerDisplay.text('');
-            };
-
-            $('.load-exam-btn').click(function (event) {
-                event.preventDefault(); // Previene la acción predeterminada del botón
-                const materia = $(this).data('materia');
-                const pdfUrl = $(this).data('pdf-url');
-                loadExam(materia, pdfUrl);
             });
+        }
 
-            window.closeQuiz = function () {
-                quizSection.hide();
-                pdfContainer.attr('src', '');
-                answerSheet.empty();
-                correctionResultDiv.text('');
-                clearInterval(timerInterval);
-                timerDisplay.text('');
-            };
+        // Cargar exámenes
+        function loadExams() {
+            $('#exam-list').html(exams.map(exam => `
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5>${exam.title}</h5>
+                        <small>Duración: ${exam.duration} minutos</small>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="startExam(${exam.id})">
+                        Iniciar Examen
+                    </button>
+                </div>
+            `).join(''));
+        }
 
-            function startTimer(durationInMinutes) {
-                timeLeft = durationInMinutes * 60;
-                clearInterval(timerInterval);
-                timerInterval = setInterval(updateTimer, 1000);
-            }
+        // Iniciar examen
+        function startExam(examId) {
+            currentExam = exams.find(e => e.id === examId);
+            timeLeft = currentExam.duration * 60;
 
-            function updateTimer() {
+            clearInterval(timerInterval);
+            $('.timer').text(
+                `${Math.floor(timeLeft / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`
+            ).show();
+
+            $('#examTitle').text(currentExam.title);
+            $('#examQuestions').html(currentExam.questions.map((q, index) => `
+                <div class="question-card">
+                    <h6>Pregunta ${index + 1}</h6>
+                    <p>${q.question}</p>
+                    ${q.options.map((o, i) => `
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q${index}" 
+                                   id="q${index}o${i}" value="${i}">
+                            <label class="form-check-label" for="q${index}o${i}">
+                                ${o}
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join(''));
+
+            $('#examModal').modal('show');
+            startTimer();
+        }
+
+        // Temporizador
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                timerDisplay.text(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
-                timeLeft--;
+                $('.timer').text(
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+                );
 
-                if (timeLeft < 0) {
+                if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    timerDisplay.text("¡Tiempo terminado!");
+                    submitExam();
                 }
+            }, 1000);
+        }
+
+        // Entregar examen
+        function submitExam() {
+            clearInterval(timerInterval);
+            let score = 0;
+            let results = [];
+
+            currentExam.questions.forEach((q, index) => {
+                const selected = $(`input[name="q${index}"]:checked`).val();
+                const isCorrect = parseInt(selected) === q.correct;
+                if (isCorrect) score++;
+
+                results.push({
+                    question: q.question,
+                    userAnswer: q.options[selected] || "Sin responder",
+                    correctAnswer: q.options[q.correct],
+                    isCorrect: isCorrect
+                });
+            });
+
+            const finalScore = (score / currentExam.questions.length * 100).toFixed(1);
+            const timeUsed = `${Math.floor((currentExam.duration * 60 - timeLeft) / 60)}:${(currentExam.duration * 60 - timeLeft) % 60 < 10 ? '0' : ''}${(currentExam.duration * 60 - timeLeft) % 60}`;
+
+            showResults(results, finalScore, timeUsed);
+            saveGrade(finalScore);
+        }
+
+        // Mostrar resultados
+        function showResults(results, score, timeUsed) {
+            $('#finalScore').text(score);
+            $('#timeUsed').text(timeUsed);
+
+            $('#resultsDetails').html(results.map((r, i) => `
+                <div class="question-card ${r.isCorrect ? 'correct-answer' : 'incorrect-answer'}">
+                    <h6>Pregunta ${i + 1}: ${r.question}</h6>
+                    <p>Tu respuesta: ${r.userAnswer}</p>
+                    <p>Respuesta correcta: ${r.correctAnswer}</p>
+                </div>
+            `).join(''));
+
+            $('#examModal').modal('hide');
+            $('#resultsModal').modal('show');
+        }
+
+        // Guardar calificación
+        function saveGrade(score) {
+            grades.push({
+                exam: currentExam.title,
+                score: score,
+                date: new Date().toLocaleDateString()
+            });
+            updateGrades();
+        }
+
+        // Actualizar tabla de calificaciones
+        function updateGrades() {
+            $('#grades-table').html(grades.map(g => `
+                <tr>
+                    <td>${g.exam}</td>
+                    <td>${g.score}%</td>
+                    <td>${g.date}</td>
+                </tr>
+            `).join(''));
+        }
+
+        // Inicialización
+        $(document).ready(function () {
+            if ($(window).width() >= 992) {
+                $('#navbarNav').addClass('show');
             }
 
-            startTimerBtn.click(function () {
-                const minutes = parseInt(timerMinutesInput.val());
-                if (!isNaN(minutes) && minutes > 0) {
-                    startTimer(minutes);
-                } else {
-                    alert("Por favor, introduce un número válido de minutos.");
-                }
-            });
+            if (!window.location.hash) {
+                window.location.hash = '#dashboard';
+            }
+            handleNavigation();
 
-           // 5. Modificar el evento click del botón corregir
-            // Encuentra el evento click existente del corregirBtn y modifícalo así:
-            corregirBtn.click(function () {
-                let correctas = 0;
-                for (let i = 1; i <= 100; i++) {
-                    const preguntaName = `q${i}`;
-                    const respuestaSeleccionada = $(`input[name="${preguntaName}"]:checked`).val();
-                    const resultSpan = $(`#result-q${i}`);
-
-                    if (respuestaSeleccionada) {
-                        if (respuestasCorrectasActuales[preguntaName] === respuestaSeleccionada) {
-                            correctas++;
-                            resultSpan.html('<span class="correct-answer"> ✅</span>');
-                        } else {
-                            resultSpan.html('<span class="incorrect-answer"> ❌</span>');
-                        }
-                    } else {
-                        resultSpan.html('<span class="incorrect-answer"> ❌</span>');
-                    }
-                }
-                const porcentaje = (correctas / 100) * 100;
-                correctionResultDiv.html(`Tienes ${correctas} respuestas correctas de 100 (${porcentaje.toFixed(2)}%).`);
-
-                // Agregar esta parte nueva al final del evento click
-                const currentExam = parseInt($('#quiz-section').data('currentExam'));
-                if (currentExam < 9) { // 9 es el número total de exámenes
-                    showUnlockModal(currentExam);
-                }
-            });
-
-            borrarBtn.click(function () {
-                answerSheet.find('input[type="radio"]').prop('checked', false);
-                $('.correct-answer').remove();
-                $('.incorrect-answer').remove();
-                correctionResultDiv.text('');
-            });
-
-            descargarPdfBtn.click(function () {
-                const pdfDoc = new jspdf.jsPDF();
-                pdfDoc.text("Respuestas del Examen", 10, 10);
-                let yOffset = 30;
-                for (let i = 1; i <= 100; i++) {
-                    const preguntaName = `q${i}`;
-                    const respuestaSeleccionada = $(`input[name="${preguntaName}"]:checked`).val();
-                    pdfDoc.text(`${i}. Respuesta: ${respuestaSeleccionada || 'No respondida'}`, 10, yOffset);
-                    yOffset += 10;
-                    if (yOffset > 280) {
-                        pdfDoc.addPage();
-                        yOffset = 30;
-                    }
-                }
-                pdfDoc.save("respuestas_examen.pdf");
-            });
-                initializeExamButtons();
+            initDashboard();
+            loadExams();
+            updateGrades();
         });
-      
-    </script>
 
+        $(window).resize(function () {
+            if ($(window).width() >= 992) {
+                $('#navbarNav').addClass('show');
+            } else {
+                $('#navbarNav').removeClass('show');
+            }
+        });
+
+        $('#examModal').on('hidden.bs.modal', function () {
+            clearInterval(timerInterval);
+            $('.timer').hide();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://rirmbevhccxvskgnfroi.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpcm1iZXZoY2N4dnNrZ25mcm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc2NDYwODQsImV4cCI6MjA1MzIyMjA4NH0.IvMLHEPG5teMc_dPxObZhvCTCuzo7mbp8IV5K_kZxiw';
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Verificar sesión al cargar
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (!session) window.location.href = 'login.html';
+        });
+    </script>
 </body>
 
 </html>
