@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
+ <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
 
-    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a>  
+    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a>   
 
     <title>NABORI Corp - Student Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -480,101 +480,113 @@
 
                 alert('Exámenes reiniciados. Tu historial sigue disponible.');
             }
+        // Código del Chat Bot
+        const API_KEY = 'AIzaSyDWqEQB_l4HGiRY5G6RXppH7ajelOhx0dk';
+        const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
-        
-const WORKER_URL = 'https://gemini-proxy.naborihorizons.workers.dev/chat';
-const MAX_HISTORY = 3;
-let conversationHistory = [];
-let isProcessing = false;
+        let conversationHistory = [];
+        let isProcessing = false;
 
-const systemPrompt = {
-    role: "system",
-    parts: [{ text: "Eres un tutor académico que explica conceptos en matemáticas, español e inglés. No resuelvas ejercicios directamente." }]
-};
+        const initialPrompt = {
+            role: "user",
+            parts: [{
+                text: "Eres un tutor experto en matemáticas, español e inglés. Reglas:\n" +
+                    "0. Puede explicar conceptos, enseñar temas y ofrecer ejemplos generales para ayudar a los estudiantes a aprender. No está permitido resolver ejercicios, proporcionar respuestas directas a problemas, ni realizar asignaciones. Solo puede guiar y enseñar cómo abordar los temas.\n" + 
+                    "1. Proporciona respuestas contextualizadas y únicas\n" +
+                    "2. Analiza profundamente cada pregunta\n" +
+                    "3. Si no entiendes algo, pide clarificación\n" +
+                    "4. Varía tus respuestas evitando repeticiones\n" +
+                    "5. Adapta el lenguaje al nivel del usuario"
+            }]
+        };
 
-async function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const message = userInput.value.trim();
+        function toggleChat() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.classList.toggle('active');
+        }
 
-    if (!message || isProcessing) return;
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBody = document.getElementById('chatBody');
+            const message = userInput.value.trim();
 
-    isProcessing = true;
-    userInput.disabled = true;
+            if (!message) return;
 
-    try {
-        // Mostrar mensaje usuario
-        addMessageToChat('user', message);
-        userInput.value = '';
+            isProcessing = true;
+            userInput.disabled = true;
 
-        // Construir contexto
-        const context = [
-            systemPrompt,
-            ...conversationHistory.slice(-MAX_HISTORY * 2),
-            { role: "user", parts: [{ text: message }] }
-        ];
+            try {
+                chatBody.innerHTML += `<div class="user-message">${message}</div>`;
+                userInput.value = '';
+                chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Enviar al Worker
-        const response = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: context })
+                const conversationContext = conversationHistory.length > 4
+                    ? conversationHistory.slice(-4)
+                    : conversationHistory;
+
+                const fullContext = [initialPrompt, ...conversationContext, {
+                    role: "user",
+                    parts: [{ text: message }]
+                }];
+
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: fullContext,
+                        generationConfig: {
+                            temperature: 0.7,
+                            topP: 0.9,
+                            maxOutputTokens: 600,
+                            stopSequences: ["Repetir", "Lo mismo", "De nuevo"]
+                        }
+                    })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.json();
+                const aiResponse = data.candidates[0].content.parts[0].text;
+
+                if (aiResponse.toLowerCase().includes("no entiendo")) {
+                    throw new Error("Respuesta no comprendida");
+                }
+
+                conversationHistory.push(
+                    { role: "user", parts: [{ text: message }] },
+                    { role: "model", parts: [{ text: aiResponse }] }
+                );
+
+                if (conversationHistory.length > 6) {
+                    conversationHistory = conversationHistory.slice(-6);
+                }
+
+                const formattedResponse = aiResponse
+                    .replace(/\n/g, '<br>')
+                    .replace(/(\d+\.)/g, '<strong>$1</strong>');
+
+                chatBody.innerHTML += `<div class="bot-message">${formattedResponse}</div>`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                const errorMessage = error.message.includes("no comprendida")
+                    ? "¿Podrías reformular tu pregunta? Quiero asegurarme de entenderte bien."
+                    : "Estoy teniendo dificultades para responder. ¿Podrías intentar formularlo de otra manera?";
+
+                chatBody.innerHTML += `<div class="bot-message">${errorMessage}</div>`;
+            } finally {
+                isProcessing = false;
+                userInput.disabled = false;
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey && !isProcessing) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
-
-        const data = await response.json();
-        
-        if (!response.ok || !data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-            throw new Error(data.error || 'Respuesta inesperada');
-        }
-
-        const aiResponse = data.candidates[0].content.parts[0].text;
-        
-        // Actualizar historial
-        conversationHistory.push(
-            { role: "user", parts: [{ text: message }] },
-            { role: "model", parts: [{ text: aiResponse }] }
-        );
-
-        // Mantener límite de historial
-        if (conversationHistory.length > MAX_HISTORY * 2) {
-            conversationHistory = conversationHistory.slice(-MAX_HISTORY * 2);
-        }
-
-        // Mostrar respuesta
-        addMessageToChat('bot', aiResponse);
-
-    } catch (error) {
-        console.error('Error:', error);
-        addMessageToChat('bot', `⚠️ Error: ${error.message}`);
-    } finally {
-        isProcessing = false;
-        userInput.disabled = false;
-    }
-}
-
-// Funciones auxiliares
-function addMessageToChat(sender, text) {
-    const chatBody = document.getElementById('chatBody');
-    const escapedText = escapeHtml(text).replace(/\n/g, '<br>');
-    const messageClass = sender === 'user' ? 'user-message' : 'bot-message';
-    
-    chatBody.innerHTML += `<div class="${messageClass}">${escapedText}</div>`;
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function escapeHtml(unsafe) {
-    return unsafe.replace(/[&<"'>]/g, m => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;',
-        '"': '&quot;', "'": '&#39;'
-    }[m]));
-}
-
-// Event listeners
-document.getElementById('userInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-    }
-});
 
         // Código original del portal
         let exams = [{
