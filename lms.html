@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
+    <!---- <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
 
-    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a> 
+    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a> -->
 
     <title>NABORI Corp - Student Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -313,14 +313,62 @@
         .btn-reset:hover i {
             transform: rotate(-45deg);
         }
+img {
+    max-width: 100px; /* Reduced from 300px for smaller size */
+    width: auto; /* Changed from 100% to auto to maintain aspect ratio */
+    height: auto;
+    border-radius: 6px; /* Slightly reduced from 8px to match smaller size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block; /* Ensures proper centering and spacing */
+    margin: 10px auto; /* Centers the image and adds vertical spacing */
+    object-fit: contain; /* Ensures image fits within dimensions while maintaining aspect ratio */
+    min-width: 100px; /* Prevents images from becoming too small */
+}
+
+/* Add a class for even smaller images if needed */
+.img-small {
+    max-width: 100px;
+}
+
+        .modal-content {
+            border-radius: 15px;
+        }
+        .modal-header {
+            background-color: var(--secondary-color);
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+
     </style>
 </head>
 
 <body>
+    <!-- Modal Inicial -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenido a NABORI Corp College Board LMS</h5>
+                </div>
+                <div class="modal-body">
+                    <p>En esta página tendrás la oportunidad de tomar exámenes diseñados al estilo del College Board para
+                        práctica. Además, dispones de un modelo IA en el lado derecho inferior para consultas. Sin embargo,
+                        el modelo no responderá preguntas de los exámenes, recordando que es para tu aprovechamiento.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmAccess">Confirmar y Acceder</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">NABORI Corp SmartLMS</a>
+            <a class="navbar-brand" href="#">NABORI Corp Smart College Board LMS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -401,6 +449,9 @@
             <button class="btn btn-primary mb-3" onclick="generatePDF()">
                 <i class="fas fa-download"></i> Exportar a PDF
             </button>
+            <button class="btn btn-warning mb-3" onclick="clearGrades()">
+                <i class="fas fa-trash-alt"></i> Limpiar Historial
+            </button>
 
             <table class="table table-striped">
                 <thead>
@@ -413,6 +464,8 @@
                 <tbody id="grades-table"></tbody>
             </table>
         </div>
+       
+
     </main>
 
     <!-- Exam Interface Modal -->
@@ -459,7 +512,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
 
+
     <script>
+        $(document).ready(function () {
+            // Mostrar el modal al cargar la página
+            $('#welcomeModal').modal({ backdrop: 'static', keyboard: false });
+            $('#welcomeModal').modal('show');
+
+            // Manejar la confirmación de acceso
+            $('#confirmAccess').click(function () {
+                $('#welcomeModal').modal('hide');
+            });
+
+            // Marcar como completado instantáneamente al tomar un examen
+            $('.btn-exam').click(function () {
+                const examId = $(this).data('exam-id');
+                $(`#exam-status-${examId}`).html('<span class="text-success"><i class="fas fa-check"></i> Completado</span>');
+            });
+        });
+    </script>
+
+    <script>
+        
         function resetAllExams() {
             if (!confirm('¿Reiniciar todos los exámenes? Podrás volver a realizarlos pero se conservará tu historial.')) return;
 
@@ -487,69 +561,959 @@
         
         
         // Código original del portal
-        let exams = [{
-            id: 1,
-            title: "Matemáticas Básicas",
-            duration: 30,
-            questions: [
-                { question: "2 + 2 =", options: ["3", "4", "5", "6"], correct: 1 },
-                { question: "√16 =", options: ["2", "3", "4", "5"], correct: 2 },
-                { question: "2x + 4 = 8", options: ["3", "4", "5", "2"], correct: 3 },
-                { question: "√25 =", options: ["2", "3", "4", "5"], correct: 3 },
-                { question: "i x es un número par, ¿cuál de las siguientes expresiones resulta número impar? ", options: ["x-4", "x+4", "2(x +1)", "x+1"], correct: 0 }
-            ],
-            status: "pending"
-        },
-        {
-            id: 2,
-            title: "Historia Universal",
-            duration: 45,
-            questions: [
-                { question: "Año descubrimiento América", options: ["1492", "1502", "1487", "1510"], correct: 0 },
-                { question: "Primera guerra mundial", options: ["1914", "1905", "1939", "1945"], correct: 0 }
-            ],
-            status: "pending"
-        },
-        {
-            id: 3,
-            title: "Geografía Mundial",
-            duration: 25,
-            questions: [
-                { question: "Capital de Francia", options: ["Lyon", "Marsella", "París", "Toulouse"], correct: 2 },
-                { question: "País más grande del mundo", options: ["China", "Rusia", "Canadá", "EE.UU"], correct: 1 }
-            ],
-            status: "pending"
-        },
-        {
-            id: 4,
-            title: "Gramática Española",
-            duration: 20,
-            questions: [
-                { question: "'Había' es conjugación de:", options: ["Haber", "Hacer", "Hablar", "Hallar"], correct: 0 },
-                { question: "Palabra aguda:", options: ["Árbol", "Canción", "Lápiz", "Mesa"], correct: 1 }
-            ],
-            status: "pending"
-        },
-        {
-            id: 5,
-            title: "Química Básica",
-            duration: 35,
-            questions: [
-                { question: "Símbolo del Oro", options: ["Au", "Ag", "Fe", "Cu"], correct: 0 },
-                { question: "pH del agua pura", options: ["5", "7", "8", "10"], correct: 1 }
-            ],
-            status: "pending"
-        },
-        {
-            id: 6,
-            title: "Informática General",
-            duration: 40,
-            questions: [
-                { question: "Lenguaje de marcado web", options: ["Java", "HTML", "Python", "C++"], correct: 1 },
-                { question: "Inventor de Linux", options: ["Bill Gates", "Linus Torvalds", "Steve Jobs", "Mark Zuckerberg"], correct: 1 }
-            ],
-            status: "pending"
-        }];
+       let exams = [
+            {
+               id: 1,
+               title: "Matemáticas College Board",
+               duration: 60,
+               questions: [
+                   {
+                       question: " If f(x) = 2x + 3, what is f(4)?",
+                       options: ["11", "10", "9", "8"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: " Solve for x: 3x - 5 = 16",
+                       options: ["7", "8", "6", "5"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: " What is the slope of the line passing through the points (2, 3) and (5, 11)?",
+                       options: ["8/3", "3", "8", "11/3"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: " The equation of a circle with center (0,0) and radius 5 is:",
+                       options: ["x² + y² = 25", "x² + y² = 5", "x² + y² = 10", "x² + y² = 50"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: " Simplify: (2x² * 3x³)",
+                       options: ["5x⁵", "6x⁶", "6x⁵", "5x⁶"],
+                       correct: 2,
+                       image: null
+                   },
+                   {
+                       question: " Evaluate log₂(8):",
+                       options: ["2", "3", "4", "1"],
+                       correct: 1,
+                       image: null
+                   },
+                   {
+                       question: " Solve: x² - 9 = 0",
+                       options: ["x = 3", "x = -3", "x = 3 or x = -3", "x = 0"],
+                       correct: 2,
+                       image: null
+                   },
+                   {
+                       question: " What is the derivative of f(x) = x²?",
+                       options: ["2x", "x", "x²", "1"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: " In a 30°-60°-90° triangle, what is the ratio of the sides?",
+                       options: ["1:√3:2", "1:2:√3", "2:√3:1", "1:1:√2"],
+                       correct: 0,
+                       image: "assets/images/image2.png"
+                   },
+                   {
+                       question: "Calculate: 7!",
+                       options: ["5040", "720", "120", "40320"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "Evaluate: 2³ * 2⁴",
+                       options: ["2⁷", "2⁸", "2¹²", "2⁶"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "Solve for y: (2y)/3 = 4",
+                       options: ["y = 6", "y = 8", "y = 12", "y = 2"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "If f(x) = x² + 1, what is f(2)?",
+                       options: ["5", "4", "3", "6"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "What is the distance formula between two points (x₁, y₁) and (x₂, y₂)?",
+                       options: [
+                           "√((x₂ - x₁)² + (y₂ - y₁)²)",
+                           "(x₂ - x₁) + (y₂ - y₁)",
+                           "√((x₂ - x₁) + (y₂ - y₁))",
+                           "None of the above"
+                       ],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "For the line y = -3x + 7, what is the y-intercept?",
+                       options: ["7", "-3", "0", "3"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "What is the area of a triangle with a base of 8 and a height of 5?",
+                       options: ["20", "40", "30", "80"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "If sin(θ) = 1/2, then which angle (in degrees) could θ be?",
+                       options: ["30°", "45°", "60°", "90°"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "Solve the proportion: 3/4 = x/8.",
+                       options: ["x = 6", "x = 8", "x = 12", "x = 10"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "Find the sum of the first 5 positive integers.",
+                       options: ["15", "10", "12", "20"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "If an arithmetic sequence has a first term of 3 and a common difference of 4, what is the 5th term?",
+                       options: ["23", "19", "15", "21"],
+                       correct: 1,
+                       image: null
+                   },
+                   {
+                       question: "Evaluate: (3²)³",
+                       options: ["3⁶", "3⁵", "3⁹", "3⁸"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "What is the quadratic formula?",
+                       options: [
+                           "x = (-b ± √(b² - 4ac))/(2a)",
+                           "x = (-b ± √(b² + 4ac))/(2a)",
+                           "x = (-b ± √(b² - 4ac))/a",
+                           "x = (-b ± √(4ac - b²))/(2a)"
+                       ],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "If two angles of a triangle are 45° and 45°, what is the measure of the third angle?",
+                       options: ["90°", "45°", "60°", "120°"],
+                       correct: 0,
+                       image: null
+                   },
+                   {
+                       question: "Find the greatest common divisor (GCD) of 24 and 36.",
+                       options: ["6", "8", "12", "18"],
+                       correct: 2,
+                       image: null
+                   },
+                   {
+                       question: "Simplify the expression: (x² - 9)/(x - 3)",
+                       options: ["x + 3", "x - 3", "x² + 3", "x + 9"],
+                       correct: 0,
+                       image: null
+                   }
+               ],
+               status: "pending"
+            },
+
+            {
+                id: 2,
+                title: "Razonamiento Matemático",
+                duration: 45,
+                questions: [
+                    {
+                        question: "A rectangle's length is twice its width. If its perimeter is 36 units, what is its area?",
+                        options: ["48 square units", "72 square units", "96 square units", "108 square units"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "If 3⁽ˣ⁺¹⁾ = 27, what is the value of x?",
+                        options: ["2", "3", "4", "5"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "The function h(x) = ax² + bx + c has zeros at x = -2 and x = 3. What is h(-2 + 3)?",
+                        options: ["0", "1", "5", "6"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "If cos θ = 4/5, what is sin θ?",
+                        options: ["3/5", "5/3", "4/3", "3/4"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "Which expression is equivalent to (x + 2)(x - 3) - (x - 1)(x + 4)?",
+                        options: ["-5", "-3", "3", "5"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "A sequence has terms a₁ = 2, a₂ = 6, a₃ = 18. If this pattern continues, what is a₄?",
+                        options: ["36", "54", "72", "90"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "The graph of y = f(x) is reflected over the y-axis and stretched vertically by a factor of 2. Which equation represents the new graph?",
+                        options: ["y = 2f(-x)", "y = -2f(x)", "y = f(2x)", "y = 2f(x)"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "If log₃(x) = 4, what is the value of x?",
+                        options: ["12", "64", "81", "256"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "The sum of two numbers is 15 and their product is 56. What is the positive difference between these numbers?",
+                        options: ["1", "3", "7", "13"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "Which is equivalent to (sin²θ + cos²θ)³?",
+                        options: ["0", "1", "3", "sin²θ + cos²θ"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "If f(x) = x² - 4x + 3 and g(x) = 2x - 1, find f(g(2)).",
+                        options: ["3", "7", "11", "15"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "The line 3x + 2y = 12 intersects the line y = mx + b at point (2, 3). What is the value of m?",
+                        options: ["-3/2", "3/2", "2/3", "-2/3"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "What is the period of the function f(x) = 3sin(2x)?",
+                        options: ["π", "2π", "π/2", "π/4"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "If (x + 3)² = 16, what are all possible values of x?",
+                        options: ["1 or 7", "-7 or 1", "-1 or 7", "-7 or -1"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "The expression (x⁴ - 16) can be factored as:",
+                        options: ["(x² + 4)(x² - 4)", "(x² - 4)(x² + 4)", "(x + 2)(x - 2)(x² + 4)", "(x + 4)(x - 4)(x² + 4)"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "If 5ˣ = 125, then log₅(125) equals:",
+                        options: ["1", "2", "3", "4"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "In triangle ABC, if sin A = 3/5 and cos B = 4/5, what is the measure of C?",
+                        options: ["30°", "45°", "60°", "90°"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "The solution set of |2x - 1| > 5 is:",
+                        options: ["x < -2 or x > 3", "x < 2 or x > 3", "-2 < x < 3", "-3 < x < 2"],
+                        correct: 0,
+                        image: null
+                    },
+                    {
+                        question: "If f(x) = x³ - 6x² + 9x + 1, what is f'(2)?",
+                        options: ["-3", "0", "3", "6"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "Which of these is equivalent to sec²θ - 1?",
+                        options: ["cos²θ", "sin²θ", "tan²θ", "cot²θ"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "If the arithmetic mean of 5 numbers is 10 and their standard deviation is 2, what is the sum of their squared values?",
+                        options: ["516", "520", "524", "528"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "The complex number (3 + 4i)(3 - 4i) equals:",
+                        options: ["0", "9", "16", "25"],
+                        correct: 3,
+                        image: null
+                    },
+                    {
+                        question: "What is the radius of convergence of the power series Σ(x/3)ⁿ?",
+                        options: ["1", "2", "3", "4"],
+                        correct: 2,
+                        image: null
+                    },
+                    {
+                        question: "If matrix A = [1 2; 3 4] and det(A) = -2, what is det(2A)?",
+                        options: ["-4", "-8", "4", "8"],
+                        correct: 1,
+                        image: null
+                    },
+                    {
+                        question: "The volume of a cone is increasing at a rate of 6π cubic units per second. If the radius is 3 units, at what rate is the height changing?",
+                        options: ["2 units/sec", "3 units/sec", "4 units/sec", "6 units/sec"],
+                        correct: 0,
+                        image: null
+                    }
+                ],
+                status: "pending"
+            },
+            {
+                id: 3,
+                title: "Problemas Verbales",
+                duration: 25,
+                questions: [
+                    {
+                        "question": "Juan compró 3 libros por $24.50 cada uno y 2 cuadernos por $3.75 cada uno. Si pagó con un billete de $100, ¿cuánto recibió de cambio?",
+                        "options": ["$40.50", "$45.50", "$50.50", "$55.50"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "En una fábrica, 15 máquinas producen 375 piezas en 5 horas. ¿Cuántas piezas producirán 12 máquinas en 8 horas?",
+                        "options": ["480 piezas", "500 piezas", "480 piezas", "520 piezas"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "Si 2x + 5 = 13, ¿cuál es el valor de 3x - 4?",
+                        "options": ["4", "5", "6", "7"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "En una tienda, el precio de una camisa aumentó un 20%. Si el precio original era $45, ¿cuál es el nuevo precio?",
+                        "options": ["$50", "$54", "$56", "$58"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "Un triángulo tiene un ángulo de 45° y otro de 60°. ¿Cuál es la medida del tercer ángulo?",
+                        "options": ["65°", "70°", "75°", "80°"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Si 3/4 de un número es 36, ¿cuál es el número?",
+                        "options": ["27", "38", "48", "54"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Un rectángulo tiene un perímetro de 24 cm y un ancho de 4 cm. ¿Cuál es su área?",
+                        "options": ["24 cm²", "32 cm²", "40 cm²", "48 cm²"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Si el 15% de un número es 30, ¿cuál es el número?",
+                        "options": ["150", "175", "200", "225"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "En una clase, la razón de chicos a chicas es 3:5. Si hay 24 chicos, ¿cuántos estudiantes hay en total?",
+                        "options": ["40", "48", "54", "64"],
+                        "correct": 3,
+                        "image": null
+                    },
+                    {
+                        "question": "Un tren recorre 240 kilómetros en 3 horas. ¿Cuál es su velocidad promedio?",
+                        "options": ["60 km/h", "70 km/h", "80 km/h", "90 km/h"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es la probabilidad de sacar un número par al lanzar un dado de 6 caras?",
+                        "options": ["1/6", "1/3", "1/2", "2/3"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Si x² - 5x + 6 = 0, ¿cuál es el valor más grande de x?",
+                        "options": ["2", "3", "4", "5"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "Una piscina se llena en 6 horas con 2 bombas. ¿Cuánto tardará en llenarse con 3 bombas?",
+                        "options": ["2 horas", "3 horas", "4 horas", "5 horas"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el área de un círculo con radio de 5 cm? (Use π = 3.14)",
+                        "options": ["75.5 cm²", "78.5 cm²", "81.5 cm²", "84.5 cm²"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "Si 5x + 3y = 21 y 2x + y = 8, ¿cuál es el valor de x?",
+                        "options": ["2", "3", "4", "5"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "Un comerciante compra un artículo por $80 y lo vende con una ganancia del 25%. ¿Cuál es el precio de venta?",
+                        "options": ["$95", "$100", "$105", "$110"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el mínimo común múltiplo de 12 y 18?",
+                        "options": ["24", "30", "36", "42"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Si un cubo tiene un volumen de 27 cm³, ¿cuál es la longitud de su arista?",
+                        "options": ["2 cm", "3 cm", "4 cm", "5 cm"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "En una secuencia, cada número es el doble del anterior más 1. Si el primer número es 2, ¿cuál es el cuarto número?",
+                        "options": ["23", "25", "27", "29"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Un triángulo rectángulo tiene un cateto de 6 cm y una hipotenusa de 10 cm. ¿Cuál es la longitud del otro cateto?",
+                        "options": ["6 cm", "8 cm", "10 cm", "12 cm"],
+                        "correct": 1,
+                        "image": "assets/images/image.png"
+                    },
+                    {
+                        "question": "Si 2ˣ = 32, ¿cuál es el valor de x?",
+                        "options": ["3", "4", "5", "6"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "En una urna hay 5 bolas rojas y 3 azules. ¿Cuál es la probabilidad de sacar una bola roja?",
+                        "options": ["3/8", "4/8", "5/8", "6/8"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Si log₁₀(x) = 2, ¿cuál es el valor de x?",
+                        "options": ["20", "50", "100", "200"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "Un auto viaja a 60 km/h durante 2.5 horas y luego a 80 km/h durante 1.5 horas. ¿Cuál es la distancia total recorrida?",
+                        "options": ["240 km", "250 km", "260 km", "270 km"],
+                        "correct": 3,
+                        "image": null
+                    },
+                    {
+                        "question": "Si (x + 2)(x - 3) = 0, ¿cuáles son los valores de x?",
+                        "options": ["-2 y 3", "-3 y 2", "2 y 3", "-2 y -3"],
+                        "correct": 0,
+                        "image": null
+                    }
+                ],
+                status: "pending"
+            },
+            {
+                id: 4,
+                title: "Matemática College Board 2",
+                duration: 20,
+                questions: [
+                        {
+                            question: "Juan compra 12 dulces por 30 pesos. Si al día siguiente el precio de cada dulce se incrementó a 6 pesos, ¿cuánto se ahorró Juan por dulce al comprarlos con el precio anterior?",
+                            options: ["2 pesos", "3 pesos", "4 pesos", "3.5 pesos", "5 pesos"],
+                            correct: 3,
+                            image: null
+                        },
+                        {
+                            question: "Si 3x+5=103, determina a qué es igual √(3x+2 ",
+                            options: ["8", "9", "10", "98", "103"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "La suma de dos números enteros impares consecutivos es 104, determina el impar mayor.",
+                            options: ["41", "49", "51", "53", "55"],
+                            correct: 3,
+                            image: null
+                        },
+                        {
+                            question: "El largo de un rectángulo se incrementa 15% y el ancho del rectángulo se incrementa por 20%. Determina el porcentaje en que el área se incrementa.",
+                            options: ["10%", "15%", "20%", "38%", "40%"],
+                            correct: 3,
+                            image: null
+                        },
+                        {
+                            question: "Si se tienen dos círculos de radio 1cm y 2cm respectivamente, ¿cuál es la razón del área del primero con respecto al segundo?",
+                            options: ["1:2", "1:4", "2:1", "3:1", "4:1"],
+                            correct: 1,
+                            image: null
+                        },
+                        {
+                            question: "Una secretaria puede hacer 3 escritos del mismo tamaño en 4 horas. ¿Qué tiempo le llevará a la misma secretaria realizar 5 trabajos de la misma longitud?",
+                            options: ["7h. 15 min.", "7h. 30 min.", "7h. 45 min.", "6h. 20 min.", "6h. 40 min."],
+                            correct: 4,
+                            image: null
+                        },
+                        {
+                            question: "El precio de un traje de caballero es de 3060 pesos una vez que se ha efectuado un descuento del 15%. ¿Cuál es el precio original del traje?",
+                            options: ["2601", "3519", "3600", "3825", "4000"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "En una clase de 40 estudiantes, 14 tienen ipod y 30 tienen celular. ¿Cuántos estudiantes tienen ambos aparatos, si se sabe que todos tienen al menos uno de los dos?",
+                            options: ["0", "4", "6", "7", "11"],
+                            correct: 1,
+                            image: null
+                        },
+                        {
+                            question: "En una urna se encuentran 20 esferas: 7 blancas, 5 rojas y 8 azules. ¿Cuál es la probabilidad que al sacar una sea azul o roja?",
+                            options: ["2/5", "3/4", "13/20", "7/20", "8/20"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "El promedio de cuatro números es 30, tres de ellos son 45, 30, y 25. ¿Cuál es el número que falta?",
+                            options: ["100", "35", "120", "20", "40"],
+                            correct: 3,
+                            image: null
+                        },
+                        {
+                            question: "Si el promedio de dos números es 47 y uno de ellos es 24, ¿Cuál es el otro número?",
+                            options: ["94", "70", "117", "23", "80"],
+                            correct: 1,
+                            image: null
+                        },
+                        {
+                            question: "Las temperaturas durante una semana fueron: 32,28,25,20,25,25,27. ¿Cuál fue la media aritmética?",
+                            options: ["182", "25", "32", "26", "20"],
+                            correct: 3,
+                            image: null
+                        },
+                        {
+                            question: "El promedio de 4 números es 9; el promedio de otros 5 números es 8. ¿Cuál es el promedio de los 9 números?",
+                            options: ["8.4", "7.6", "8", "9", "38"],
+                            correct: 0,
+                            image: null
+                        },
+                        {
+                            question: "En una clase de 10 alumnos las calificaciones en Arte fueron: 7,7,7,7,7,8,8,8,8,10 ¿Cuál es la mediana?",
+                            options: ["7", "8", "7.5", "8.5", "7 y 8"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "Los radios de los círculos A y B están en la razón 1:2. ¿Cuál afirmación es cierta respecto al área?",
+                            options: ["El área del círculo A es la mitad del área del círculo B", "El área del círculo B es el triple del área del círculo A", "Cuatro veces el área del círculo A es igual al área del círculo B", "El área de círculo A es una quinta parte del área de círculo B", "El área del círculo A es una sexta parte del área del círculo B"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "¿Cuál representa verbalmente la expresión 2(x²-y²)?",
+                            options: ["El doble de la diferencia del cuadrado de dos números", "El cuadrado de la diferencia de dos números multiplicado por 2", "El doble producto del cuadrado de la diferencia de dos números", "El doble producto de cuadrado de un número menos el cuadrado del otro", "El cuadrado de la diferencia de dos números menos el doble producto de ellos"],
+                            correct: 0,
+                            image: null
+                        },
+                        {
+                            question: "¿De cuántas maneras diferentes se pueden preparar pizzas si se tienen 8 ingredientes diferentes y cada pizza lleva 2 ingredientes?",
+                            options: ["28", "16", "56", "48", "4"],
+                            correct: 0,
+                            image: null
+                        },
+                        {
+                            question: "En una fábrica hay 300 personas, 110 son católicos, 120 son hombres y 50 son hombres católicos. ¿Cuántas son mujeres católicas?",
+                            options: ["190", "70", "120", "180", "60"],
+                            correct: 4,
+                            image: null
+                        },
+                        {
+                            question: "Hay 450 alumnos de tercer año y 405 se graduarán. ¿Qué parte del total no se graduará?",
+                            options: ["1/10", "1/5", "1/9", "1/8", "1/7"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "En una escuela todos reciben una de cuatro calificaciones: A, B, C y D. Si 2/5 obtienen A, 1/4 obtienen B, 1/5 obtienen C y 20 alumnos reciben D. ¿Cuántos estudiantes hay en total?",
+                            options: ["30", "60", "100", "200", "400"],
+                            correct: 4,
+                            image: null
+                        },
+                        {
+                            question: "Si un mes tiene 31 días y el día primero es lunes, ¿Cuáles son los días de la semana de moda en dicho mes?",
+                            options: ["Lunes, martes y miércoles", "Domingo, lunes y martes", "Solo miércoles", "Sábado, domingo y lunes", "Jueves, viernes y sábado"],
+                            correct: 0,
+                            image: null
+                        },
+                        {
+                            question: "En una preparatoria el club de Matemáticas tiene 15 miembros y el club de Ciencias tiene 12 miembros. Si en total 13 estudiantes pertenecen ya sea solamente a Matemáticas o solamente a Ciencias, ¿cuántos estudiantes pertenecen a ambos clubes?",
+                            options: ["2", "6", "7", "12", "14"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "Si a la raíz cuadrada de la diferencia de x y 3 se le añade 5 y da como resultado 9, determina el valor de x.",
+                            options: ["3", "4", "5", "16", "19"],
+                            correct: 4,
+                            image: null
+                        },
+                        {
+                            question: "En un número de tres dígitos, el dígito de las centenas es el triple de las decenas y el dígito de las decenas es la mitad del dígito de las unidades. Si la suma de los tres dígitos es 12, ¿cuál es el dígito de las unidades?",
+                            options: ["2", "3", "4", "6", "9"],
+                            correct: 2,
+                            image: null
+                        },
+                        {
+                            question: "En una encuesta a 300 consumidores sobre productos tipo A y B (180 prefieren A, 130 prefieren B, 40 prefieren ambos), si se elige uno al azar, ¿cuál es la probabilidad de que no prefiera ningún producto?",
+                            options: ["0.1", "0.2", "0.3", "0.4", "0.5"],
+                            correct: 0,
+                            image: null
+                        }
+                    ],
+                status: "pending"
+            },
+            {
+                id: 5,
+                title: "Vocabulario",
+                duration: 35,
+                questions: [
+                     {
+                        "question": "¿Qué significa la palabra 'efímero'?",
+                        "options": ["Duradero", "Breve", "Complejo", "Ordinario"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el sinónimo de 'perspicaz'?",
+                        "options": ["Ingenuo", "Sagaz", "Tímido", "Irreflexivo"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué palabra es un antónimo de 'tedioso'?",
+                        "options": ["Aburrido", "Dinámico", "Monótono", "Pesado"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el significado de 'paradigma'?",
+                        "options": ["Ejemplo", "Problema", "Teoría", "Hipótesis"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa la palabra 'ineludible'?",
+                        "options": ["Evadible", "Inevitable", "Flexible", "Opcional"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el sinónimo de 'reverberar'?",
+                        "options": ["Reflejarse", "Absorber", "Apagar", "Callar"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'lacónico'?",
+                        "options": ["Elocuente", "Breve", "Sofisticado", "Desorganizado"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el antónimo de 'arduo'?",
+                        "options": ["Fácil", "Intenso", "Duro", "Complicado"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'discrepancia'?",
+                        "options": ["Acuerdo", "Diferencia", "Afinidad", "Coincidencia"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué palabra es un sinónimo de 'ostentoso'?",
+                        "options": ["Modesto", "Sencillo", "Lujoso", "Humilde"],
+                        "correct": 2,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el significado de 'frugal'?",
+                        "options": ["Abundante", "Económico", "Derrochador", "Generoso"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa la palabra 'ambiguo'?",
+                        "options": ["Claro", "Confuso", "Inequívoco", "Específico"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el sinónimo de 'inerte'?",
+                        "options": ["Activo", "Inmóvil", "Vibrante", "Productivo"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'perpetuar'?",
+                        "options": ["Olvidar", "Prolongar", "Detener", "Interrumpir"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué palabra es un antónimo de 'benevolente'?",
+                        "options": ["Amable", "Hostil", "Bondadoso", "Compasivo"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'cauteloso'?",
+                        "options": ["Descuidado", "Prudente", "Imprudente", "Riesgoso"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es un sinónimo de 'esporádico'?",
+                        "options": ["Frecuente", "Ocasional", "Continuo", "Persistente"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa la palabra 'euforia'?",
+                        "options": ["Tristeza", "Alegría extrema", "Indiferencia", "Calma"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'ostentar'?",
+                        "options": ["Esconder", "Mostrar", "Evitar", "Renunciar"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el antónimo de 'voraz'?",
+                        "options": ["Insaciable", "Moderado", "Hambriento", "Apresurado"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'oneroso'?",
+                        "options": ["Fácil", "Costoso", "Ligero", "Gratuito"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es un sinónimo de 'prodigioso'?",
+                        "options": ["Común", "Extraordinario", "Normal", "Ordinario"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'tenaz'?",
+                        "options": ["Indeciso", "Persistente", "Dudoso", "Débil"],
+                        "correct": 1,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué palabra es un antónimo de 'precario'?",
+                        "options": ["Estable", "Inseguro", "Frágil", "Vulnerable"],
+                        "correct": 0,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Qué significa 'impávido'?",
+                        "options": ["Asustado", "Valiente", "Tímido", "Dudoso"],
+                        "correct": 1,
+                        "image": null
+                    }
+                ],
+                status: "pending"
+            },
+            {
+                id: 6,
+                title: "Comprensión de Lectura",
+                duration: 40,
+                questions: [
+                   {
+                        "question": "¿Qué palabra describe mejor el significado de 'mito' en el contexto de la lectura sobre los alimentos calentados al microondas?",
+                        "options": ["Historia de héroes y deidades", "Una invención literaria antigua", "Creencia que altera la verdad", "Una historia muy tradicional"],
+                        "correct": 2,
+                        "image": "assets/images/alimentos_microondas.png"
+                    },
+                    {
+                        "question": "Según la lectura sobre el microondas, ¿qué método reduce los nutrientes de los alimentos?",
+                        "options": ["Cocción al vapor", "Hervir en agua", "Uso de microondas", "Todos los métodos de cocción"],
+                        "correct": 3,
+                        "image": null
+                    },
+                    {
+                        "question": "¿Cuál es el principal antioxidante del té mencionado en la lectura sobre la estevia?",
+                        "options": ["Quercetina", "Glicósidos del esteviol", "Vitamina C", "Ácido fólico"],
+                        "correct": 0,
+                        "image": "assets/images/lectura_estevia.png"
+                    },
+                    {
+                        "question": "En la lectura sobre la ópera renacentista, ¿quién escribió 'Dafne'?",
+                        "options": ["Ottavio Rinuccini", "Giovanni Bardi", "Jacopo Peri", "Giulio Caccini"],
+                        "correct": 2,
+                        "image": "assets/images/opera_renacentista.png"
+                    },
+                    {
+                        "question": "¿Según la lectrura la palabra (arca)línea 2 , se refiere a...?",
+                        "options": ["una caja de madera con cerradura", "una nave o embarcación", "un lugar dónde se guarda lo valioso", "un sepulcro o"],
+                        "correct": 1,
+                        "image": "assets/images/niña_imaginaba.png"
+                    },
+                    {
+                        "question": "Según la lectura, ¿cuál es el porcentaje de hogares en 2014 que clasificaron plástico como residuo?",
+                        "options": ["20.86%", "31.48%", "12.68%", "25.75%"],
+                        "correct": 1,
+                        "image": "assets/images/residuo_organico.png"
+                    },
+                    {
+                        "question": "¿Qué significa el término 'ergogenia' en el contexto de la lectura sobre el café?",
+                        "options": ["Sustancias que aumentan el rendimiento físico", "Métodos de cultivo de café", "Efectos negativos del café", "Pruebas científicas sobre cafeína"],
+                        "correct": 0,
+                        "image": "assets/images/cafe.png"
+                    },
+                    {
+                        "question": "En la lectura sobre residuos, ¿qué tipo de material fue el más clasificado en los hogares?",
+                        "options": ["Vidrio", "Papel-cartón", "Plástico", "Orgánicos"],
+                        "correct": 2,
+                        "image": "assets/images/residuo_organico.png"
+                    },
+                   
+                    {
+                        "question": "¿Qué palabra puede sustituir apropiadamente a 'memoria' en la lectura sobre la anécdota del hotel?",
+                        "options": ["Recuerdo", "Estudio", "Cerebro", "Estrategia"],
+                        "correct": 0,
+                        "image": "assets/images/la_memoria.png"
+                    },
+                    {
+                        "question": "¿Cuál era la principal función de la CNC mencionada en la lectura?",
+                        "options": ["Apoyar políticas presidenciales", "Recaudar impuestos", "Promover la agricultura", "Generar empleos"],
+                        "correct": 0,
+                        "image": "assets/images/funcion_CNC.png"
+                    },
+                    {
+                        "question": "En la lectura sobre la estevia, ¿qué compuesto está directamente relacionado con su capacidad antioxidante?",
+                        "options": ["Ácido fólico", "Vitamina C", "Glicósidos del esteviol", "Edulcorantes refinados"],
+                        "correct": 2,
+                        "image": "assets/images/lectura_estevia.png"
+                    },
+                    {
+                        "question": "Según la lectura, ¿qué resultado se obtuvo al consumir más de 5 tazas de café al día en el experimento?",
+                        "options": ["Escuchar música inexistente", "Mayor percepción del cansancio", "Mejora en habilidades motoras", "Reducción del estrés"],
+                        "correct": 0,
+                        "image": "assets/images/cafe.png"
+                    },
+                    {
+                        "question": "En la lectura sobre residuos, ¿qué beneficio tiene el compostaje?",
+                        "options": ["Generar ingresos", "Producir abono natural", "Incrementar los residuos sólidos", "Reducir el reciclaje"],
+                        "correct": 1,
+                        "image": "assets/images/residuo_organico.png"
+                    },
+                   
+                    {
+                        "question": "En la lectura sobre el códice Voynich, ¿quién lo adquirió en 1912?",
+                        "options": ["John Dee", "Wilfrid Voynich", "Rodolfo II de Habsburgo", "Hans Peter Kraus"],
+                        "correct": 1,
+                        "image": "assets/images/codice_voniche.png"
+                    },
+                    {
+                        "question": "Según la lectura, ¿qué caracteriza a los glicósidos del esteviol?",
+                        "options": ["Son altamente calóricos", "Tienen propiedades antioxidantes", "Provienen del azúcar de mesa", "Son menos dulces que la sacarosa"],
+                        "correct": 1,
+                        "image": "assets/images/lectura_estevia.png"
+                    },
+                    {
+                        "question": "En la lectura sobre residuos, ¿qué porcentaje del papel-cartón fue clasificado en 2014?",
+                        "options": ["12.68%", "20.86%", "31.48%", "25.50%"],
+                        "correct": 1,
+                        "image": "assets/images/residuo_organico.png"
+                    },
+                    {
+                        "question": "En la lectura sobre la ópera renacentista, ¿qué grupo contribuyó al desarrollo de la teoría del teatro musical?",
+                        "options": ["La familia Medici", "La Camerata de Giovanni Bardi", "El círculo de Galileo Galilei", "El Consejo de Florencia"],
+                        "correct": 1,
+                        "image": "assets/images/opera_renacentista.png"
+                    },
+                    {
+                        "question": "Según la lectura, ¿qué proceso ocurre con las proteínas cuando se calientan?",
+                        "options": ["Se enfrían rápidamente", "Se desnaturalizan", "Se fortalecen", "Se vuelven líquidas"],
+                        "correct": 1,
+                        "image": "assets/images/alimentos_microondas.png"
+                    },
+                    {
+                        "question": "¿Qué se perdió en la obra 'Dafne' según la lectura sobre la ópera?",
+                        "options": ["El libreto", "La música", "El título original", "El reconocimiento"],
+                        "correct": 1,
+                        "image": "assets/images/opera_renacentista.png"
+                    },
+                    {
+                        "question": "En la lectura sobre el café, ¿qué efecto tiene la cafeína en el rendimiento físico?",
+                        "options": ["Aumenta el cansancio", "Reduce la percepción del esfuerzo", "Incrementa el estrés", "Disminuye la tolerancia al ejercicio"],
+                        "correct": 1,
+                        "image": "assets/images/cafe.png"
+                    },
+                    {
+                        "question": "Según la lectura, ¿qué caracteriza a los residuos inorgánicos?",
+                        "options": ["Provienen de organismos vivos", "Son reciclables", "Se descomponen rápidamente", "Provienen de procesos industriales"],
+                        "correct": 3,
+                        "image": "assets/images/residuo_organico.png"
+                    },
+                    {
+                        "question": "En la lectura sobre la memoria, ¿por qué el personaje pide que le recuerden el número de su habitación?",
+                        "options": ["Es una tradición del hotel", "Tiene mala memoria", "No confía en el personal", "Olvidó la llave"],
+                        "correct": 1,
+                        "image": "assets/images/la_memoria.png"
+                    },
+                    {   "image": "assets/images/ciencia_ficcion.png",
+                        "question": "En la lectura sobre ficción literaria, ¿qué propósito tiene la literatura según el autor?",
+                        "options": ["Imitar la realidad exacta", "Crear experiencias emocionales", "Criticar exclusivamente lo social", "Estudiar hechos históricos"],
+                        "correct": 1,
+                        
+                    }
+                ],
+                status: "pending"
+            }
+        ];
+        
+
         let grades = [];
         let currentExam = null;
         let timeLeft = 0;
@@ -653,48 +1617,51 @@
         }
 
         // Iniciar examen
-        function startExam(examId) {
+       function startExam(examId) {
             currentExam = exams.find(e => e.id === examId);
             timeLeft = currentExam.duration * 60;
 
+            // Mostrar preguntas con imágenes opcionales
+            $('#examQuestions').html(`
+        <div class="student-info mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+            </div>
+        </div>
+        ${currentExam.questions.map((q, index) => `
+            <div class="question-card">
+                <h6>Pregunta ${index + 1}: ${q.question}</h6>
+                ${q.image ? `<img src="${q.image}" alt="Imagen de la pregunta" class="img-fluid mb-3">` : ""}
+                ${q.options.map((o, i) => `
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q${index}" id="q${index}o${i}" value="${i}">
+                        <label class="form-check-label" for="q${index}o${i}">
+                            ${o}
+                        </label>
+                    </div>
+                `).join('')}
+            </div>
+        `).join('')}
+       
+    `);
+
+            // Mostrar temporizador
             $('.timer').text(
                 `${Math.floor(timeLeft / 60).toString().padStart(2, '0')}:${(timeLeft % 60).toString().padStart(2, '0')}`
             ).show();
 
-            $('#examTitle').text(currentExam.title);
-            $('#examQuestions').html(`
-                <div class="student-info mb-4">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="firstName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="firstName" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label for="lastName" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="lastName" required>
-                        </div>
-                    </div>
-                </div>
-                ${currentExam.questions.map((q, index) => `
-                    <div class="question-card">
-                        <h6>Pregunta ${index + 1}</h6>
-                        <p>${q.question}</p>
-                        ${q.options.map((o, i) => `
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="q${index}" 
-                                       id="q${index}o${i}" value="${i}">
-                                <label class="form-check-label" for="q${index}o${i}">
-                                    ${o}
-                                </label>
-                            </div>
-                        `).join('')}
-                    </div>
-                `).join('')}
-            `);
-
-            $('#examModal').modal('show');
-            startTimer();
+            $('#examModal').modal('show'); // Mostrar modal del examen
+            startTimer(); // Iniciar el temporizador
         }
+
+
 
         // Temporizador
         function startTimer() {
@@ -895,6 +1862,24 @@
         VG_SCRIPT.defer = true; // Remove 'defer' if you want widget to load faster (Will affect website loading)
         document.body.appendChild(VG_SCRIPT);
     })()
+    function clearGrades() {
+            if (confirm('¿Estás seguro de que deseas limpiar el historial de calificaciones?')) {
+                grades = [];
+                let savedData = localStorage.getItem('studentProgress');
+                if (savedData) {
+                    try {
+                        let data = JSON.parse(savedData);
+                        data.grades = [];
+                        localStorage.setItem('studentProgress', JSON.stringify(data));
+                    } catch (error) {
+                        console.error('Error al limpiar el historial en localStorage:', error);
+                    }
+                }
+                updateGrades();
+                alert('Historial de calificaciones limpiado.');
+            }
+        }
+
 </script>
 </body>
 
