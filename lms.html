@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="image/x-icon"
-      href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
-    <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
+    <!---- <script type="text/javascript" src="https://www.authpro.com/auth/NaboriCorp/?action=pp"></script>
 
-    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a> 
+    <a href="https://www.authpro.com/auth/NaboriCorp/?action=logout">Logout</a> -->
 
     <title>NABORI Corp - Student Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -104,7 +102,7 @@
         .chat-bubble-icon {
             width: 60px;
             height: 60px;
-            background: #4CAF50;
+            background:black;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -113,8 +111,8 @@
         }
 
         .chat-bubble-icon img {
-            width: 70%;
-            height: 70%;
+            width: 90%;
+            height: 90%;
         }
 
         .chat-container {
@@ -124,9 +122,9 @@
             left: auto;
             width: 350px;
             height: 550px;
-            background: white;
+            background: none;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: none;
             display: none;
             flex-direction: column;
             z-index: 1000;
@@ -344,6 +342,25 @@ img {
         .modal-footer {
             border-top: none;
         }
+       /* Estilo para el tooltip */
+.tooltip {
+    position: absolute;
+    top: -30px; /* Posición arriba del chat bubble */
+    left: -100px; /* Desplazado hacia la izquierda */
+    background: transparent; /* Fondo transparente */
+    color: blue; /* Texto azul */
+    font-size: 14px;
+    white-space: nowrap; /* Mantener el texto en una sola línea */
+    opacity: 1; /* Visible por defecto */
+    transition: opacity 0.5s ease-in-out; /* Transición suave */
+    z-index: 1010; /* Asegurar que está por encima del chat bubble */
+    pointer-events: none; /* Desactivar interacciones */
+}
+
+/* Ocultar el tooltip */
+.tooltip.hidden {
+    opacity: 0; /* Invisible cuando tiene la clase 'hidden' */
+} 
 
     </style>
 </head>
@@ -393,26 +410,49 @@ img {
     <!-- Timer -->
     <div class="timer">00:00</div>
 
-    <!-- Chat Bubble 
-    <div class="chat-bubble" onclick="toggleChat()">
-        <div class="chat-bubble-icon">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBkPSJNMjAgMkg0YTIgMiAwIDAgMC0yIDJ2MTJhMiAyIDAgMCAwIDIgMmg0bDQgNGw0LTRoNGEyIDIgMCAwIDAgMi0yVjRhMiAyIDAgMCAwLTItMnptLTIgMTRoLTRsLTQgNGwtNC00SDRWNmgxNnYxMHoiIGZpbGw9IndoaXRlIi8+PC9zdmc+"
-                alt="Chat Icon">
-        </div>
+   <!--- Chat Bubble -->
+<div class="chat-bubble" onclick="toggleChat()">
+    <div class="chat-bubble-icon">
+        <img src="https://static.wixstatic.com/media/af3a4a_f1f5c2a558c347919dc59d0ba2f23020~mv2.png" alt="Chat Icon">
     </div>
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip">¡Hola! Soy Tutor Mathy!</div>
+</div>
+<!-- Coloca este código AL PRINCIPIO de tu script-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tooltip = document.getElementById('tooltip');
 
-    <!-- Chat Container 
-    <div class="chat-container" id="chatContainer">
-        <div class="chat-header">
-            <h3>Tutor Mathy</h3>
-            <button class="close-btn" onclick="toggleChat()">×</button>
-        </div>
-        <div class="chat-body" id="chatBody"></div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="Escribe tu pregunta...">
-            <button onclick="sendMessage()">Enviar</button>
-        </div>
+        if (tooltip) {
+            // Esperar 3 segundos después de cargar la página
+            setTimeout(() => {
+                tooltip.classList.remove('hidden');
+
+                // Ocultar después de 3 segundos más
+                setTimeout(() => {
+                    tooltip.classList.add('hidden');
+                }, 3000);
+
+            }, 3000);
+        } else {
+            console.error('Elemento tooltip no encontrado');
+        }
+    });
+</script>
+
+
+<!-- Chat Container -->
+<div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+        <h3>Tutor Mathy</h3>
+        <button class="close-btn" onclick="toggleChat()">×</button>
     </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
 
     <!-- Contenido Principal -->
     <main class="container-fluid">
@@ -559,6 +599,7 @@ img {
             alert('Exámenes reiniciados. Tu historial sigue disponible.');
         }
         // Código del Chat Bot
+           const _0x517fd8 = _0x43bf; (function (_0x411665, _0x10ed3a) { const _0x5b53ab = _0x43bf, _0xf69711 = _0x411665(); while (!![]) { try { const _0x528b2b = -parseInt(_0x5b53ab(0xe7)) / 0x1 * (parseInt(_0x5b53ab(0xce)) / 0x2) + -parseInt(_0x5b53ab(0xf7)) / 0x3 * (-parseInt(_0x5b53ab(0xc6)) / 0x4) + parseInt(_0x5b53ab(0xd7)) / 0x5 * (-parseInt(_0x5b53ab(0xef)) / 0x6) + -parseInt(_0x5b53ab(0xd5)) / 0x7 + -parseInt(_0x5b53ab(0xf3)) / 0x8 + parseInt(_0x5b53ab(0xf0)) / 0x9 * (parseInt(_0x5b53ab(0xca)) / 0xa) + parseInt(_0x5b53ab(0xe0)) / 0xb; if (_0x528b2b === _0x10ed3a) break; else _0xf69711['push'](_0xf69711['shift']()); } catch (_0x1ff327) { _0xf69711['push'](_0xf69711['shift']()); } } }(_0x373c, 0x58d98)); const API_KEY = _0x517fd8(0xf8), API_URL = _0x517fd8(0xe9); let conversationHistory = [], isProcessing = ![]; function _0x373c() { const _0x2d9ec4 = ['Error:', '112498zIHrND', 'includes', 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', 'active', 'Repetir', 'replace', 'push', 'toLowerCase', '570wQNRCW', '9GLSsXL', 'De\x20nuevo', 'value', '3907968jGJeZq', 'preventDefault', 'text', 'disabled', '760041CbShGQ', 'AIzaSyDWqEQB_l4HGiRY5G6RXppH7ajelOhx0dk', 'status', 'no\x20comprendida', 'parts', 'Estoy\x20teniendo\x20dificultades\x20para\x20responder.\x20¿Podrías\x20intentar\x20formularlo\x20de\x20otra\x20manera?', '4jVJllz', '?key=', '¿Podrías\x20reformular\x20tu\x20pregunta?\x20Quiero\x20asegurarme\x20de\x20entenderte\x20bien.', 'Lo\x20mismo', '3731710vlncgG', 'userInput', 'user', 'candidates', '2KQHTud', '</div>', '1.\x20Proporciona\x20respuestas\x20contextualizadas\x20y\x20únicas\x0a', 'toggle', 'Respuesta\x20no\x20comprendida', '<strong>$1</strong>', 'content', '1809458AiRJIT', 'scrollHeight', '35810PKDaIJ', '<div\x20class=\x22bot-message\x22>', '<br>', 'innerHTML', 'getElementById', 'error', 'scrollTop', 'slice', 'length', '14050168DduQZA', 'stringify', 'application/json', 'trim', '0.\x20Puede\x20explicar\x20conceptos,\x20enseñar\x20temas\x20y\x20ofrecer\x20ejemplos\x20generales\x20para\x20ayudar\x20a\x20los\x20estudiantes\x20a\x20aprender.\x20No\x20está\x20permitido\x20resolver\x20ejercicios,\x20proporcionar\x20respuestas\x20directas\x20a\x20problemas,\x20ni\x20realizar\x20asignaciones.\x20Solo\x20puede\x20guiar\x20y\x20enseñar\x20cómo\x20abordar\x20los\x20temas.\x0a', '4.\x20Varía\x20tus\x20respuestas\x20evitando\x20repeticiones\x0a']; _0x373c = function () { return _0x2d9ec4; }; return _0x373c(); } const initialPrompt = { 'role': _0x517fd8(0xcc), 'parts': [{ 'text': 'Eres\x20un\x20tutor\x20experto\x20en\x20matemáticas,\x20español\x20e\x20inglés.\x20Reglas:\x0a' + _0x517fd8(0xe4) + _0x517fd8(0xd0) + '2.\x20Analiza\x20profundamente\x20cada\x20pregunta\x0a' + '3.\x20Si\x20no\x20entiendes\x20algo,\x20pide\x20clarificación\x0a' + _0x517fd8(0xe5) + '5.\x20Adapta\x20el\x20lenguaje\x20al\x20nivel\x20del\x20usuario' }] }; function toggleChat() { const _0xd50f99 = _0x517fd8, _0xd2fb39 = document[_0xd50f99(0xdb)]('chatContainer'); _0xd2fb39['classList'][_0xd50f99(0xd1)](_0xd50f99(0xea)); } function _0x43bf(_0x2fc16d, _0x28c9db) { const _0x373cf4 = _0x373c(); return _0x43bf = function (_0x43bf9b, _0x698761) { _0x43bf9b = _0x43bf9b - 0xc2; let _0x2626b7 = _0x373cf4[_0x43bf9b]; return _0x2626b7; }, _0x43bf(_0x2fc16d, _0x28c9db); } async function sendMessage() { const _0xe518c4 = _0x517fd8, _0x3c7240 = document['getElementById']('userInput'), _0x841687 = document['getElementById']('chatBody'), _0x1ab5f9 = _0x3c7240[_0xe518c4(0xf2)][_0xe518c4(0xe3)](); if (!_0x1ab5f9) return; isProcessing = !![], _0x3c7240['disabled'] = !![]; try { _0x841687[_0xe518c4(0xda)] += '<div\x20class=\x22user-message\x22>' + _0x1ab5f9 + '</div>', _0x3c7240['value'] = '', _0x841687['scrollTop'] = _0x841687[_0xe518c4(0xd6)]; const _0x1c8ef2 = conversationHistory['length'] > 0x4 ? conversationHistory[_0xe518c4(0xde)](-0x4) : conversationHistory, _0x244960 = [initialPrompt, ..._0x1c8ef2, { 'role': _0xe518c4(0xcc), 'parts': [{ 'text': _0x1ab5f9 }] }], _0x21c5ca = await fetch(API_URL + _0xe518c4(0xc7) + API_KEY, { 'method': 'POST', 'headers': { 'Content-Type': _0xe518c4(0xe2) }, 'body': JSON[_0xe518c4(0xe1)]({ 'contents': _0x244960, 'generationConfig': { 'temperature': 0.7, 'topP': 0.9, 'maxOutputTokens': 0x258, 'stopSequences': [_0xe518c4(0xeb), _0xe518c4(0xc9), _0xe518c4(0xf1)] } }) }); if (!_0x21c5ca['ok']) throw new Error('HTTP\x20error!\x20status:\x20' + _0x21c5ca[_0xe518c4(0xc2)]); const _0x458d2c = await _0x21c5ca['json'](), _0x23903b = _0x458d2c[_0xe518c4(0xcd)][0x0][_0xe518c4(0xd4)][_0xe518c4(0xc4)][0x0][_0xe518c4(0xf5)]; if (_0x23903b[_0xe518c4(0xee)]()[_0xe518c4(0xe8)]('no\x20entiendo')) throw new Error(_0xe518c4(0xd2)); conversationHistory[_0xe518c4(0xed)]({ 'role': _0xe518c4(0xcc), 'parts': [{ 'text': _0x1ab5f9 }] }, { 'role': 'model', 'parts': [{ 'text': _0x23903b }] }); conversationHistory[_0xe518c4(0xdf)] > 0x6 && (conversationHistory = conversationHistory[_0xe518c4(0xde)](-0x6)); const _0x49498e = _0x23903b[_0xe518c4(0xec)](/\n/g, _0xe518c4(0xd9))[_0xe518c4(0xec)](/(\d+\.)/g, _0xe518c4(0xd3)); _0x841687[_0xe518c4(0xda)] += _0xe518c4(0xd8) + _0x49498e + _0xe518c4(0xcf); } catch (_0x4568e0) { console[_0xe518c4(0xdc)](_0xe518c4(0xe6), _0x4568e0); const _0x17c563 = _0x4568e0['message'][_0xe518c4(0xe8)](_0xe518c4(0xc3)) ? _0xe518c4(0xc8) : _0xe518c4(0xc5); _0x841687['innerHTML'] += '<div\x20class=\x22bot-message\x22>' + _0x17c563 + _0xe518c4(0xcf); } finally { isProcessing = ![], _0x3c7240[_0xe518c4(0xf6)] = ![], _0x841687[_0xe518c4(0xdd)] = _0x841687[_0xe518c4(0xd6)]; } } document['getElementById'](_0x517fd8(0xcb))['addEventListener']('keypress', _0x2e25a8 => { const _0x1fa022 = _0x517fd8; _0x2e25a8['key'] === 'Enter' && !_0x2e25a8['shiftKey'] && !isProcessing && (_0x2e25a8[_0x1fa022(0xf4)](), sendMessage()); });   
 
         
         
@@ -567,7 +608,7 @@ img {
             {
                id: 1,
                title: "Matemáticas College Board",
-               duration: 60,
+               duration: 50,
                questions: [
                    {
                        question: " If f(x) = 2x + 3, what is f(4)?",
@@ -577,14 +618,14 @@ img {
                    },
                    {
                        question: " Solve for x: 3x - 5 = 16",
-                       options: ["5", "8", "6", "7"],
-                       correct: 3,
+                       options: ["7", "8", "6", "5"],
+                       correct: 0,
                        image: null
                    },
                    {
                        question: " What is the slope of the line passing through the points (2, 3) and (5, 11)?",
-                       options: ["3", "8/3", "8", "11/3"],
-                       correct: 1,
+                       options: ["8/3", "3", "8", "11/3"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -619,14 +660,14 @@ img {
                    },
                    {
                        question: " In a 30°-60°-90° triangle, what is the ratio of the sides?",
-                       options: ["1:1:√2", "1:2:√3", "2:√3:1", "1:√3:2"],
-                       correct: 3,
-                       image: "images/image2.png"
+                       options: ["1:√3:2", "1:2:√3", "2:√3:1", "1:1:√2"],
+                       correct: 0,
+                       image: "assets/images/image2.png"
                    },
                    {
                        question: "Calculate: 7!",
-                       options: ["120", "720", "5040", "40320"],
-                       correct: 2,
+                       options: ["5040", "720", "120", "40320"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -637,8 +678,8 @@ img {
                    },
                    {
                        question: "Solve for y: (2y)/3 = 4",
-                       options: ["y = 2", "y = 8", "y = 12", "y = 6"],
-                       correct: 3,
+                       options: ["y = 6", "y = 8", "y = 12", "y = 2"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -660,8 +701,8 @@ img {
                    },
                    {
                        question: "For the line y = -3x + 7, what is the y-intercept?",
-                       options: ["-3", "7", "0", "3"],
-                       correct: 1,
+                       options: ["7", "-3", "0", "3"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -672,20 +713,20 @@ img {
                    },
                    {
                        question: "If sin(θ) = 1/2, then which angle (in degrees) could θ be?",
-                       options: ["45°", "30°", "60°", "90°"],
-                       correct: 1,
+                       options: ["30°", "45°", "60°", "90°"],
+                       correct: 0,
                        image: null
                    },
                    {
                        question: "Solve the proportion: 3/4 = x/8.",
-                       options: ["x = 16", "x = 8", "x = 6", "x = 10"],
-                       correct: 2,
+                       options: ["x = 6", "x = 8", "x = 12", "x = 10"],
+                       correct: 0,
                        image: null
                    },
                    {
                        question: "Find the sum of the first 5 positive integers.",
-                       options: ["20", "10", "12", "15"],
-                       correct: 3,
+                       options: ["15", "10", "12", "20"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -713,8 +754,8 @@ img {
                    },
                    {
                        question: "If two angles of a triangle are 45° and 45°, what is the measure of the third angle?",
-                       options: ["45°", "90°", "60°", "120°"],
-                       correct: 1,
+                       options: ["90°", "45°", "60°", "120°"],
+                       correct: 0,
                        image: null
                    },
                    {
@@ -758,8 +799,8 @@ img {
                     },
                     {
                         question: "If cos θ = 4/5, what is sin θ?",
-                        options: ["3/4", "5/3", "4/3", "3/5"],
-                        correct: 3,
+                        options: ["3/5", "5/3", "4/3", "3/4"],
+                        correct: 0,
                         image: null
                     },
                     {
@@ -770,8 +811,8 @@ img {
                     },
                     {
                         question: "A sequence has terms a₁ = 2, a₂ = 6, a₃ = 18. If this pattern continues, what is a₄?",
-                        options: ["72", "54", "36", "90"],
-                        correct: 2,
+                        options: ["36", "54", "72", "90"],
+                        correct: 0,
                         image: null
                     },
                     {
@@ -806,8 +847,8 @@ img {
                     },
                     {
                         question: "The line 3x + 2y = 12 intersects the line y = mx + b at point (2, 3). What is the value of m?",
-                        options: ["-2/3", "3/2", "2/3", "-3/2"],
-                        correct: 3,
+                        options: ["-3/2", "3/2", "2/3", "-2/3"],
+                        correct: 0,
                         image: null
                     },
                     {
@@ -928,8 +969,8 @@ img {
                     },
                     {
                         "question": "Si 3/4 de un número es 36, ¿cuál es el número?",
-                        "options": ["27", "38", "54", "48"],
-                        "correct": 3,
+                        "options": ["27", "38", "48", "54"],
+                        "correct": 2,
                         "image": null
                     },
                     {
@@ -940,8 +981,8 @@ img {
                     },
                     {
                         "question": "Si el 15% de un número es 30, ¿cuál es el número?",
-                        "options": ["150", "200", "175", "225"],
-                        "correct": 1,
+                        "options": ["150", "175", "200", "225"],
+                        "correct": 2,
                         "image": null
                     },
                     {
@@ -982,8 +1023,8 @@ img {
                     },
                     {
                         "question": "Si 5x + 3y = 21 y 2x + y = 8, ¿cuál es el valor de x?",
-                        "options": ["2", "5", "4", "3"],
-                        "correct": 3,
+                        "options": ["2", "3", "4", "5"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1000,8 +1041,8 @@ img {
                     },
                     {
                         "question": "Si un cubo tiene un volumen de 27 cm³, ¿cuál es la longitud de su arista?",
-                        "options": ["3 cm", "2 cm", "4 cm", "5 cm"],
-                        "correct": 0,
+                        "options": ["2 cm", "3 cm", "4 cm", "5 cm"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1014,7 +1055,7 @@ img {
                         "question": "Un triángulo rectángulo tiene un cateto de 6 cm y una hipotenusa de 10 cm. ¿Cuál es la longitud del otro cateto?",
                         "options": ["6 cm", "8 cm", "10 cm", "12 cm"],
                         "correct": 1,
-                        "image": "images/image.png"
+                        "image": "assets/images/image.png"
                     },
                     {
                         "question": "Si 2ˣ = 32, ¿cuál es el valor de x?",
@@ -1030,8 +1071,8 @@ img {
                     },
                     {
                         "question": "Si log₁₀(x) = 2, ¿cuál es el valor de x?",
-                        "options": ["100", "50", "20", "200"],
-                        "correct": 0,
+                        "options": ["20", "50", "100", "200"],
+                        "correct": 2,
                         "image": null
                     },
                     {
@@ -1068,8 +1109,8 @@ img {
                         },
                         {
                             question: "La suma de dos números enteros impares consecutivos es 104, determina el impar mayor.",
-                            options: ["41", "49", "51", "55", "53"],
-                            correct: 4,
+                            options: ["41", "49", "51", "53", "55"],
+                            correct: 3,
                             image: null
                         },
                         {
@@ -1116,8 +1157,8 @@ img {
                         },
                         {
                             question: "Si el promedio de dos números es 47 y uno de ellos es 24, ¿Cuál es el otro número?",
-                            options: ["70", "94", "117", "23", "80"],
-                            correct: 0,
+                            options: ["94", "70", "117", "23", "80"],
+                            correct: 1,
                             image: null
                         },
                         {
@@ -1220,8 +1261,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es el sinónimo de 'perspicaz'?",
-                        "options": ["Ingenuo", "Irreflexivo", "Tímido", "Sagaz"],
-                        "correct": 3,
+                        "options": ["Ingenuo", "Sagaz", "Tímido", "Irreflexivo"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1232,8 +1273,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es el significado de 'paradigma'?",
-                        "options": ["Teoría", "Problema", "Ejemplo", "Hipótesis"],
-                        "correct": 2,
+                        "options": ["Ejemplo", "Problema", "Teoría", "Hipótesis"],
+                        "correct": 0,
                         "image": null
                     },
                     {
@@ -1256,8 +1297,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es el antónimo de 'arduo'?",
-                        "options": ["Complicado", "Intenso", "Duro", "Fácil"],
-                        "correct": 3,
+                        "options": ["Fácil", "Intenso", "Duro", "Complicado"],
+                        "correct": 0,
                         "image": null
                     },
                     {
@@ -1274,8 +1315,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es el significado de 'frugal'?",
-                        "options": ["Abundante", "Generoso", "Derrochador", "Económico"],
-                        "correct": 3,
+                        "options": ["Abundante", "Económico", "Derrochador", "Generoso"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1286,8 +1327,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es el sinónimo de 'inerte'?",
-                        "options": ["Inmóvil", "Activo", "Vibrante", "Productivo"],
-                        "correct": 0,
+                        "options": ["Activo", "Inmóvil", "Vibrante", "Productivo"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1298,14 +1339,14 @@ img {
                     },
                     {
                         "question": "¿Qué palabra es un antónimo de 'benevolente'?",
-                        "options": ["Amable", "Bondadoso", "Hostil", "Compasivo"],
-                        "correct": 2,
+                        "options": ["Amable", "Hostil", "Bondadoso", "Compasivo"],
+                        "correct": 1,
                         "image": null
                     },
                     {
                         "question": "¿Qué significa 'cauteloso'?",
-                        "options": ["Descuidado", "Riesgoso", "Imprudente", "Prudente"],
-                        "correct": 3,
+                        "options": ["Descuidado", "Prudente", "Imprudente", "Riesgoso"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1316,20 +1357,20 @@ img {
                     },
                     {
                         "question": "¿Qué significa la palabra 'euforia'?",
-                        "options": ["Alegría extrema", "Tristeza", "Indiferencia", "Calma"],
-                        "correct": 0,
+                        "options": ["Tristeza", "Alegría extrema", "Indiferencia", "Calma"],
+                        "correct": 1,
                         "image": null
                     },
                     {
                         "question": "¿Qué significa 'ostentar'?",
-                        "options": ["Esconder", "Evitar", "Alegría extrema", "Renunciar"],
-                        "correct": 2,
+                        "options": ["Esconder", "Mostrar", "Evitar", "Renunciar"],
+                        "correct": 1,
                         "image": null
                     },
                     {
                         "question": "¿Cuál es el antónimo de 'voraz'?",
-                        "options": ["Insaciable", "Apresurado", "Hambriento", "Moderado"],
-                        "correct": 3,
+                        "options": ["Insaciable", "Moderado", "Hambriento", "Apresurado"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1340,8 +1381,8 @@ img {
                     },
                     {
                         "question": "¿Cuál es un sinónimo de 'prodigioso'?",
-                        "options": ["Común", "Ordinario", "Normal", "Extraordinario"],
-                        "correct": 3,
+                        "options": ["Común", "Extraordinario", "Normal", "Ordinario"],
+                        "correct": 1,
                         "image": null
                     },
                     {
@@ -1374,7 +1415,7 @@ img {
                         "question": "¿Qué palabra describe mejor el significado de 'mito' en el contexto de la lectura sobre los alimentos calentados al microondas?",
                         "options": ["Historia de héroes y deidades", "Una invención literaria antigua", "Creencia que altera la verdad", "Una historia muy tradicional"],
                         "correct": 2,
-                        "image": "images/alimentos_microondas.png"
+                        "image": "assets/images/alimentos_microondas.png"
                     },
                     {
                         "question": "Según la lectura sobre el microondas, ¿qué método reduce los nutrientes de los alimentos?",
@@ -1386,125 +1427,125 @@ img {
                         "question": "¿Cuál es el principal antioxidante del té mencionado en la lectura sobre la estevia?",
                         "options": ["Quercetina", "Glicósidos del esteviol", "Vitamina C", "Ácido fólico"],
                         "correct": 0,
-                        "image": "images/lectura_estevia.png"
+                        "image": "assets/images/lectura_estevia.png"
                     },
                     {
                         "question": "En la lectura sobre la ópera renacentista, ¿quién escribió 'Dafne'?",
                         "options": ["Ottavio Rinuccini", "Giovanni Bardi", "Jacopo Peri", "Giulio Caccini"],
                         "correct": 2,
-                        "image": "images/opera_renacentista.png"
+                        "image": "assets/images/opera_renacentista.png"
                     },
                     {
                         "question": "¿Según la lectrura la palabra (arca)línea 2 , se refiere a...?",
                         "options": ["una caja de madera con cerradura", "una nave o embarcación", "un lugar dónde se guarda lo valioso", "un sepulcro o"],
                         "correct": 1,
-                        "image": "images/niña_imaginaba.png"
+                        "image": "assets/images/niña_imaginaba.png"
                     },
                     {
                         "question": "Según la lectura, ¿cuál es el porcentaje de hogares en 2014 que clasificaron plástico como residuo?",
                         "options": ["20.86%", "31.48%", "12.68%", "25.75%"],
                         "correct": 1,
-                        "image": "images/residuo_organico.png"
+                        "image": "assets/images/residuo_organico.png"
                     },
                     {
                         "question": "¿Qué significa el término 'ergogenia' en el contexto de la lectura sobre el café?",
                         "options": ["Sustancias que aumentan el rendimiento físico", "Métodos de cultivo de café", "Efectos negativos del café", "Pruebas científicas sobre cafeína"],
                         "correct": 0,
-                        "image": "images/cafe.png"
+                        "image": "assets/images/cafe.png"
                     },
                     {
                         "question": "En la lectura sobre residuos, ¿qué tipo de material fue el más clasificado en los hogares?",
                         "options": ["Vidrio", "Papel-cartón", "Plástico", "Orgánicos"],
                         "correct": 2,
-                        "image": "images/residuo_organico.png"
+                        "image": "assets/images/residuo_organico.png"
                     },
                    
                     {
                         "question": "¿Qué palabra puede sustituir apropiadamente a 'memoria' en la lectura sobre la anécdota del hotel?",
                         "options": ["Recuerdo", "Estudio", "Cerebro", "Estrategia"],
                         "correct": 0,
-                        "image": "images/la_memoria.png"
+                        "image": "assets/images/la_memoria.png"
                     },
                     {
                         "question": "¿Cuál era la principal función de la CNC mencionada en la lectura?",
                         "options": ["Apoyar políticas presidenciales", "Recaudar impuestos", "Promover la agricultura", "Generar empleos"],
                         "correct": 0,
-                        "image": "images/funcion_CNC.png"
+                        "image": "assets/images/funcion_CNC.png"
                     },
                     {
                         "question": "En la lectura sobre la estevia, ¿qué compuesto está directamente relacionado con su capacidad antioxidante?",
                         "options": ["Ácido fólico", "Vitamina C", "Glicósidos del esteviol", "Edulcorantes refinados"],
                         "correct": 2,
-                        "image": "images/lectura_estevia.png"
+                        "image": "assets/images/lectura_estevia.png"
                     },
                     {
                         "question": "Según la lectura, ¿qué resultado se obtuvo al consumir más de 5 tazas de café al día en el experimento?",
                         "options": ["Escuchar música inexistente", "Mayor percepción del cansancio", "Mejora en habilidades motoras", "Reducción del estrés"],
                         "correct": 0,
-                        "image": "images/cafe.png"
+                        "image": "assets/images/cafe.png"
                     },
                     {
                         "question": "En la lectura sobre residuos, ¿qué beneficio tiene el compostaje?",
                         "options": ["Generar ingresos", "Producir abono natural", "Incrementar los residuos sólidos", "Reducir el reciclaje"],
                         "correct": 1,
-                        "image": "images/residuo_organico.png"
+                        "image": "assets/images/residuo_organico.png"
                     },
                    
                     {
                         "question": "En la lectura sobre el códice Voynich, ¿quién lo adquirió en 1912?",
-                        "options": ["John Dee", "Hans Peter Kraus", "Rodolfo II de Habsburgo", "Wilfrid Voynich"],
-                        "correct": 3,
-                        "image": "images/codice_voniche.png"
+                        "options": ["John Dee", "Wilfrid Voynich", "Rodolfo II de Habsburgo", "Hans Peter Kraus"],
+                        "correct": 1,
+                        "image": "assets/images/codice_voniche.png"
                     },
                     {
                         "question": "Según la lectura, ¿qué caracteriza a los glicósidos del esteviol?",
                         "options": ["Son altamente calóricos", "Tienen propiedades antioxidantes", "Provienen del azúcar de mesa", "Son menos dulces que la sacarosa"],
                         "correct": 1,
-                        "image": "images/lectura_estevia.png"
+                        "image": "assets/images/lectura_estevia.png"
                     },
                     {
                         "question": "En la lectura sobre residuos, ¿qué porcentaje del papel-cartón fue clasificado en 2014?",
-                        "options": ["12.68%", "31.48%", "20.86", "25.50%"],
-                        "correct": 2,
-                        "image": "images/residuo_organico.png"
+                        "options": ["12.68%", "20.86%", "31.48%", "25.50%"],
+                        "correct": 1,
+                        "image": "assets/images/residuo_organico.png"
                     },
                     {
                         "question": "En la lectura sobre la ópera renacentista, ¿qué grupo contribuyó al desarrollo de la teoría del teatro musical?",
                         "options": ["La familia Medici", "La Camerata de Giovanni Bardi", "El círculo de Galileo Galilei", "El Consejo de Florencia"],
                         "correct": 1,
-                        "image": "images/opera_renacentista.png"
+                        "image": "assets/images/opera_renacentista.png"
                     },
                     {
                         "question": "Según la lectura, ¿qué proceso ocurre con las proteínas cuando se calientan?",
-                        "options": ["Se desnaturalizan", "Se enfrían rápidamente", "Se fortalecen", "Se vuelven líquidas"],
-                        "correct": 0,
-                        "image": "images/alimentos_microondas.png"
+                        "options": ["Se enfrían rápidamente", "Se desnaturalizan", "Se fortalecen", "Se vuelven líquidas"],
+                        "correct": 1,
+                        "image": "assets/images/alimentos_microondas.png"
                     },
                     {
                         "question": "¿Qué se perdió en la obra 'Dafne' según la lectura sobre la ópera?",
                         "options": ["El libreto", "La música", "El título original", "El reconocimiento"],
                         "correct": 1,
-                        "image": "images/opera_renacentista.png"
+                        "image": "assets/images/opera_renacentista.png"
                     },
                     {
                         "question": "En la lectura sobre el café, ¿qué efecto tiene la cafeína en el rendimiento físico?",
                         "options": ["Aumenta el cansancio", "Reduce la percepción del esfuerzo", "Incrementa el estrés", "Disminuye la tolerancia al ejercicio"],
                         "correct": 1,
-                        "image": "images/cafe.png"
+                        "image": "assets/images/cafe.png"
                     },
                     {
                         "question": "Según la lectura, ¿qué caracteriza a los residuos inorgánicos?",
                         "options": ["Provienen de organismos vivos", "Son reciclables", "Se descomponen rápidamente", "Provienen de procesos industriales"],
                         "correct": 3,
-                        "image": "images/residuo_organico.png"
+                        "image": "assets/images/residuo_organico.png"
                     },
                     {
                         "question": "En la lectura sobre la memoria, ¿por qué el personaje pide que le recuerden el número de su habitación?",
-                        "options": ["Es una tradición del hotel", "No confía en el personal", "Tiene mala memoria", "Olvidó la llave"],
-                        "correct": 2,
-                        "image": "images/la_memoria.png"
+                        "options": ["Es una tradición del hotel", "Tiene mala memoria", "No confía en el personal", "Olvidó la llave"],
+                        "correct": 1,
+                        "image": "assets/images/la_memoria.png"
                     },
-                    {   "image": "images/ciencia_ficcion.png",
+                    {   "image": "assets/images/ciencia_ficcion.png",
                         "question": "En la lectura sobre ficción literaria, ¿qué propósito tiene la literatura según el autor?",
                         "options": ["Imitar la realidad exacta", "Crear experiencias emocionales", "Criticar exclusivamente lo social", "Estudiar hechos históricos"],
                         "correct": 1,
@@ -1808,9 +1849,9 @@ img {
                     ¡Hola! Soy tu tutor interactivo 🎓<br>
                     Puedes preguntarme sobre:
                     <ul>
-                        <li>Matemáticas: ecuaciones, fórmulas, problemas</li>
-                        <li>Español: gramática, redacción, literatura</li>
-                        <li>Inglés: vocabulario, gramática, traducciones</li>
+                        <li>Matemáticas: ecuaciones, fórmulas, problemas, etc...</li>
+                        <li>Español: gramática, redacción, literatura, etc...</li>
+                        <li>Inglés: vocabulario, gramática, traducciones, etc...</li>
                     </ul>
                     ¿En qué puedo ayudarte hoy?
                 </div>
@@ -1831,58 +1872,8 @@ img {
             });
         });
     </script>
-<div style="width: 0; height: 0;" id="VG_OVERLAY_CONTAINER">
-    <!-- Here is where TIXAE Agents renders the widget. -->
-    <!-- Set render to 'full-width' then adjust the width and height to 500px (for example) to render the chatbot itself without the popup. -->
-</div>
+ 
 
-<!-- Remove 'defer' if you want widget to load faster (Will affect website loading) -->
-<script defer>
-    (function () {
-        window.VG_CONFIG = {
-            ID: "cjhsay0epl7uqkvb", // YOUR AGENT ID
-            region: 'na', // YOUR ACCOUNT REGION 
-            render: 'bottom-right', // can be 'full-width' or 'bottom-left' or 'bottom-right'
-            stylesheets: [
-                // Base TIXAE Agents CSS
-                "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
-                // Add your custom css stylesheets, Can also add relative URL ('/public/your-file.css)
-            ],
-            // THIS IS SUPPOSED TO BE CHANGED OR REMOVED.
-            // user: {
-            //     name: 'John Doe', // User's name
-            //     email: 'johndoe@gmail.com', // User's email
-            //     phone: '+1234567890', // User's phone number
-            // }
-            // Optional user data -- end
-            // **
-            // userID: 'USER_ID', // If you want to use your own user_id
-            // autostart: true, // Whether to autostart the chatbot with the proactive message
-        }
-        var VG_SCRIPT = document.createElement("script");
-        VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
-        VG_SCRIPT.defer = true; // Remove 'defer' if you want widget to load faster (Will affect website loading)
-        document.body.appendChild(VG_SCRIPT);
-    })()
-    function clearGrades() {
-            if (confirm('¿Estás seguro de que deseas limpiar el historial de calificaciones?')) {
-                grades = [];
-                let savedData = localStorage.getItem('studentProgress');
-                if (savedData) {
-                    try {
-                        let data = JSON.parse(savedData);
-                        data.grades = [];
-                        localStorage.setItem('studentProgress', JSON.stringify(data));
-                    } catch (error) {
-                        console.error('Error al limpiar el historial en localStorage:', error);
-                    }
-                }
-                updateGrades();
-                alert('Historial de calificaciones limpiado.');
-            }
-        }
-
-</script>
 </body>
 
 </html>
