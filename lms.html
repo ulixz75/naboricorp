@@ -1871,6 +1871,25 @@ img {
                 $('.timer').hide();
             });
         });
+        <script>
+            
+    function clearGrades() {
+            if (confirm('¿Estás seguro de que deseas limpiar el historial de calificaciones?')) {
+                grades = [];
+                let savedData = localStorage.getItem('studentProgress');
+                if (savedData) {
+                    try {
+                        let data = JSON.parse(savedData);
+                        data.grades = [];
+                        localStorage.setItem('studentProgress', JSON.stringify(data));
+                    } catch (error) {
+                        console.error('Error al limpiar el historial en localStorage:', error);
+                    }
+                }
+                updateGrades();
+                alert('Historial de calificaciones limpiado.');
+            }
+        }
     </script>
  
 
