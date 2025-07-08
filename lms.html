@@ -84,283 +84,7 @@
             overflow-y: auto;
         }
 
-        /* Estilos del Chat Flotante */
-        .chat-bubble {
-            position: fixed;
-            bottom: 40px;
-            right: 30px;
-            left: auto;
-            z-index: 1000;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .chat-bubble:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-bubble-icon {
-            width: 60px;
-            height: 60px;
-            background:black;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .chat-bubble-icon img {
-            width: 90%;
-            height: 90%;
-        }
-
-        .chat-container {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            left: auto;
-            width: 350px;
-            height: 550px;
-            background: none;
-            border-radius: 15px;
-            box-shadow: none;
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .chat-container.active {
-            display: flex;
-            animation: slideUp 0.3s ease;
-        }
-
-        [data-title]:hover:after {
-            content: attr(data-title);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            white-space: nowrap;
-            margin-bottom: 8px;
-            pointer-events: none;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .chat-header {
-            background: #4CAF50;
-            color: white;
-            padding: 15px;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-header h3 {
-            margin: 0;
-            font-size: 1.2em;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5em;
-            cursor: pointer;
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        .chat-input {
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            background: white;
-            border-radius: 0 0 15px 15px;
-        }
-
-        .chat-input input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            margin-bottom: 10px;
-        }
-
-        .chat-input button {
-            width: 100%;
-            padding: 10px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-
-        .user-message,
-        .bot-message {
-            margin: 10px 0;
-            padding: 10px 15px;
-            border-radius: 15px;
-            max-width: 80%;
-            word-break: break-word;
-            font-size: 0.9em;
-        }
-
-        .user-message {
-            background: #e3f2fd;
-            color: #1a73e8;
-            margin-left: auto;
-        }
-
-        .bot-message {
-            background: #f5f5f5;
-            color: #0d652d;
-            margin-right: auto;
-        }
-
-        @media (max-width: 480px) {
-            .chat-container {
-                width: 90vw;
-                height: 70vh;
-                right: 5vw;
-                left: auto;
-                bottom: 80px;
-            }
-
-            .chat-bubble {
-                bottom: 10px;
-                left: auto;
-                right: 10px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .navbar-collapse {
-                display: flex !important;
-                flex-basis: auto;
-            }
-        }
-
-        .btn-reset {
-            position: relative;
-            background: linear-gradient(135deg, #00b894 0%, #007a63 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 8px 20px;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .btn-reset::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg,
-                    transparent,
-                    rgba(255, 255, 255, 0.3),
-                    transparent);
-            transition: 0.5s;
-        }
-
-        .btn-reset:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
-        }
-
-        .btn-reset:hover::before {
-            left: 100%;
-        }
-
-        .btn-reset:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 10px rgba(0, 184, 148, 0.3);
-        }
-
-        .btn-reset i {
-            margin-right: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-reset:hover i {
-            transform: rotate(-45deg);
-        }
-img {
-    max-width: 100px; /* Reduced from 300px for smaller size */
-    width: auto; /* Changed from 100% to auto to maintain aspect ratio */
-    height: auto;
-    border-radius: 6px; /* Slightly reduced from 8px to match smaller size */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: block; /* Ensures proper centering and spacing */
-    margin: 10px auto; /* Centers the image and adds vertical spacing */
-    object-fit: contain; /* Ensures image fits within dimensions while maintaining aspect ratio */
-    min-width: 100px; /* Prevents images from becoming too small */
-}
-
-/* Add a class for even smaller images if needed */
-.img-small {
-    max-width: 100px;
-}
-
-        .modal-content {
-            border-radius: 15px;
-        }
-        .modal-header {
-            background-color: var(--secondary-color);
-            color: white;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-        .modal-footer {
-            border-top: none;
-        }
-       /* Estilo para el tooltip */
-.tooltip {
-    position: absolute;
-    top: -30px; /* Posición arriba del chat bubble */
-    left: -100px; /* Desplazado hacia la izquierda */
-    background: transparent; /* Fondo transparente */
-    color: blue; /* Texto azul */
-    font-size: 14px;
-    white-space: nowrap; /* Mantener el texto en una sola línea */
-    opacity: 1; /* Visible por defecto */
-    transition: opacity 0.5s ease-in-out; /* Transición suave */
-    z-index: 1010; /* Asegurar que está por encima del chat bubble */
-    pointer-events: none; /* Desactivar interacciones */
-}
-
-/* Ocultar el tooltip */
-.tooltip.hidden {
-    opacity: 0; /* Invisible cuando tiene la clase 'hidden' */
-} 
+ 
 
     </style>
 </head>
@@ -410,49 +134,10 @@ img {
     <!-- Timer -->
     <div class="timer">00:00</div>
 
-   <!--- Chat Bubble -->
-<div class="chat-bubble" onclick="toggleChat()">
-    <div class="chat-bubble-icon">
-        <img src="https://static.wixstatic.com/media/af3a4a_c988b422d94a44c2839d1b7aadb03e22~mv2.png" alt="Chat Icon">
-    </div>
-    <!-- Tooltip -->
-    <div class="tooltip" id="tooltip">¡Hola! Soy Tutor Mathy!</div>
-</div>
-<!-- Coloca este código AL PRINCIPIO de tu script-->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const tooltip = document.getElementById('tooltip');
-
-        if (tooltip) {
-            // Esperar 3 segundos después de cargar la página
-            setTimeout(() => {
-                tooltip.classList.remove('hidden');
-
-                // Ocultar después de 3 segundos más
-                setTimeout(() => {
-                    tooltip.classList.add('hidden');
-                }, 3000);
-
-            }, 3000);
-        } else {
-            console.error('Elemento tooltip no encontrado');
-        }
-    });
-</script>
 
 
-<!-- Chat Container -->
-<div class="chat-container" id="chatContainer">
-    <div class="chat-header">
-        <h3>Tutor Mathy</h3>
-        <button class="close-btn" onclick="toggleChat()">×</button>
-    </div>
-    <div class="chat-body" id="chatBody"></div>
-    <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta...">
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
-</div>
+
+
 
     <!-- Contenido Principal -->
     <main class="container-fluid">
@@ -598,8 +283,7 @@ img {
 
             alert('Exámenes reiniciados. Tu historial sigue disponible.');
         }
-        // Código del Chat Bot
-           const _0x517fd8 = _0x43bf; (function (_0x411665, _0x10ed3a) { const _0x5b53ab = _0x43bf, _0xf69711 = _0x411665(); while (!![]) { try { const _0x528b2b = -parseInt(_0x5b53ab(0xe7)) / 0x1 * (parseInt(_0x5b53ab(0xce)) / 0x2) + -parseInt(_0x5b53ab(0xf7)) / 0x3 * (-parseInt(_0x5b53ab(0xc6)) / 0x4) + parseInt(_0x5b53ab(0xd7)) / 0x5 * (-parseInt(_0x5b53ab(0xef)) / 0x6) + -parseInt(_0x5b53ab(0xd5)) / 0x7 + -parseInt(_0x5b53ab(0xf3)) / 0x8 + parseInt(_0x5b53ab(0xf0)) / 0x9 * (parseInt(_0x5b53ab(0xca)) / 0xa) + parseInt(_0x5b53ab(0xe0)) / 0xb; if (_0x528b2b === _0x10ed3a) break; else _0xf69711['push'](_0xf69711['shift']()); } catch (_0x1ff327) { _0xf69711['push'](_0xf69711['shift']()); } } }(_0x373c, 0x58d98)); const API_KEY = _0x517fd8(0xf8), API_URL = _0x517fd8(0xe9); let conversationHistory = [], isProcessing = ![]; function _0x373c() { const _0x2d9ec4 = ['Error:', '112498zIHrND', 'includes', 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', 'active', 'Repetir', 'replace', 'push', 'toLowerCase', '570wQNRCW', '9GLSsXL', 'De\x20nuevo', 'value', '3907968jGJeZq', 'preventDefault', 'text', 'disabled', '760041CbShGQ', 'AIzaSyDWqEQB_l4HGiRY5G6RXppH7ajelOhx0dk', 'status', 'no\x20comprendida', 'parts', 'Estoy\x20teniendo\x20dificultades\x20para\x20responder.\x20¿Podrías\x20intentar\x20formularlo\x20de\x20otra\x20manera?', '4jVJllz', '?key=', '¿Podrías\x20reformular\x20tu\x20pregunta?\x20Quiero\x20asegurarme\x20de\x20entenderte\x20bien.', 'Lo\x20mismo', '3731710vlncgG', 'userInput', 'user', 'candidates', '2KQHTud', '</div>', '1.\x20Proporciona\x20respuestas\x20contextualizadas\x20y\x20únicas\x0a', 'toggle', 'Respuesta\x20no\x20comprendida', '<strong>$1</strong>', 'content', '1809458AiRJIT', 'scrollHeight', '35810PKDaIJ', '<div\x20class=\x22bot-message\x22>', '<br>', 'innerHTML', 'getElementById', 'error', 'scrollTop', 'slice', 'length', '14050168DduQZA', 'stringify', 'application/json', 'trim', '0.\x20Puede\x20explicar\x20conceptos,\x20enseñar\x20temas\x20y\x20ofrecer\x20ejemplos\x20generales\x20para\x20ayudar\x20a\x20los\x20estudiantes\x20a\x20aprender.\x20No\x20está\x20permitido\x20resolver\x20ejercicios,\x20proporcionar\x20respuestas\x20directas\x20a\x20problemas,\x20ni\x20realizar\x20asignaciones.\x20Solo\x20puede\x20guiar\x20y\x20enseñar\x20cómo\x20abordar\x20los\x20temas.\x0a', '4.\x20Varía\x20tus\x20respuestas\x20evitando\x20repeticiones\x0a']; _0x373c = function () { return _0x2d9ec4; }; return _0x373c(); } const initialPrompt = { 'role': _0x517fd8(0xcc), 'parts': [{ 'text': 'Eres\x20un\x20tutor\x20experto\x20en\x20matemáticas,\x20español\x20e\x20inglés.\x20Reglas:\x0a' + _0x517fd8(0xe4) + _0x517fd8(0xd0) + '2.\x20Analiza\x20profundamente\x20cada\x20pregunta\x0a' + '3.\x20Si\x20no\x20entiendes\x20algo,\x20pide\x20clarificación\x0a' + _0x517fd8(0xe5) + '5.\x20Adapta\x20el\x20lenguaje\x20al\x20nivel\x20del\x20usuario' }] }; function toggleChat() { const _0xd50f99 = _0x517fd8, _0xd2fb39 = document[_0xd50f99(0xdb)]('chatContainer'); _0xd2fb39['classList'][_0xd50f99(0xd1)](_0xd50f99(0xea)); } function _0x43bf(_0x2fc16d, _0x28c9db) { const _0x373cf4 = _0x373c(); return _0x43bf = function (_0x43bf9b, _0x698761) { _0x43bf9b = _0x43bf9b - 0xc2; let _0x2626b7 = _0x373cf4[_0x43bf9b]; return _0x2626b7; }, _0x43bf(_0x2fc16d, _0x28c9db); } async function sendMessage() { const _0xe518c4 = _0x517fd8, _0x3c7240 = document['getElementById']('userInput'), _0x841687 = document['getElementById']('chatBody'), _0x1ab5f9 = _0x3c7240[_0xe518c4(0xf2)][_0xe518c4(0xe3)](); if (!_0x1ab5f9) return; isProcessing = !![], _0x3c7240['disabled'] = !![]; try { _0x841687[_0xe518c4(0xda)] += '<div\x20class=\x22user-message\x22>' + _0x1ab5f9 + '</div>', _0x3c7240['value'] = '', _0x841687['scrollTop'] = _0x841687[_0xe518c4(0xd6)]; const _0x1c8ef2 = conversationHistory['length'] > 0x4 ? conversationHistory[_0xe518c4(0xde)](-0x4) : conversationHistory, _0x244960 = [initialPrompt, ..._0x1c8ef2, { 'role': _0xe518c4(0xcc), 'parts': [{ 'text': _0x1ab5f9 }] }], _0x21c5ca = await fetch(API_URL + _0xe518c4(0xc7) + API_KEY, { 'method': 'POST', 'headers': { 'Content-Type': _0xe518c4(0xe2) }, 'body': JSON[_0xe518c4(0xe1)]({ 'contents': _0x244960, 'generationConfig': { 'temperature': 0.7, 'topP': 0.9, 'maxOutputTokens': 0x258, 'stopSequences': [_0xe518c4(0xeb), _0xe518c4(0xc9), _0xe518c4(0xf1)] } }) }); if (!_0x21c5ca['ok']) throw new Error('HTTP\x20error!\x20status:\x20' + _0x21c5ca[_0xe518c4(0xc2)]); const _0x458d2c = await _0x21c5ca['json'](), _0x23903b = _0x458d2c[_0xe518c4(0xcd)][0x0][_0xe518c4(0xd4)][_0xe518c4(0xc4)][0x0][_0xe518c4(0xf5)]; if (_0x23903b[_0xe518c4(0xee)]()[_0xe518c4(0xe8)]('no\x20entiendo')) throw new Error(_0xe518c4(0xd2)); conversationHistory[_0xe518c4(0xed)]({ 'role': _0xe518c4(0xcc), 'parts': [{ 'text': _0x1ab5f9 }] }, { 'role': 'model', 'parts': [{ 'text': _0x23903b }] }); conversationHistory[_0xe518c4(0xdf)] > 0x6 && (conversationHistory = conversationHistory[_0xe518c4(0xde)](-0x6)); const _0x49498e = _0x23903b[_0xe518c4(0xec)](/\n/g, _0xe518c4(0xd9))[_0xe518c4(0xec)](/(\d+\.)/g, _0xe518c4(0xd3)); _0x841687[_0xe518c4(0xda)] += _0xe518c4(0xd8) + _0x49498e + _0xe518c4(0xcf); } catch (_0x4568e0) { console[_0xe518c4(0xdc)](_0xe518c4(0xe6), _0x4568e0); const _0x17c563 = _0x4568e0['message'][_0xe518c4(0xe8)](_0xe518c4(0xc3)) ? _0xe518c4(0xc8) : _0xe518c4(0xc5); _0x841687['innerHTML'] += '<div\x20class=\x22bot-message\x22>' + _0x17c563 + _0xe518c4(0xcf); } finally { isProcessing = ![], _0x3c7240[_0xe518c4(0xf6)] = ![], _0x841687[_0xe518c4(0xdd)] = _0x841687[_0xe518c4(0xd6)]; } } document['getElementById'](_0x517fd8(0xcb))['addEventListener']('keypress', _0x2e25a8 => { const _0x1fa022 = _0x517fd8; _0x2e25a8['key'] === 'Enter' && !_0x2e25a8['shiftKey'] && !isProcessing && (_0x2e25a8[_0x1fa022(0xf4)](), sendMessage()); });   
+       
 
         
         
@@ -1890,6 +1574,9 @@ img {
             }
         }
 
+</script>
+<script
+  src='https://cdn.jotfor.ms/agent/embedjs/019542d7d84c716092380082a9bb493da4c2/embed.js?skipWelcome=1&maximizable=1'>
 </script>
 </body>
 
