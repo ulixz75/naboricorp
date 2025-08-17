@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona tu Plan Educativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a237e, #283593);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .symbol {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 24px;
+            animation: float 15s infinite linear;
+            user-select: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .modal-container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+            perspective: 1000px;
+        }
+
+        .modal {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            animation: modalEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes modalEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-30deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(100, 181, 246, 0.1),
+                rgba(255, 255, 255, 0) 60%
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            color: #1a237e;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal-header p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .option {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #64b5f6;
+        }
+
+        .option-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover .option-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .option-1 .option-icon {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+        }
+
+        .option-2 .option-icon {
+            background: linear-gradient(45deg, #4ecdc4, #48b1bf);
+        }
+
+        .option-3 .option-icon {
+            background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+        }
+
+        .option-content h3 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .option-content p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .option::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0) 80%
+            );
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .option:hover::after {
+            transform: translateX(100%);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal {
+                padding: 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 24px;
+            }
+            
+            .option {
+                padding: 15px;
+            }
+            
+            .option-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Símbolos flotantes de fondo -->
+    <div id="symbols-container"></div>
+
+    <!-- Modal -->
+    <div class="modal-container">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Selecciona tu Plan Educativo</h2>
+                <p>Elige el plan que reservastes</p>
+            </div>
+            <div class="options-container">
+                <div class="option option-1" data-link="https://ejemplo.com/primeros-pasos">
+                    <div class="option-icon">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <div class="option-content">
+                        <h3>Plan: PRIMEROS PASOS</h3>
+                        <p>Ideal para quienes comienzan su viaje educativo</p>
+                    </div>
+                </div>
+                <div class="option option-2" data-link="https://ejemplo.com/aprendizaje-continuo">
+                    <div class="option-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="option-content">
+                        <h3>Plan: APRENDIZAJE CONTINUO</h3>
+                        <p>Para aquellos que buscan profundizar sus conocimientos</p>
+                    </div>
+                </div>
+                <div class="option option-3" data-link="https://ejemplo.com/programa-impulso">
+                    <div class="option-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="option-content">
+                        <h3>Plan: PROGRAMA IMPULSO</h3>
+                        <p>Acelera tu aprendizaje con nuestro programa intensivo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Símbolos educativos
+        const symbols = [
+            '∫', '∑', '∞', 'π', 'α', 'β', 'γ', 'δ', 'θ', 'λ', 'μ', 'σ', 'φ', 'ω',
+            'H₂O', 'CO₂', 'E=mc²', 'F=ma', 'A+B=C', 'x²', '√', '≠', '≈', '≡',
+            'A', 'B', 'C', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+            '♔', '♕', '♖', '♗', '♘', '♙', '♚', '♛', '♜', '♝', '♞', '♟',
+            'Ä', 'Ö', 'Ü', '¿', '¡', '«', '»', '∀', '∃', '∄', '∈', '∉'
+        ];
+
+        const container = document.getElementById('symbols-container');
+
+        function createSymbol() {
+            const symbol = document.createElement('div');
+            symbol.className = 'symbol';
+            symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            // Posición aleatoria
+            symbol.style.left = Math.random() * 100 + 'vw';
+            symbol.style.top = Math.random() * 100 + 'vh';
+            
+            // Tamaño aleatorio
+            const size = Math.random() * 20 + 10;
+            symbol.style.fontSize = size + 'px';
+            
+            // Duración de animación aleatoria
+            const duration = Math.random() * 10 + 10;
+            symbol.style.animationDuration = duration + 's';
+            
+            // Retraso aleatorio
+            symbol.style.animationDelay = Math.random() * 5 + 's';
+            
+            container.appendChild(symbol);
+            
+            // Eliminar el símbolo después de que termine la animación
+            setTimeout(() => {
+                symbol.remove();
+            }, duration * 1000);
+        }
+
+        // Crear símbolos continuamente
+        setInterval(createSymbol, 500);
+
+        // Efecto ripple en las opciones
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                // Crear efecto ripple
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                
+                // Posición del ripple
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                this.appendChild(ripple);
+                
+                // Eliminar el ripple después de la animación
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // Redirigir después de un breve retraso para ver el efecto
+                setTimeout(() => {
+                    window.location.href = this.getAttribute('data-link');
+                }, 300);
+            });
+        });
+
+        // Animación adicional al pasar el mouse sobre las opciones
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            option.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
