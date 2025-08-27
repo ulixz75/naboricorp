@@ -1658,7 +1658,7 @@ footer #search button:hover {
 }
 
 .footer-widget .logo img {
-  max-width: 96px;
+  max-width: 196px;
   margin-bottom: 30px;
 }
 
@@ -2229,3 +2229,4 @@ responsive
     padding: 30px;
   }
 }
+
