@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script>
@@ -8,11 +9,14 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
+
     // Activa Google Analytics solo si el usuario da consentimiento
     if (document.cookie.includes("cookieconsent_status=allow")) {
       gtag('config', 'G-4NCGYV9CKG');
     }
   </script>
+
+
 
 
   <meta charset="UTF-8">
@@ -30,6 +34,7 @@
     rel="stylesheet">
   
 
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,6 +42,7 @@
       href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
     <meta name="description"
       content="NABORI Corp: Servicios personalizados de tutorías, terapia educativa, homeschooling y terapia del habla. Transformamos vidas a través de la educación.">
+
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -94,6 +100,8 @@
 </script>
 
 
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
@@ -104,10 +112,18 @@
 
 
 
+
+
+
+
   <title>NABORI Corp</title>
+
 
   <!-- Bootstrap core CSS -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
 
 
 
@@ -118,42 +134,283 @@
   <link rel="stylesheet" href="css/animated.css">
   <link rel="stylesheet" href="css/owl.css">
 
+
 </head>
 <style>
+  /* --- INICIO CÓDIGO POP-UP CORREGIDO --- */
+  
+  /* #1: VARIABLES DE COLOR AÑADIDAS */
+  :root {
+      --neon-blue: #00f0ff;
+      --neon-purple: #8a2be2;
+      --text-light: #e0e0e0;
+      --text-dark: #f0f0f0;
+      --gradient-1: linear-gradient(90deg, #00f0ff, #8a2be2);
+      --gradient-2: linear-gradient(90deg, #8a2be2, #00f0ff);
+  }
+
+
   /* Estilos del popup */
-    .popup-overlay {
+  .popup-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.85);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-    }
+      z-index: 9999; /* Aumentado para asegurar que esté por encima de todo */
+      animation: fadeIn 0.5s ease-out forwards;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+  }
 
-    .popup-content {
-      background: #fff176;
+
+  .popup-content {
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      /* #2: TAMAÑO Y PADDING REDUCIDOS */
       padding: 30px;
-      border-radius: 10px;
-      max-width: 500px;
+      max-width: 500px; 
+      width: 95%;
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.3), 0 0 50px rgba(138, 43, 226, 0.2);
       text-align: center;
       position: relative;
-    }
+      animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+      border: 2px solid;
+      border-image: var(--gradient-1) 1;
+      box-sizing: border-box;
+      color: var(--text-dark);
+  }
 
-    .popup-close {
+
+  .popup-close {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
+      top: 15px;
+      right: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 28px;
       cursor: pointer;
-    }
+      color: var(--neon-blue);
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-shadow: 0 0 8px var(--neon-blue);
+  }
 
-    .popup-active {
-      display: flex !important;
+
+  .popup-close:hover {
+      color: var(--neon-purple);
+      transform: scale(1.2) rotate(5deg);
+      text-shadow: 0 0 10px var(--neon-purple);
+  }
+
+
+  .popup-title {
+      font-family: 'Orbitron', sans-serif;
+      /* #2: TAMAÑO FUENTE REDUCIDO */
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--neon-blue);
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue);
+      animation: textGlow 1.5s infinite alternate;
+  }
+
+
+  .popup-description {
+      /* #2: TAMAÑO FUENTE REDUCIDO */
+      font-size: 16px;
+      color: var(--text-light);
+      margin-bottom: 25px;
+      line-height: 1.6;
+      padding: 0 10px;
+  }
+
+
+  .popup-offers {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+      /* #2: TAMAÑO FUENTE REDUCIDO */
+      font-size: 15px;
+      color: var(--text-dark);
+      text-align: left;
+  }
+
+
+  .popup-offers li {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding-left: 10px;
+      position: relative;
+  }
+
+
+  .popup-offers li::before {
+      content: '✦';
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      color: var(--neon-purple);
+      text-shadow: 0 0 10px var(--neon-purple);
+      flex-shrink: 0;
+      margin-top: -2px;
+  }
+  .popup-offers strong {
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+  }
+
+
+  .popup-button {
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      /* #2: PADDING Y TAMAÑO FUENTE REDUCIDOS */
+      padding: 15px 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      margin: 8px;
+      touch-action: manipulation;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+  }
+
+
+  .popup-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+  }
+
+
+  .popup-button:hover::before {
+      left: 100%;
+  }
+
+
+  .popup-button:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 40px rgba(138, 43, 226, 0.5);
+      background: var(--gradient-2);
+  }
+
+
+  .popup-button.secondary {
+      background: none;
+      border: 2px solid var(--neon-purple);
+      color: var(--neon-purple);
+      box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
+  }
+
+
+  .popup-button.secondary:hover {
+      background: rgba(138, 43, 226, 0.2);
+      color: white;
+      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+      transform: translateY(-5px) scale(1.03);
+  }
+
+
+  /* Animaciones */
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+
+
+  @keyframes popIn {
+      from { transform: scale(0.7) translateY(50px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+
+  @keyframes textGlow {
+      0% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+      100% { text-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue), 0 0 35px var(--neon-blue); }
+  }
+
+
+  .show {
+      display: flex;
+  }
+
+
+  /* Optimización para móviles */
+  @media (max-width: 768px) {
+      .popup-content {
+          /* #2: TAMAÑO Y PADDING REDUCIDOS PARA MÓVIL */
+          padding: 25px 15px;
+          width: 95%;
+          border-radius: 15px;
+          margin: 0 10px;
+      }
+      .popup-title {
+          font-size: 24px;
+          margin-bottom: 15px;
+      }
+      .popup-description {
+          font-size: 14px;
+          margin-bottom: 20px;
+      }
+      .popup-offers {
+          font-size: 14px;
+      }
+      .popup-offers li:nth-child(2) {
+  margin-top: 10px; /* ajusta a tu gusto */
+}
+
+      .popup-offers li::before {
+          font-size: 18px;
+      }
+      .popup-button {
+          padding: 14px 28px;
+          font-size: 15px;
+          width: 100%;
+          max-width: 280px;
+          margin: 6px auto;
+          display: block;
+      }
+      .popup-close {
+          font-size: 26px;
+          top: 10px;
+          right: 15px;
+      }
+  }
+
+
+  @media (max-width: 480px) {
+      .popup-content {
+          padding: 20px 15px;
+      }
+      .popup-title {
+          font-size: 22px;
+      }
+      .popup-description {
+          font-size: 13px;
+      }
+      .popup-button {
+          padding: 12px 24px;
+          font-size: 14px;
+      }
     }
+  /* --- FIN CÓDIGO POP-UP --- */
+  
   
   /* Base styles for About Us section */
   .about-us .section-heading {
@@ -161,8 +418,10 @@
     padding: 0;
   }
 
+
   /* Media queries for mobile devices */
   @media screen and (max-width: 768px) {
+
 
     /* Fix alignment issues in About Us section */
     .about-us .section-heading {
@@ -174,6 +433,7 @@
       /* Force left alignment */
     }
 
+
     /* Ensure the text content is properly aligned */
     .about-us .section-heading p {
       text-align: left;
@@ -183,11 +443,13 @@
       /* Remove any existing left margin */
     }
 
+
     /* Fix container padding */
     .about-us .container {
       padding-left: 15px;
       padding-right: 15px;
     }
+
 
     /* Adjust column spacing */
     .about-us .col-lg-6 {
@@ -195,17 +457,20 @@
       padding-right: 15px;
     }
 
+
     /* Fix box items alignment */
     .about-us .box-item {
       text-align: center;
       padding-left: 0;
     }
 
+
     /* Ensure consistent text alignment in all child elements */
     .about-us .left-content {
       text-align: left;
       padding-left: 0;
     }
+
 
     /* Fix any floating issues */
     .about-us .row {
@@ -214,14 +479,17 @@
     }
   }
 
+
   /* First, we set up the base styles for the services section to ensure consistent formatting */
   .services .section-heading {
     position: relative;
     padding: 0;
   }
 
+
   /* Now we create specific rules for mobile devices */
   @media screen and (max-width: 768px) {
+
 
     /* Main heading container adjustments */
     .services .section-heading {
@@ -230,6 +498,7 @@
       text-align: left;
       /* Forces left alignment for the entire heading section */
     }
+
 
     /* Style the main heading text */
     .services .section-heading h4 {
@@ -240,6 +509,7 @@
       /* Adds space between heading and paragraph */
     }
 
+
     /* Adjust the description text under the heading */
     .services .section-heading p {
       text-align: left;
@@ -249,11 +519,13 @@
       /* Improves readability of paragraph text */
     }
 
+
     /* Container adjustments to ensure proper spacing */
     .services .container {
       padding-left: 15px;
       padding-right: 15px;
     }
+
 
     /* Individual service item formatting */
     .services .service-item {
@@ -263,11 +535,13 @@
       /* Adds space between service items */
     }
 
+
     /* Service item headings */
     .services .service-item h4 {
       text-align: left;
       margin-bottom: 15px;
     }
+
 
     /* Service item descriptions */
     .services .service-item p {
@@ -276,11 +550,13 @@
       margin-bottom: 15px;
     }
 
+
     /* Fix row spacing issues */
     .services .row {
       margin-left: 0;
       margin-right: 0;
     }
+
 
     /* Ensure proper column spacing */
     .services .col-lg-3,
@@ -292,6 +568,7 @@
       padding-right: 15px;
     }
 
+
     /* Adjust any decorative images in the section */
     .services .section-heading img {
       margin-left: 0;
@@ -299,6 +576,112 @@
       display: block;
     }
   }
+  .contact-buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+
+        .oval-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 32px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+            min-width: 200px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .oval-button i {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            border-color: #25D366;
+            color: #25D366;
+        }
+
+
+        .whatsapp-button i {
+            color: #25D366;
+        }
+
+
+        .whatsapp-button:hover {
+            background: #25D366;
+            color: white;
+            border-color: #25D366;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+
+        .whatsapp-button:hover i {
+            color: white;
+        }
+
+
+        /* Email Button */
+        .email-button {
+            border-color: #666;
+            color: #666;
+        }
+
+
+        .email-button i {
+            color: #666;
+        }
+
+
+        .email-button:hover {
+            background: #666;
+            color: white;
+            border-color: #666;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 102, 102, 0.3);
+        }
+
+
+        .email-button:hover i {
+            color: white;
+        }
+
+
+        /* Active effect */
+        .oval-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .oval-button {
+                min-width: 180px;
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+            
+            .oval-button i {
+                font-size: 16px;
+            }
+          }
+
 
   /* Additional adjustments for very small screens */
   @media screen and (max-width: 480px) {
@@ -307,11 +690,13 @@
       /* Further reduced size for very small screens */
     }
 
+
     .services .service-item {
       padding: 20px 10px;
       /* Slightly reduced padding for very small screens */
     }
   }
+
 
   /* Base styles for the content container */
   .left-content.show-up.header-text {
@@ -319,14 +704,17 @@
     width: 100%;
   }
 
+
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
+
 
     /* Target the column container */
     .col-lg-12 {
       padding-left: 15px;
       padding-right: 15px;
     }
+
 
     /* Specific styling for the h2 heading */
     .left-content.show-up.header-text h2 {
@@ -341,6 +729,7 @@
       /* Adjust font size for mobile */
     }
 
+
     /* Style the paragraph text */
     .left-content.show-up.header-text p {
       text-align: left;
@@ -354,6 +743,7 @@
       /* Improve readability */
     }
 
+
     /* Ensure strong tags maintain the proper alignment */
     .left-content.show-up.header-text p strong {
       display: inline-block;
@@ -363,6 +753,7 @@
     }
   }
 
+
   /* Additional refinements for very small screens */
   @media screen and (max-width: 480px) {
     .left-content.show-up.header-text h2 {
@@ -371,10 +762,1269 @@
       margin-bottom: 15px;
       /* Adjust spacing for smaller screens */
     }
+
+
   }
+  /* --- INICIO: ESTILOS MEJORADOS PARA LAS CARDS DE PRECIOS --- */
+
+
+.pricing-section {
+  --pc-primary: #4361ee;
+  --pc-secondary: #3a0ca3;
+  --pc-accent: #7209b7;
+  --pc-success: #4cc9f0;
+  --pc-dark: #2b2d42;
+  --pc-light: #f8f9fa;
+  --pc-gray: #6c757d; /* Ligeramente más oscuro para mejor contraste */
+  --pc-card-bg: #ffffff;
+  --pc-card-border: #eef2f7;
+  /* Sombra más suave y moderna */
+  --pc-card-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 10px 20px rgba(0,0,0,0.06);
+  --pc-card-shadow-hover: 0 7px 14px rgba(0,0,0,0.06), 0 15px 30px rgba(0,0,0,0.1);
+  --pc-transition: all 0.3s ease-in-out; /* Transición más suave */
+  
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  padding: 60px 20px;
+  font-family: 'Roboto', sans-serif; /* Usando la fuente ya cargada en la web */
+}
+
+
+.pc-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.pc-header {
+  text-align: center;
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.pc-header h2 {
+  font-size: 2.5rem; /* Un poco más grande */
+  font-weight: 700;
+  color: var(--pc-dark);
+  margin-bottom: 15px;
+}
+
+
+.pc-header p {
+  font-size: 1.1rem;
+  color: var(--pc-gray);
+  line-height: 1.6;
+}
+
+
+.pc-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Más espacio entre tarjetas */
+}
+
+
+.pc-card {
+  background: var(--pc-card-bg);
+  border-radius: 16px; /* Bordes más redondeados */
+  box-shadow: var(--pc-card-shadow);
+  border: 1px solid var(--pc-card-border);
+  width: 280px; /* Un poco más anchas */
+  padding: 25px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--pc-transition);
+  display: flex;
+  flex-direction: column; /* Asegura el orden vertical */
+}
+
+
+.pc-card:hover {
+  transform: translateY(-8px); /* Efecto de "levantarse" */
+  box-shadow: var(--pc-card-shadow-hover);
+  background-color: #FFD93D;
+}
+
+
+/* El plan popular destaca por defecto */
+.pc-card.popular {
+  border-color: var(--pc-primary);
+  transform: scale(1.05); /* Ligeramente más grande */
+}
+
+
+@media (max-width: 768px) {
+  .pc-card.popular {
+    transform: scale(1); /* Se desactiva el zoom en móvil para no ocupar tanto espacio */
+  }
+}
+
+
+.pc-popular-tag {
+  position: absolute;
+  top: 15px;
+  right: -35px;
+  background: linear-gradient(45deg, var(--pc-accent), var(--pc-primary));
+  color: white;
+  padding: 6px 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+.pc-plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pc-dark);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.pc-plan-name i {
+  background: linear-gradient(135deg, var(--pc-primary), var(--pc-success));
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+
+.pc-plan-price {
+  font-size: 2.5rem; /* Precio más grande y llamativo */
+  font-weight: 800;
+  color: var(--pc-dark);
+  margin-bottom: 5px;
+}
+
+
+.pc-plan-price span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--pc-gray);
+  margin-left: 5px;
+}
+
+
+.pc-plan-billing {
+  font-size: 0.85rem;
+  color: var(--pc-gray);
+  margin-bottom: 15px;
+  min-height: 40px; /* Altura mínima para alinear tarjetas */
+}
+
+
+.pc-plan-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  background: linear-gradient(to right, var(--pc-primary), var(--pc-secondary));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--pc-transition);
+  margin-top: auto; /* Empuja el botón hacia abajo */
+  text-decoration: none;
+}
+
+
+.pc-plan-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+}
+
+
+.pc-no-credit {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--pc-gray);
+  margin-top: 10px; /* Espacio sobre el texto */
+  margin-bottom: 20px;
+}
+
+
+.pc-divider {
+  height: 1px;
+  background-color: var(--pc-card-border);
+  margin: 15px 0;
+  border: none;
+}
+
+
+.pc-features-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--pc-dark);
+  margin-bottom: 15px;
+}
+
+
+.pc-plan-features {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Permite que la lista crezca y alinee los botones */
+}
+
+
+.pc-plan-features li {
+  padding: 8px 0;
+  position: relative;
+  padding-left: 25px;
+  color: #343a40; /* Texto de feature más oscuro */
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+
+.pc-plan-features li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 12px;
+  color: var(--pc-success);
+  font-size: 0.9rem;
+}
+
+
+/* NUEVO: Estilo para la característica destacada */
+.pc-feature-highlight {
+  font-weight: 700;
+  color: var(--pc-accent);
+}
+
+
+/* NUEVO: Estilo para el bloque de público objetivo */
+.pc-target-audience {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f7f5ff; /* Un color de fondo muy suave */
+  border-left: 4px solid var(--pc-accent);
+  border-radius: 4px;
+}
+
+
+.pc-target-audience p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--pc-dark);
+  line-height: 1.5;
+}
+
+
+/* Media queries para responsividad */
+@media (max-width: 1100px) {
+  .pc-card {
+    width: 250px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .pc-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .pc-card {
+    width: 100%;
+    max-width: 380px;
+  }
+  
+  .pc-header h2 {
+    font-size: 2rem;
+  }
+}
+
+
+/* --- FIN: ESTILOS MEJORADOS --- */
+
+
+
+
+/* === ESTILOS DE LA SECCIÓN DE SERVICIOS === */
+.services-section {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  text-align: center;
+}
+
+
+.services-title {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #4a6fa5;
+  background: linear-gradient(45deg, #4a6fa5, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.service-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid #4a6fa5;
+}
+
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  background-color: #FFD93D;
+}
+
+
+.service-card h3 {
+  color: #4a6fa5;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+
+.service-card p {
+  color: #343a40;
+  margin-bottom: 15px;
+}
+
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px;
+}
+
+
+.service-card ul li {
+  margin-bottom: 8px;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.6;
+}
+
+
+.service-card ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: bold;
+}
+
+
+.service-price {
+  background: #ff6b6b;
+  color: white;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+
+.payment-methods-section {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+        }
+        
+        .payment-methods-title {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        
+        .payment-methods-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .payment-method {
+            background: #fff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            min-width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .payment-method:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .payment-logo {
+            height: 40px;
+            width: auto;
+            max-width: 80px;
+            object-fit: contain;
+        }
+        
+        .payment-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .payment-methods-container {
+                gap: 20px;
+            }
+            
+            .payment-method {
+                padding: 12px 15px;
+                min-width: 70px;
+            }
+            
+            .payment-logo {
+                height: 35px;
+                max-width: 70px;
+            }
+        }
+
+
+        /* Estilos para la sección de testimonios */
+       
+        .testimonials-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+
+        .carousel-container {
+            position: relative;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.4s ease;
+            gap: 1rem;
+        }
+
+
+        .testimonial-card {
+            min-width: 100%;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            min-height: 280px;
+        }
+
+
+        .testimonial-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            position: relative;
+            flex-grow: 1;
+            overflow: visible;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 2rem;
+            color: #64748b;
+            opacity: 0.2;
+            position: absolute;
+            top: -0.5rem;
+            left: -0.3rem;
+            font-family: Georgia, serif;
+        }
+
+
+        .parent-info {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-top: auto;
+        }
+
+
+        .parent-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+
+        .parent-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+
+        .parent-details h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .parent-details p {
+            color: #64748b;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .rating {
+            display: flex;
+            gap: 0.1rem;
+            flex-shrink: 0;
+        }
+
+
+        .star {
+            color: #f59e0b;
+            font-size: 0.8rem;
+        }
+
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+
+        .carousel-btn {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+
+        .carousel-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+
+        .carousel-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+
+        .carousel-indicators {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+
+        .indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+
+        .indicator.active {
+            background: #64748b;
+            transform: scale(1.2);
+        }
+
+
+        .auto-play-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 1rem;
+        }
+
+
+        .auto-play-btn:hover {
+            background: #e2e8f0;
+        }
+
+
+        /* Responsive */
+        @media (min-width: 640px) {
+            .testimonial-card {
+                min-width: calc(50% - 0.5rem);
+                min-height: 260px;
+            }
+        }
+
+
+        @media (min-width: 1024px) {
+            .testimonial-card {
+                min-width: calc(33.333% - 0.67rem);
+                min-height: 250px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+
+        @media (max-width: 640px) {
+            .carousel-container {
+                padding: 1rem;
+            }
+            
+            .testimonial-card {
+                padding: 1rem;
+                min-height: 270px;
+            }
+            
+            .testimonial-text {
+                font-size: 0.88rem;
+                -webkit-line-clamp: 4;
+            }
+            
+            .carousel-controls {
+                margin-top: 1.2rem;
+            }
+            
+            body {
+                padding: 0.5rem;
+            }
+        }
+        /* === FIN ESTILOS DE LA SECCIÓN DE TESTIMONIOS === */
+        /*===comienzo infographic===*/
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      
+        .infographic-container {
+        width: 100%;
+        max-width: 1200px;
+        background: white;
+        border-radius: 24px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        padding: 60px 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .infographic-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 280px;
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        z-index: -1;
+        border-radius: 0 0 50% 50%;
+        transform: scale(1.5);
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 70px;
+        position: relative;
+      }
+
+      .header h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .steps-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        position: relative;
+      }
+
+      .step {
+        flex: 1;
+        min-width: 300px;
+        max-width: 340px;
+        perspective: 1000px;
+        position: relative;
+      }
+
+      .step-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-style: preserve-3d;
+        padding: 50px 30px 40px;
+        border-radius: 20px;
+        background: white;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(99, 102, 241, 0.1);
+        z-index: 2;
+      }
+
+      .step-inner:hover {
+        transform: translateY(-15px) rotateY(5deg) rotateX(5deg);
+        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+      }
+
+      .step-number {
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #f1f163, #4f46e5);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.8rem;
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+        z-index: 3;
+      }
+
+      .step-icon {
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 30px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .step:nth-child(1) .step-icon {
+        animation-delay: 0s;
+        color: #6366f1;
+      }
+
+      .step:nth-child(2) .step-icon {
+        animation-delay: 0.7s;
+        color: #10b981;
+      }
+
+      .step:nth-child(3) .step-icon {
+        animation-delay: 1.4s;
+        color: #f59e0b;
+      }
+
+      .step-icon-inner {
+        font-size: 70px;
+        transform: translateZ(25px);
+      }
+
+      .step-title {
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1e293b;
+        position: relative;
+        display: inline-block;
+      }
+
+      .step-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 4px;
+        background: linear-gradient(to right, #6366f1, #4f46e5);
+        border-radius: 4px;
+      }
+
+      .step:nth-child(2) .step-title::after {
+        background: linear-gradient(to right, #10b981, #059669);
+      }
+
+      .step:nth-child(3) .step-title::after {
+        background: linear-gradient(to right, #f59e0b, #d97706);
+      }
+
+      .step-description {
+        color: #64748b;
+        line-height: 1.7;
+        margin-top: 25px;
+        font-size: 1.05rem;
+      }
+
+      .step-highlight {
+        display: inline-block;
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-top: 20px;
+        font-size: 0.9rem;
+      }
+
+      .step:nth-child(2) .step-highlight {
+        background: linear-gradient(135deg, #10b981, #059669);
+      }
+
+      .step:nth-child(3) .step-highlight {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+      }
+
+      .connector {
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        width: 40px;
+        height: 4px;
+        background: linear-gradient(to right, #c7d2fe, #6366f1, #c7d2fe);
+        z-index: 1;
+      }
+
+      .connector::before,
+      .connector::after {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #6366f1;
+        top: -4px;
+      }
+
+      .connector::before {
+        left: 0;
+      }
+
+      .connector::after {
+        right: 0;
+      }
+
+      .step:nth-child(2) .connector {
+        background: linear-gradient(to right, #a7f3d0, #10b981, #a7f3d0);
+      }
+
+      .step:nth-child(2) .connector::before,
+      .step:nth-child(2) .connector::after {
+        background: #10b981;
+      }
+
+      .step:nth-child(3) .connector {
+        background: linear-gradient(to right, #fde68a, #f59e0b, #fde68a);
+      }
+
+      .step:nth-child(3) .connector::before,
+      .step:nth-child(3) .connector::after {
+        background: #f59e0b;
+      }
+
+      /* Animaciones */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate3d(0.5, 1, 0, 0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate3d(0.5, 1, 0, 12deg);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .cta-container {
+        text-align: center;
+        margin-top: 70px;
+        padding: 40px;
+        background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+        border-radius: 16px;
+        color: white;
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      .cta-container h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .cta-container p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: white;
+        color: #6366f1;
+        padding: 16px 40px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-decoration: none;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1200px) {
+        .header h1 {
+          font-size: 2.8rem;
+        }
+
+        .step {
+          min-width: 280px;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .steps-container {
+          gap: 70px;
+        }
+
+        .step {
+          min-width: 100%;
+          max-width: 500px;
+        }
+
+        .connector {
+          display: none;
+        }
+
+        .step-inner {
+          padding: 45px 25px 35px;
+        }
+
+        .step-icon {
+          width: 130px;
+          height: 130px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .infographic-container {
+          padding: 50px 30px;
+        }
+
+        .header h1 {
+          font-size: 2.4rem;
+        }
+
+        .header p {
+          font-size: 1.1rem;
+        }
+
+        .step-title {
+          font-size: 1.5rem;
+        }
+
+        .step-description {
+          font-size: 1rem;
+        }
+
+        .cta-container {
+          padding: 30px 20px;
+        }
+
+        .cta-container h2 {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        body {
+          padding: 20px 15px;
+        }
+
+        .infographic-container {
+          padding: 40px 20px;
+          border-radius: 18px;
+        }
+
+        .infographic-container::before {
+          height: 200px;
+        }
+
+        .header {
+          margin-bottom: 50px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .header p {
+          font-size: 1rem;
+        }
+
+        .step-inner {
+          padding: 40px 20px 30px;
+        }
+
+        .step-number {
+          width: 50px;
+          height: 50px;
+          font-size: 1.5rem;
+          top: -20px;
+        }
+
+        .step-icon {
+          width: 110px;
+          height: 110px;
+          margin-bottom: 25px;
+        }
+
+        .step-icon-inner {
+          font-size: 55px;
+        }
+
+        .step-title {
+          font-size: 1.4rem;
+        }
+
+        .step-description {
+          margin-top: 20px;
+        }
+
+        .cta-container {
+          margin-top: 50px;
+          padding: 25px 15px;
+        }
+
+        .cta-container h2 {
+          font-size: 1.6rem;
+        }
+
+        .cta-container p {
+          font-size: 1rem;
+        }
+
+        .cta-button {
+          padding: 14px 30px;
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .step-inner {
+          padding: 35px 15px 25px;
+        }
+
+        .step-icon {
+          width: 100px;
+          height: 100px;
+        }
+
+        .step-icon-inner {
+          font-size: 50px;
+        }
+      }
+      /* Agregar esto al final de tu CSS */
+@media (min-width: 1200px) {
+  body {
+    padding: 0;
+    min-width: 1200px;
+  }
+}
+/* === SOLUCIÓN PARA CENTRAR EL INFOGRÁFICO === */
+.infographic-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Ajustes específicos para desktop y laptop */
+@media (min-width: 1024px) {
+  .infographic-wrapper {
+    padding: 60px 40px;
+  }
+  
+  .infographic-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+}
+
+/* Para pantallas muy grandes */
+@media (min-width: 1400px) {
+  .infographic-wrapper {
+    padding: 80px 60px;
+  }
+  
+  .infographic-container {
+    max-width: 1200px;
+  }
+}
+      
+
+
+
+
+        
+        
 </style>
 
+
 <body>
+
 
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
@@ -388,19 +2038,32 @@
     </div>
   </div>
   <!-- ***** Preloader End ***** -->
-    <!-- Popup -->
-    <div class="popup-overlay" id="popupOverlay">
-      <div class="popup-content">
-        <span class="popup-close" onclick="closePopup()">&times;</span>
-        <h3><strong>🎓 ¡Oferta Exclusiva por Tiempo Limitado!</strong></h3>
-        <p><strong>Eleva tu puntaje con un repaso totalmente personalizado para el College Board.
-                  📚 Adaptado a tu nivel, enfocado en tus metas.</strong></p>
-        <small>🔴 ¡INCLUYE SESIÓN DE EVALUACIÓN GRATUITA! 🔴 Primera sesión gratis para evaluar tu nivel antes de comenzar tu paquete seleccionado.
-¿Listo para alcanzar tu puntaje ideal?</small>
-        <br>
-        <button class="btn btn-primary" onclick="window.location.href='https://wa.me/7274264414?text=Hola,%20me%20interesa%20más%20información%20sobre%20el%20repaso de college board.%20Mi%20nombre%20es%20'">Comenzar ahora</button>
-      </div>
+  <!-- Popup compacto y moderno -->
+  <div id="popupOverlay" class="popup-overlay">
+    <div class="popup-content">
+        <span id="popupClose" class="popup-close">X</span>
+        <h2 class="popup-title">¡Ofertas Exclusivas!*</h2>
+        <p class="popup-description">Aprovecha nuestras promociones de lanzamiento por tiempo limitado.</p>
+        <ul class="popup-offers">
+          <li><strong>FREE TRIAL:</strong> Sesión de 30 mins.</li>
+          <li><strong>CYBER DISC:</strong> Hasta un 30% en paquetes.</li>
+          <li><strong>BONUS DIGITAL:</strong>Recursos exclusivos con tu compra.</li>
+        </ul>
+        <button class="popup-button" onclick="closePopup(); location.href='#pricing';">
+          RECLAMAR OFERTA
+        </button>
+        
+        <button class="popup-button secondary" onclick="closePopup()">
+          CERRAR
+        </button>
+        <small>*Ciertas restricciones aplican</small>
+        
     </div>
+</div>
+
+
+   
+
 
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
@@ -410,7 +2073,13 @@
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="#" class="logo">
-              <h1><span style="color: violet;"><strong>NABORI Corp</strong></span></h1>
+              <h1>
+                <strong style="color: black;">NABORI</strong> 
+                <span style="color: violet;">Corp</span>
+              </h1>
+              
+
+
 
 
               <!-- ***** Logo End ***** -->
@@ -418,11 +2087,12 @@
               <ul class="nav">
                 <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
                 <li class="scroll-to-section"><a href="#services">Servicios</a></li>
-                <li class="scroll-to-section"><a href="https://naboricorpreservas.setmore.com/">Reservas/Clientes
-                    activos</a></li>
+                <li class="scroll-to-section"><a href="#contacto">Contáctanos</a></li>
+                <li class="scroll-to-section"><a href="#testimonios">Testimonios</a></li>
                 <li class="scroll-to-section"><a href="#about">Conócenos</a></li>
                 <li class="scroll-to-section"><a href="#pricing">Precios</a></li>
-                <li class="scroll-to-section"><a href="#newsletter">Carreras</a></li>
+                
+
 
               </ul>
               <a class='menu-trigger'>
@@ -438,6 +2108,9 @@
 
 
 
+
+
+
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">
       <div class="row">
@@ -448,26 +2121,29 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>NABORI <span style="color: violet;">Corp</span></h2>
-                    <p><strong>En NABORI Corp somos más que una compañía; somos facilitadores de crecimiento y
+                    <p><strong>En NABORI Corp somos más que una compañía; somos facilitadores de crecimiento y
                         aprendizaje. Combinamos la experiencia y
-                        la empatía para crear entornos de aprendizaje personalizados. Ofrecemos servicios presenciales
-                        en el ambiente natural
-                        y/o remotos de Tutorías, Terapia Educativa, Homeschooling & Evaluación y Terapia del Habla y
+                        la empatía para crear entornos de aprendizaje personalizados. Ofrecemos servicios remotos de Tutorías, Terapia Educativa, Homeschooling & Evaluación y Terapia del Habla y
                         Lenguaje.
+
 
                         La diversidad transformando vidas.
                       </strong></p>
                   </div>
                   <div class="col-lg-12">
-                    <div class="white-button first-button scroll-to-section">
-                      <a
-                        href="https://wa.me/7274264414?text=Hola,%20me%20interesa%20más%20información%20sobre%20los%20servicios.%20Mi%20nombre%20es%20">Whatsapp
-                        <i class=""></i></a>
-                    </div>
-                    <div class="white-button scroll-to-section">
-                      <a href="mailto:naboricorp6@gmail.com?subject=Solicito%20más%20información">Email <i
-                          class=""></i></a>
-                    </div>
+                    <div class="contact-buttons-container">
+                      <a href="https://wa.me/7274264414?text=Hola,%20me%20interesa%20más%20información%20sobre%20los%20servicios.%20Mi%20nombre%20es%20" 
+                         class="oval-button whatsapp-button">
+                          <i class="fab fa-whatsapp"></i>
+                          <span>WhatsApp</span>
+                      </a>
+                      
+                      <a href="mailto:naboricorp6@gmail.com?subject=Solicito%20más%20información" 
+                         class="oval-button email-button">
+                          <i class="fas fa-envelope"></i>
+                          <span>Email</span>
+                      </a>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -483,15 +2159,16 @@
     </div>
   </div>
 
-  <div id="services" class="services section">
+
+ <div id="services" class="services section">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
             <h4>Soluciones <em>educativas &amp; integrales</em> a tu medida</h4>
             <img src="images/heading-line-dec.png" alt="servicios educativos">
-            <p>Servicios personalizados en el ambiente natural y/o remotos de Tutorías,Terapia Educativa,Homeschooling &
-              Evaluación y Terapia del Habla y Lenguaje.</p>
+            <p><strong>Servicios personalizados  remotos de Tutorías,Terapia Educativa,Homeschooling &
+              Evaluación & Terapia del Habla y Repaso del College Board.</strong></p>
           </div>
         </div>
       </div>
@@ -501,7 +2178,7 @@
         <div class="col-lg-3">
           <div class="service-item first-service">
             <div class="icon">
-
+              <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #4A90E2; margin-bottom: 15px; display: block;"></i>
             </div>
             <h4>Tutorías/Repaso de College Board</h4>
             <p>En nuestro servicios de Tutorías, nos enfocamos en brindar tutorías y programas de educación
@@ -510,11 +2187,14 @@
               de cada
               solicitante, permitiéndonos diseñar estrategias de aprendizaje eficaces y personalizadas.</p>
 
+
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item second-service">
-            <div class="icon"></div>
+            <div class="icon">
+              <i class="fas fa-home" style="font-size: 3rem; color: #50C878; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Homeschooling</h4>
             <p>Nuestro programa de Homeschooling ofrece una experiencia educativa completamente personalizada,
               ajustándose a las
@@ -522,13 +2202,17 @@
               implementamos
               estrategias y recursos específicos para alcanzar objetivos académicos de manera efectiva.
 
+
             </p>
+
 
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item third-service">
-            <div class="icon"></div>
+            <div class="icon">
+              <i class="fas fa-brain" style="font-size: 3rem; color: #FF6B6B; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Terapia Educativa</h4>
             <p>Nuestra terapia educativa está diseñada para abordar las necesidades únicas de cada estudiante. Con
               técnicas
@@ -536,11 +2220,14 @@
               para potenciar
               las habilidades académicas, cognitivas y conductuales, fomentando su desarrollo integral.</p>
 
+
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item fourth-service">
-            <div class="icon"></div>
+            <div class="icon">
+              <i class="fas fa-comments" style="font-size: 3rem; color: #FFD93D; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Evaluación &amp; Terapia del Habla y Lenguaje</h4>
             <p>Ofrecemos evaluación y terapia del habla y lenguaje, ya sea en entornos naturales o de forma remota.
               Nuestros terapeutas
@@ -549,11 +2236,13 @@
               habla y el lenguaje en situaciones reales de la vida cotidiana.
             </p>
 
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <div id="about" class="about-us section">
     <div class="container">
@@ -562,69 +2251,31 @@
           <div class="section-heading">
             <h4>Acerca&nbsp;<em>de nosotros</em></h4>
             <img src="images/heading-line-dec.png" alt="apoyar el crecimiento y desarrollo académico y personal ">
-            <p><strong>NABORI Corp es una corporación orgullosamente puertorriqueña, fundada en 2021, con sede en
-                Dorado, Puerto Rico. Nuestro
-                compromiso es con el bienestar educativo de los estudiantes, abarcando desde kindergarten hasta la
-                universidad.
+            <p><strong>NABORI Corp, corporación puertorriqueña fundada en 2021 en Dorado, se especializa en bienestar educativo integral desde kindergarten hasta universidad. Basamos nuestro trabajo en empatía y relaciones saludables como pilares del éxito. Nuestros profesionales garantizan resultados excepcionales, asegurando que cada estudiante alcance su máximo potencial académico, emocional y social.
+              <br>
+              </strong><span style="color: #f40d43;">-Dra. Lilliam Vega Lassús</span></p>
 
-                <br>
-                <br>
-
-                En NABORI Corp, creemos firmemente en la empatía y en la construcción de relaciones saludables con
-                nuestros estudiantes,
-                entendiendo que estos son pilares fundamentales para el éxito educativo.
-                <br>
-                <br>
-                Nos especializamos en una variedad de servicios diseñados para apoyar el crecimiento y desarrollo
-                académico y personal
-                de nuestros estudiantes.Nuestro equipo de profesionales dedicados trabaja incansablemente para
-                proporcionar un sistema de apoyo que garantiza
-                resultados. En NABORI Corp, cada estudiante es importante y merece las mejores oportunidades para
-                alcanzar su máximo
-                potencial.
-                <br>
-                <br>
-                Únete a NABORI Corp y sé parte de un sistema de apoyo que no solo se dedica a la excelencia académica,
-                sino que también
-                valora y cultiva el bienestar emocional y social de cada estudiante. Juntos, podemos lograr grandes
-                cosas y asegurar un
-                futuro brillante y prometedor para todos los estudiantes. ¡Esperamos que cuentes con nosotros y ser
-                parte de tu camino
-                hacia el éxito!</strong><span style="color: #f40d43;">-Dra. Lilliam Vega Lassús</span></p>
 
           </div>
+
           <div class="row">
             <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="mailto:naboricorp6@gmail.com?subject=Solicito%20más%20información">Correo electrónico</a>
-                </h4>
-                <p><strong>naboricorp6@gmail.com</strong></p>
-              </div>
+              
             </div>
             <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="https://eu.jotform.com/agent/019548ba3122731aa27bc6c6d6c087290bf3">24/7 Servicio al
-                    cliente</a></h4>
-                <p><strong>Preguntas frecuentes</strong></p>
-              </div>
+              
             </div>
             <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="tel:+17274264414">Contáctanos</a></h4>
-                <p><strong>(727) 426-4414 &nbsp; |&nbsp;(813) 816-2624</strong></p>
-              </div>
+              
             </div>
             <div class="col-lg-6">
-              <div class="box-item">
-                <h4><a href="https://wa.me/7274264414">Whatsapp</a></h4>
-                <p><strong>Escríbenos&nbsp;(enlace directo)</strong></p>
-              </div>
+              
             </div>
             <div class="col-lg-12">
-              <p><strong>¡Reserva una consulta gratuita, hoy!</strong></p>
+              <p><strong>¡Reserva una evaluación gratis, hoy!</strong></p>
               <div class="gradient-button">
                 <a href="https://bookings.setmore.com/scheduleappointment/1f0a34aa-4436-4fda-8967-6a435b503d83">Reservar
-                  consulta</a>
+                  Evaluación</a>
               </div>
               <span>*Sin compromiso</span>
             </div>
@@ -638,409 +2289,482 @@
       </div>
     </div>
   </div>
+  <!--infographic-->
+  <div class="infographic-wrapper">
+    <div class="infographic-container">
+    <div class="header">
+      <h1>Nuestro Proceso en 3 Pasos</h1>
+      <p>
+        Descubre cómo nuestra consulta con la Dra. Vega te ayudará a alcanzar
+        tus objetivos de salud y bienestar
+      </p>
+    </div>
 
-  <div id="clients" class="the-clients">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-          <div class="section-heading">
-            <h4>Compruebe <em>los testimonios</em> sobre nuestros servicios</h4>
-            <img src="images/heading-line-dec.png" alt="testimonios">
-            <p>La opinion de nuestros clientes</p>
+    <div class="steps-container">
+      <!-- Paso 1 -->
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-number">1</div>
+          <div class="step-icon">
+            <div class="step-icon-inner"><i class="fas fa-user-md"></i></div>
           </div>
+          <h3 class="step-title">Evaluación gratis con la Dra. Vega</h3>
+          <p class="step-description">
+            Agenda una consulta inicial sin costo para evaluar tus necesidades.
+            
+          </p>
+          <div class="step-highlight">Sin compromisos</div>
         </div>
-        <div class="col-lg-12">
-          <div class="naccs">
-            <div class="grid">
-              <div class="row">
-                <div class="col-lg-7 align-self-center">
-                  <div class="menu">
-                    <div class="first-thumb active">
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <h4>Katherine Martinez</h4>
-                            <span class="date">30/ November/ 2021</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                            <span class="category">Madre</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span class="rating">4.8</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <h4>Feliz González</h4>
-                            <span class="date">20/Mayo/ 2021</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                            <span class="category">Padre/Encargado</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span class="rating">4.5</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <h4>Destin Pérez Rodriguez</h4>
-                            <span class="date">27 /abril /2021</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                            <span class="category">Madre</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span class="rating">4.7</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <h4>Nancy Santiago</h4>
-                            <span class="date">24/ Noviembre /2022</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                            <span class="category">Madre/Encargada</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span class="rating">4.9</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="last-thumb">
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <h4>Pamela Parapar</h4>
-                            <span class="date">15 Mayo 2021</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                            <span class="category">Madre/Encargada</span>
-                          </div>
-                          <div class="col-lg-4 col-sm-4 col-12">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <span class="rating">5.0</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+        <div class="connector"></div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-number">2</div>
+          <div class="step-icon">
+            <div class="step-icon-inner">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+          </div>
+          <h3 class="step-title">Reservar servicio</h3>
+          <p class="step-description">
+            Una vez seleccionado el servicio, programa tu cita en el 
+            horario que más te convenga. Recibirás recordatorios oportunos.
+          </p>
+          <div class="step-highlight">Flexibilidad horaria</div>
+        </div>
+        <div class="connector"></div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="step">
+        <div class="step-inner">
+          <div class="step-number">3</div>
+          <div class="step-icon">
+            <div class="step-icon-inner">
+              <i class="fas fa-credit-card"></i>
+            </div>
+          </div>
+          <h3 class="step-title">Emitir pago</h3>
+          <p class="step-description">
+            Realiza el pago de manera segura a través de nuestros múltiples
+            métodos de pago disponibles. Transacciones 100% seguras.
+          </p>
+          <div class="step-highlight">Pago seguro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-container">
+      <h2>¡Comienza hoy!</h2>
+      <p style="color: white;">
+        Reserva tu evaluación gratuita
+       </p>
+      <a href="https://wa.me/17274264414?text=Hola,%20quiero%20agendar%20una%20evaluaci%C3%B3n%20gratis%20para%20los%20servicios%20de%20NABORI%20Corp,%20mi%20nombre%20es%20" class="cta-button">Agendar ahora</a>
+    </div>
+  </div>
+  </div>
+<!--end infographic -->
+  <!-- INICIO DEL COMPONENTE DE PRECIOS -->
+  <section id="pricing" class="pricing-section">
+        <div class="pc-container">
+            <div class="pc-header">
+                <h2>Planes de Innovación Educativa </h2>
+                <p>Opta por el programa que se adapte a tu necesidad</p>
+            </div>
+            
+            <div class="pc-cards">
+              <!-- Plan FREE -->
+              <div class="pc-card">
+                  <div class="pc-plan-name">
+                      <i class="fas fa-gift"></i>
+                      FREE TRIAL🎁
                   </div>
-                </div>
-                <div class="col-lg-5">
-                  <ul class="nacc">
-                    <li class="active">
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="client-content">
-                                <img src="images/quote.png" alt="">
-                                <p>"Saludos!!! Siii le fue súper chevere. Le comentaba al tutor que Dereck me compartió
-                                  que le encantó la tutoría y
-                                  sobretodo que lo comprendió todo súper chévere. Ya que en otras tutorías que había
-                                  tomado el proceso no había sido
-                                  igual. Ulises identificó unas cositas con las qué hay que trabajar primero para que
-                                  aclare dudas de la materia y
-                                  entonces darle fuerte a los temas actuales.
-                                  Muchas gracias!!! "👍 -<span style="color: #f40d43;">Katherine Martinez</span></p>
-                              </div>
-                              <div class="down-content">
-
-                                <div class="right-content">
-
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="client-content">
-                                <img src="images/quote.png" alt="">
-                                <p>“Saludos , estoy muy contento con los resultados de mi hijo en la escuela, reforzar
-                                  las materias con los servicios de
-                                  Nabori Corp es muy gratificante, gracias Nabori y los especialistas.” -<span
-                                    style="color: #f40d43;">Félix Gónzalez</span></p>
-                              </div>
-                              <div class="down-content">
-
-                                <div class="right-content">
-
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="client-content">
-                                <img src="images/quote.png" alt="">
-                                <p>“Estoy super agradecida con la especialista se ganó el cariño de mi hijo y poder
-                                  ayudarlo para que aprendiera a leer. Alexandiel
-                                  un niño que tenía dificultad lectora y ver ese gran cambio . Estoy super feliz y
-                                  agradecida con el personal tan atento” -<span style="color: #f40d43;">Destin
-                                    Pérez</span></p>
-                              </div>
-                              <div class="down-content">
-
-                                <div class="right-content">
-
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="client-content">
-                                <img src="images/quote.png" alt="">
-                                <p>“Mi hijo traía rezagos académicos desde la pandemia. No quería que tuviera la presión
-                                  de un sistema regular de
-                                  enseñanza.Contraté los servicios de Nabori Corps y estamos sumamente contentos. La
-                                  especialista es sumamente buena y
-                                  dulce, Hasta lo ha apoyado en sus conciertosde violín.Sus rezagos sobre todo en
-                                  matemáticas han mejorado mucho. Si
-                                  deseas los servicios de homeschooling o tutorias,Nabori tiene el mejor personal.
-                                  ¡Agradecida!” -<span style="color: #f40d43;">Nancy Santiago</span></p>
-                              </div>
-                              <div class="down-content">
-
-                                <div class="right-content">
-
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div>
-                        <div class="thumb">
-                          <div class="row">
-                            <div class="col-lg-12">
-                              <div class="client-content">
-                                <img src="images/quote.png" alt="">
-                                <p>“Hola, mi hijo de 10 años tiene Speech Delay, nosotros contratamos los servicios de
-                                  tutorias empezando las clases y
-                                  gracias al excelente servicio, mi hijo avanzó mucho academicamente, NABORI te ayuda
-                                  mucho con los
-                                  horarios y se enfoca demasiado en lo que tu hijo necesita de una manera muy
-                                  profesional. Sin duda los recomiendo mucho
-                                  ya que me ha ayudado en muchos aspectos.” -<span style="color: #f40d43;">Pamela
-                                    Parapar</span></p>
-                              </div>
-                              <div class="down-content">
-
-                                <div class="right-content">
-
-                                  <span></span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                  <div class="pc-plan-price">$0<span>/sesión²</span></div>
+                  <p class="pc-plan-billing">Ideal para empezar y conocernos.</p>
+                  <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">PROBAR GRATIS</a>
+                  <p class="pc-no-credit">No se requiere tarjeta de crédito<br>²sesión de 30 min.</p>
+                  
+                  <hr class="pc-divider">
+                  
+                  <div class="pc-features-title">
+                      Características principales:
+                  </div>
+                  <ul class="pc-plan-features">
+                    <li>Sesión de prueba de 30 minutos</li>
+                    <li>Conoce nuestra metodología exclusiva</li>
+                    <li>Demostración de herramientas educativas</li>
+                    <li>Experimenta la tutoría personalizada 1 a 1</li>
+                    <li>Acceso a contenido introductorio</li>
+                    <li>Evaluación inicial de tu nivel académico</li>
+                </ul>
+                <div class="pc-target-audience">
+                  <p><strong>Sugerido a:</strong> Quienes deseen probar nuestro método antes de comprometerse.</p>
+                  <p><strong>Precio reg.</strong> $30/sesión de 50 min.</p>
                 </div>
               </div>
-            </div>
-          </div>
+                
+                <!-- Plan SEMANAL -->
+                <div class="pc-card">
+                    <div class="pc-plan-name">
+                        <i class="fas fa-calendar-week"></i>
+                        BASE✨
+                    </div>
+                    <div class="pc-plan-price">$25*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*4 sesiones por estudiante, facturado mensualmente.</p>
+                   
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
+                    
+                    <hr class="pc-divider">
+                    
+                    <div class="pc-features-title">
+                        Incluye:
+                    </div>
+                    <ul class="pc-plan-features">
+                      <li class="pc-feature-highlight">Sesiones privadas individualizadas (50 min)</li>
+                      <li class="pc-feature-highlight">Materiales esenciales y recursos premium</li>
+                      <li class="pc-feature-highlight">Acceso a herramientas de IA básicas</li>
+                      <li class="pc-feature-highlight">Estrategias de estudio comprobadas</li>
+                      <li class="pc-feature-highlight">Biblioteca de recursos digitales completa</li>
+                      <li class="pc-feature-highlight">Creación de hábitos de estudio efectivos</li>
+                  </ul>
+                  <div class="pc-target-audience">
+                    <p><strong>Sugerido a:</strong> Estudiantes que necesitan un poco de apoyo puntual.</p>
+                    <p><strong>Precio reg.</strong> $30/sesión</p>
+                  </div>
+                </div>
+                
+                <!-- Plan BUSINESS -->
+                <div class="pc-card popular">
+                  <div class="pc-popular-tag">POPULAR</div>
+                    <div class="pc-plan-name">
+                        <i class="fas fa-briefcase"></i>
+                        NEXO🧠 
+                    </div>
+                    <div class="pc-plan-price">$22*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*8 sesiones por estudiante, facturado mensualmente.</p>
+                    
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
+                    
+                    <hr class="pc-divider">
+                    
+                    <div class="pc-features-title">
+                        Incluye lo del plan de $25, más:
+                    </div>
+                    <ul class="pc-plan-features">
+                      <li class="pc-feature-highlight">Sesiones adicionales de consolidación</li>
+                      <li class="pc-feature-highlight">Feedback detallado en actividades</li>
+                      <li class="pc-feature-highlight">Herramientas de IA Elite para tareas</li>
+                      <li class="pc-feature-highlight">Recursos especializados por materia</li>
+                      <li class="pc-feature-highlight">Estrategias avanzadas de aprendizaje con IA</li>
+                      
+                  </ul>
+                  <div class="pc-target-audience">
+                    <p><strong>Sugerido a:</strong> Estudiantes que requieren apoyo constante y reforzamiento.</p>
+                    <p><strong>Precio reg.</strong> $30/sesión</p>
+                  </div>
+                </div>
+                
+                <!-- Plan ENTERPRISE -->
+                <div class="pc-card">
+                  
+                    <div class="pc-plan-name">
+                        <i class="fas fa-rocket"></i>
+                        AVANZA🏆
+                    </div>
+                    <div class="pc-plan-price">$20*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*10 sesiones por estudiante, facturado mensualmente.</p>
+                    
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
+                    
+                    <hr class="pc-divider">
+                    
+                    <div class="pc-features-title">
+                        Incluye lo del plan de $22, más:
+                    </div>
+                    <ul class="pc-plan-features">
+                      <li class="pc-feature-highlight">Tutoría intensiva ultra-personalizada</li>
+                      <li class="pc-feature-highlight">Plan de recuperación académica a medida</li>
+                      <li class="pc-feature-highlight">Acceso completo a herramientas IA-Premium</li>
+                      <li class="pc-feature-highlight">Recursos exclusivos y quizzes interactivos</li>
+                      <li class="pc-feature-highlight">Evaluaciones periódicas con análisis profundo</li>
+                      <li class="pc-feature-highlight">Proyectos personalizados para destacar</li>
+                  </ul>
+                  <div class="pc-target-audience">
+                    <p><strong>Sugerido a:</strong> Estudiantes con rezago que necesitan intervención intensiva.</p>
+                    <p><strong>Precio reg.</strong> $30/sesión</p>
+                  </div>
+                </div>
+          
         </div>
+    </section>
+    <!-- FIN DEL COMPONENTE DE PRECIOS -->
+
+
+    <!--Tabs-->
+    
+    <section class="services-section">
+      <h2 class="services-title">Nuestros Servicios Especializados</h2>
+    
+      <div class="services-grid">
+        <!-- Servicio 1 -->
+        <div class="service-card">
+          
+          <h3>Terapia Educativa</h3>
+          <h3>$32/sesión</h3>
+          <p>Apoyo personalizado para fortalecer habilidades académicas.</p>
+          <br>
+          <ul>
+            <li>Se ofrece remoto</li>
+            <li>Clases individuales</li>
+            <li>Refuerzo escolar</li>
+            <li>Plan adaptado</li>
+            <li>Informe de progreso</li>
+            <li>Sesión de 45 mins.</li>
+          </ul>
+          <br>
+          <br>
+          <a href="https://form.jotform.com/252265034696057" 
+          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
+            Reservar Ahora
+       </a>
+       
+          
+        </div>
+         
+        <!-- Servicio 2 -->
+        <div class="service-card">
+          <h3>Terapia del Habla</h3>
+          <h3>$32/30 mins. - $42/45 mins.</h3>
+          <p>Mejora de la comunicación con apoyo profesional.</p>
+          
+          <ul>
+            <li>Se ofrece remoto y/o presencial³</li>
+            <li>Segumiento de progreso</li>
+            <li>Sesiones semanales de 30/45 mins.</li>
+            <li>Plan personalizado</li>
+          </ul>
+          <br>
+         
+          <br>
+          <small>³En la oficina de la licenciada</small>
+          <a href="https://form.jotform.com/252265034696057" 
+          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
+            Reservar Ahora
+       </a>
+         
+        </div>
+        
+    
+        <!-- Servicio 3 -->
+        <div class="service-card">
+          
+          <h3>Repaso College Board</h3>
+          <p>Repaso NO grupal guiado por especialistas certificados.</p>
+          <br>
+          <ul>
+            <li>Planes de:
+              
+              <ul>
+                <li>1 sesión gratis de evaluación</li>
+                <li>Sesión de 1 hora</li>
+                <li>4 sesiones/mes: $180</li>
+                <li>8 sesiones/mes: $340</li>
+                <li>10 sesiones/mes: $380</li>
+              </ul>
+            </li>
+          </ul>
+          <br>
+          <br>
+          <small>*Precio Reg.$50/sesión</small>
+          <br>
+          
+          <a href="https://form.jotform.com/252265034696057" 
+          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
+            Reservar Ahora
+       </a>
+         
+        </div>
+        
+
+    
+        <!-- Servicio 4 -->
+        <div class="service-card">
+          <h3>Evaluación del Habla</h3>
+          <h3>$80 única vez</h3>
+          <p>Diagnóstico inicial para detectar necesidades específicas.</p>
+        
+          <ul>
+            <li>Se ofrece remoto y/o presencial³</li>
+            <li>Informe detallado</li>
+            <li>Recomendaciones profesionales</li>
+            <li>Plan de acción personalizado</li>
+            <li>Duración de 1 hora</li>
+          </ul>
+          <br>
+          <small>³En la oficina de la licenciada</small>
+          <br>
+          <a href="https://form.jotform.com/252265034696057" 
+          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
+            Reservar Ahora
+       </a>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div id="pricing" cla:ss="pricing-tables">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-          <div class="section-heading">
-            <h4>Innovación educativa <em>Nuevos Horizontes</em> Tarifas</h4>
 
-            <p>2024-2025.Trabajamos cada caso individual de acuerdo a las necesidades de cada estudiante</p>
-          </div>
+
+
+    <!-- Sección de Métodos de Pago -->
+    <section class="payment-methods-section">
+        <h3 class="payment-methods-title"><strong>Métodos de Pago Aceptados</strong></h3>
+        
+        <div class="payment-methods-container">
+            <div class="payment-method">
+                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/9.0.0/visa.svg" alt="Visa" class="payment-logo" style="filter: invert(13%) sepia(94%) saturate(7151%) hue-rotate(230deg) brightness(88%) contrast(124%);">
+                 Debit/Credit
+              </div>
+            
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-logo">
+                Debit/Credit
+              </div>
+            
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-logo">
+            </div>
+            
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="payment-logo">
+            </div>
+            
+            <div class="payment-method">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="payment-logo">
+            </div>
+            
+            <div class="payment-method">
+              <img src="https://static.wixstatic.com/media/af3a4a_708585fdb7fc4345a2e68f56538ac72a~mv2.png" alt="Ath Movil" class="payment-logo">
+                 <strong>727-426-4414</strong>   
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-          <div class="pricing-item-regular">
-            <span class="price">*$22</span>
-            <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tutorías/Homeschooling</h4>
-            <h4>&nbsp;&nbsp;Repaso de College Board</h4> 
-            <div class="icon">
-              <img src="images/service-icon-05.png" alt="">
-            </div>
-            <ul>
-              <li>Remotos/Presenciales</li>
-              <li>Apoyo académico personalizado para estudiantes desde Kindergarten hasta Universidad.</li>
-              <li>Refuerzo en materias como matemáticas, ciencias, lenguaje, y estudios sociales.</li>
-              <li>Ayuda en la preparación para exámenes y pruebas estandarizadas.</li>
-              <li>Desarrollo de habilidades de estudio y organización personal.</li>
-              <li>Mejoras en la comprensión lectora y expresión escrita.</li>
-              <li>Asesoramiento en el desarrollo de habilidades críticas y resolución de problemas.</li>
-              <li>Ayuda en la preparación de tareas y proyectos escolares.</li>
-              <li>Fomento del pensamiento independiente y la capacidad de autoaprendizaje.</li>
-              <li>Apoyo en el manejo de herramientas digitales y recursos educativos en línea.</li>
-              <li>Flexibilidad para sesiones presenciales o remotas, adaptadas a las necesidades del estudiante.</li>
-              <li>Desarrollo de estrategias personalizadas para estudiantes con necesidades educativas especiales.</li>
-              <li>Orientación para estudiantes universitarios en la elaboración de trabajos de investigación, ensayos y
-                tesis.</li>
-
-            </ul>
-            <div class="border-button">
-              <a href="https://heyzine.com/flip-book/d5ce0c723a.html" target="_self">Explorar planes y precios</a>
+        
+        <p class="payment-subtitle">🛡️Procesamos tus pagos de forma segura y protegida</p>
+    </section>
+    
 
 
-              <br>
-              <br>
-              <small><strong>*El valor comienza desde ($22 Homeschooling remoto $24 Tutorías Remoto) por paquete de 12
-                  sesiones mensuales, precio determinado según elijas modalidad presencial o
-                  remota.</strong></small>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="pricing-item-pro">
-            <span class="price">*$40</span>
-            <h4>Terapia Educativa</h4>
-            <div class="icon">
-              <img src="images/service-icon-07.png" alt="">
-            </div>
-            <ul>
-              <li>Programa personalizado</li>
-              <li>Hojas de Progreso mensuales</li>
-              <li>Evaluación de las habilidades cognitivas y académicas de los estudiantes.</li>
-              <li>Desarrollo de programas educativos personalizados según las necesidades del alumno.</li>
-              <li>Apoyo en la mejora de las habilidades de lectura, escritura y matemáticas.</li>
-              <li>Intervención en trastornos del aprendizaje, como dislexia o discalculia.</li>
-              <li>Técnicas para mejorar la concentración y la gestión del tiempo en el estudio.</li>
-              <li>Asesoramiento en el manejo del comportamiento en el entorno educativo.</li>
-              <li>Desarrollo de estrategias para mejorar la organización y la planificación de tareas.</li>
-              <li>Apoyo para estudiantes con dificultades en el proceso de aprendizaje debido a necesidades especiales.
-              </li>
-              <li>Fomento de la autoestima y la motivación en el aprendizaje.</li>
-              <li>Colaboración con padres y maestros para crear un entorno de aprendizaje efectivo y cohesionado.</li>
-
-            </ul>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="border-button">
-              <a href="https://heyzine.com/flip-book/d5ce0c723a.html">Explorar planes y precios</a>
-              <br>
-              <br>
-              <small><strong>*El valor comienza desde ($40 Remoto) por paquete de 10 sesiones mensuales, precio
-                  determinado según elijas
-                  modalidad presencial o
-                  remota.</strong></small>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="pricing-item-regular">
-            <span class="price">*$32</span>
-            <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;²Evaluación/Terapia del Habla y
-              Lenguaje</h4>
-            <div class="icon">
-              <img src="images/service-icon-08.png" alt="">
-            </div>
-            <ul>
-              <li>Evaluación del desarrollo del habla y el lenguaje en niños y adultos.</li>
-              <li>Diagnóstico y tratamiento de trastornos del habla, como disartria o dislalia.</li>
-              <li>Mejoras en la pronunciación y claridad del habla.</li>
-              <li>Intervención en problemas de fluidez, como la tartamudez.</li>
-              <li>Tratamiento de retrasos en el desarrollo del lenguaje.</li>
-              <li>Mejoras en las habilidades de comprensión y expresión oral.</li>
-              <li>Terapia para niños con dificultades en la producción de sonidos y palabras.</li>
-              <li>Apoyo en la mejora de la comunicación no verbal (gestos, expresión facial, etc.).</li>
-              <li>Asesoramiento para padres y educadores sobre estrategias de apoyo en casa y en la escuela.</li>
-              <li>Intervención en trastornos del lenguaje asociados con autismo, trastornos de aprendizaje, etc.</li>
-              <li>Evaluación y tratamiento especializado de trastornos de la voz, incluyendo problemas de ronquera y
-                resonancia vocal.</li>
-              <li>Diagnóstico y terapia para dificultades de alimentación y deglución, enfocado en mejorar la función
-                orofacial.</li>
-            </ul>
-            <br>
-            <br>
-            <br>
-            <div class="border-button">
-              <a href="https://heyzine.com/flip-book/d5ce0c723a.html">Explorar planes y precios</a>
-              <br>
-              <br>
-              <small><strong>*El valor comienza desde ($32 Remoto) por paquete de 8 sesiones mensuales, precio
-                  determinado según elijas la modalidad.
-                  ²Evaluación comienza desde $80/30min.</strong></small>
-            </div>
-          </div>
-        </div>
+     <!--Sección de testimonios -->
+     <section id="testimonios" class="testimonials-section">
+      <div class="section-header">
+          <h2 class="section-title">Lo que dicen los padres</h2>
+          <p class="section-subtitle">Experiencias de familias que han confiado en nuestros servicios</p>
       </div>
-    </div>
-  </div>
 
+
+      <div class="carousel-container">
+          <div class="carousel-track" id="carouselTrack">
+              <!-- Testimonio 1 -->
+              <div class="testimonial-card">
+                  <p class="testimonial-text">
+                      Desde que comenzamos con sus servicios, hemos visto un cambio increíble en nuestro hijo. Los profesionales son excepcionales.
+                  </p>
+                  <div class="parent-info">
+                      <div class="parent-avatar">MG</div>
+                      <div class="parent-details">
+                          <h4>María González</h4>
+                          <p>Madre de Santiago, 8 años</p>
+                      </div>
+                      <div class="rating">
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                      </div>
+                  </div>
+              </div>
+
+
+              <!-- Testimonio 2 -->
+              <div class="testimonial-card">
+                  <p class="testimonial-text">
+                      La atención que recibimos es extraordinaria. Cada sesión está cuidadosamente planificada y adaptada a nuestras necesidades.
+                  </p>
+                  <div class="parent-info">
+                      <div class="parent-avatar">CR</div>
+                      <div class="parent-details">
+                          <h4>Carlos Rodríguez</h4>
+                          <p>Padre de Isabella, 16 años</p>
+                      </div>
+                      <div class="rating">
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                      </div>
+                  </div>
+              </div>
+
+
+              <!-- Testimonio 3 -->
+              <div class="testimonial-card">
+                  <p class="testimonial-text">
+                      Lo que más valoramos es la comunicación constante. Siempre estamos informados del progreso y recibimos orientación.
+                  </p>
+                  <div class="parent-info">
+                      <div class="parent-avatar">LM</div>
+                      <div class="parent-details">
+                          <h4>Laura Martínez</h4>
+                          <p>Madre de Diego, 10 años</p>
+                      </div>
+                      <div class="rating">
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                          <span class="star">★</span>
+                      </div>
+                  </div>
+              </div>
+         </div>
+
+
+          <div class="carousel-controls">
+              <button class="carousel-btn" id="prevBtn">
+                  <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M15 18L9 12L15 6" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+              </button>
+              
+              <div class="carousel-indicators" id="indicators"></div>
+              
+              <button class="carousel-btn" id="nextBtn">
+                  <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M9 18L15 12L9 6" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+              </button>
+          </div>
+          
+          <div style="text-align: center;">
+              <button class="auto-play-btn" id="autoPlayBtn">⏸️ Pausar</button>
+          </div>
+      </div>
+  </section>
+
+
+  <!-- ***** Footer Start ***** -->
   <footer id="newsletter">
+    
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading">
-            <h4>Se necesita empatía,carisma y deseo para impactar vidas. Únete!&nbsp;<a
-                href="https://form.jotform.com/241113071630036" class="main-button"><strong><u>Aplicar</u> </strong></a>
-            </h4>
+            
           </div>
         </div>
         <div class="col-lg-6 offset-lg-3">
@@ -1048,8 +2772,11 @@
             <div class="row">
               <div class="col-lg-6 col-sm-6">
 
+
               </div>
               <div class="col-lg-6 col-sm-6">
+
+
 
 
               </div>
@@ -1059,14 +2786,15 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-          <div class="footer-widget">
+          <div id="contacto" class="footer-widget">
             <h4>Contáctanos</h4>
             <p>Brighton Country Club, Dorado PR 00693</p>
-            <p><a href="tel:+17274264414">727-426-4414&nbsp;|&nbsp;813-816-2624</a></p>
+            <p><a href="tel:+17274264414"><strong>727-426-4414&nbsp;|&nbsp;813-816-2624</strong></a></p>
             <p><a href="mailto:naboricorp6@gmail.com">naboricorp6@gmail.com</a></p>
             <p><a href="https://eu.jotform.com/agent/019548ba3122731aa27bc6c6d6c087290bf3"><strong>preguntas y
                   respuestas 24/7 </strong></a></p>
-          </div>
+        </div>
+        
         </div>
         <div class="col-lg-3">
           <div class="footer-widget">
@@ -1075,9 +2803,9 @@
               <li><a href="#top">Inicio</a></li>
               <li><a href="#services">Servicios</a></li>
               <li><a href="#about">Conócenos</a></li>
-              <li><a href="https://naboricorpreservas.setmore.com/">Reservas</a></li>
-              <li><a href="#pricing">Precios</a></li>
+             <li><a href="#pricing">Precios</a></li>
             </ul>
+
 
           </div>
         </div>
@@ -1097,6 +2825,7 @@
           </div>
         </div>
 
+
         <div class="col-lg-3">
           <div class="footer-widget">
             <h4>NABORI Corp</h4>
@@ -1104,11 +2833,13 @@
               <img src="images/learning with NBR.png" alt="La diversidad transformando vidas">
             </div>
 
+
           </div>
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
             <p>Copyright © 2020 NABORI Corp. All Rights Reserved.
+
 
           </div>
         </div>
@@ -1116,6 +2847,8 @@
     </div>
   </footer>
   
+
+
 
 
   <!-- Scripts -->
@@ -1127,26 +2860,181 @@
   <script src="js/popup.js"></script>
   <script src="js/custom.js"></script>
 
-  <!-- Script para el popup -->
-  <script>
-    // Mostrar popup después de 3 segundos
-    setTimeout(openPopup, 3000);
 
-    function openPopup() {
-      document.getElementById('popupOverlay').classList.add('popup-active');
-    }
+  
+    <!-- Script para el popup -->
+    <script>
+      // Envolvemos el código en un evento para asegurar que la página esté cargada
+      document.addEventListener("DOMContentLoaded", function() {
+          // Asumiendo que quieres que el pop-up aparezca al cargar la página
+          // Con un pequeño retraso para que no sea tan abrupto
+          setTimeout(function() {
+              document.getElementById('popupOverlay').classList.add('show');
+              document.body.style.overflow = 'hidden';
+          }, 1000); // 1 segundo de retraso
+      });
 
-    function closePopup() {
-      document.getElementById('popupOverlay').classList.remove('popup-active');
-    }
 
-    // Cerrar al hacer clic fuera del contenido
-    window.onclick = function (event) {
-      if (event.target == document.getElementById('popupOverlay')) {
-        closePopup();
+      function closePopup() {
+          document.getElementById('popupOverlay').classList.remove('show');
+          document.body.style.overflow = 'auto';
       }
-    }
+
+
+      // Cierra el pop-up si se hace clic fuera del contenido
+      document.getElementById('popupOverlay').addEventListener('click', function(event) {
+          if (event.target === this) {
+              closePopup();
+          }
+      });
+
+
+      document.getElementById('popupClose').addEventListener('click', closePopup);
+
+
+      function claimOffer() {
+          // Redirige al usuario a la sección de precios
+          window.location.href = '#pricing';
+          closePopup();
+      }
   </script>
+  <!-- Script para testimonios -->
+  <script>
+    let currentSlide = 0;
+    let isAutoPlaying = true;
+    let autoPlayInterval;
+    let slidesPerView = getSlidesPerView();
+    const track = document.getElementById('carouselTrack');
+    const cards = document.querySelectorAll('.testimonial-card');
+    const totalSlides = cards.length;
+    const maxSlide = Math.max(0, totalSlides - slidesPerView);
+
+
+    function getSlidesPerView() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 640) return 2;
+        return 1;
+    }
+
+
+    function createIndicators() {
+        const indicatorsContainer = document.getElementById('indicators');
+        indicatorsContainer.innerHTML = '';
+        const totalIndicators = Math.ceil(totalSlides / slidesPerView);
+        
+        for (let i = 0; i < totalIndicators; i++) {
+            const indicator = document.createElement('div');
+            indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+            indicator.addEventListener('click', () => goToSlide(i * slidesPerView));
+            indicatorsContainer.appendChild(indicator);
+        }
+    }
+
+
+    function updateSlide() {
+        const slideWidth = 100 / slidesPerView;
+        const offset = -(currentSlide * slideWidth);
+        track.style.transform = `translateX(${offset}%)`;
+        
+        // Update indicators
+        const indicators = document.querySelectorAll('.indicator');
+        const activeIndicator = Math.floor(currentSlide / slidesPerView);
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === activeIndicator);
+        });
+        
+        // Update button states
+        document.getElementById('prevBtn').disabled = currentSlide === 0;
+        document.getElementById('nextBtn').disabled = currentSlide >= maxSlide;
+    }
+
+
+    function changeSlide(direction) {
+        const newSlide = currentSlide + (direction * slidesPerView);
+        if (newSlide >= 0 && newSlide <= maxSlide) {
+            currentSlide = newSlide;
+            updateSlide();
+        }
+    }
+
+
+    function goToSlide(slideIndex) {
+        if (slideIndex >= 0 && slideIndex <= maxSlide) {
+            currentSlide = slideIndex;
+            updateSlide();
+        }
+    }
+
+
+    function nextSlide() {
+        if (currentSlide >= maxSlide) {
+            currentSlide = 0;
+        } else {
+            currentSlide += slidesPerView;
+            if (currentSlide > maxSlide) currentSlide = maxSlide;
+        }
+        updateSlide();
+    }
+
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 4000);
+    }
+
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+
+    function toggleAutoPlay() {
+        const btn = document.getElementById('autoPlayBtn');
+        if (isAutoPlaying) {
+            stopAutoPlay();
+            btn.textContent = '▶️ Reproducir';
+            isAutoPlaying = false;
+        } else {
+            startAutoPlay();
+            btn.textContent = '⏸️ Pausar';
+            isAutoPlaying = true;
+        }
+    }
+
+
+    // Event listeners
+    document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
+    document.getElementById('autoPlayBtn').addEventListener('click', toggleAutoPlay);
+
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        const newSlidesPerView = getSlidesPerView();
+        if (newSlidesPerView !== slidesPerView) {
+            slidesPerView = newSlidesPerView;
+            currentSlide = 0;
+            createIndicators();
+            updateSlide();
+        }
+    });
+
+
+    // Handle hover pause
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+        if (isAutoPlaying) stopAutoPlay();
+    });
+    carouselContainer.addEventListener('mouseleave', () => {
+        if (isAutoPlaying) startAutoPlay();
+    });
+
+
+    // Initialize
+    createIndicators();
+    updateSlide();
+    if (isAutoPlaying) startAutoPlay();
+</script>
+
 
   
   <!-- Cookie Consent by Osano -->
@@ -1170,34 +3058,69 @@
       });
     });
   </script>
-  <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function () {
-      window.AgentInitializer.init({
-        agentRenderURL: "https://eu.jotform.com/agent/019548ba3122731aa27bc6c6d6c087290bf3",
-        rootId: "JotformAgent-019548ba3122731aa27bc6c6d6c087290bf3",
-        formID: "019548ba3122731aa27bc6c6d6c087290bf3",
-        queryParams: ["skipWelcome=1", "maximizable=1"],
-        domain: "https://eu.jotform.com",
-        isDraggable: false,
-        background: "linear-gradient(180deg, #F8FCF3 0%, #E6F1D7 100%)",
-        buttonBackgroundColor: "#0A1551",
-        buttonIconColor: "#FFF",
-        variant: false,
-        customizations: {
-          "greeting": "Yes",
-          "greetingMessage": "Hola,estoy disponible 24/7 para contestar cualquier pregunta.",
-          "openByDefault": "No",
-          "pulse": "Yes",
-          "position": "right",
-          "autoOpenChatIn": "0"
-        },
-        isVoice: undefined
-      });
+   <script>
+    // Script exclusivo para las cards de precios
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.pc-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+        
+        const popularCard = document.querySelector('.pc-card.popular');
+        if (popularCard) {
+            popularCard.addEventListener('mouseenter', function() {
+                this.style.animation = 'pc-float 3s ease-in-out infinite';
+            });
+            
+            popularCard.addEventListener('mouseleave', function() {
+                this.style.animation = 'pc-float 4s ease-in-out infinite';
+            });
+        }
     });
-  </script>
+</script>
+<!--script de infographic-->
+<script>
+  // Añadir efecto de aparición suave al hacer scroll
+  document.addEventListener("DOMContentLoaded", function () {
+    const steps = document.querySelectorAll(".step-inner");
+
+    steps.forEach((step, index) => {
+      // Añadir delay para animación escalonada
+      step.style.transitionDelay = `${index * 0.1}s`;
+    });
+
+    // Efecto de escritura para el título
+    const title = document.querySelector(".header h1");
+    const originalText = title.textContent;
+    title.textContent = "";
+
+    let i = 0;
+    const typeWriter = setInterval(function () {
+      if (i < originalText.length) {
+        title.textContent += originalText.charAt(i);
+        i++;
+      } else {
+        clearInterval(typeWriter);
+      }
+    }, 50);
+  });
+</script>
+
+
+ <script src='https://cdn.jotfor.ms/agent/embedjs/019548ba3122731aa27bc6c6d6c087290bf3/embed.js'>
+</script>
+
+
 
 
 </body>
+
 
 </html>
