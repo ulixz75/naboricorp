@@ -2435,7 +2435,8 @@
                 
                     <!-- Explicación del nuevo paquete -->
                     <p class="pc-plan-billing">
-                      <strong><span style="color: red;">*Paquete especial de Navidad: 4 sesiones + 1 GRATIS.</span></strong>
+                      <strong><span style="color: red;">*Paquete especial de Navidad: 4 sesiones + 1 GRATIS.  
+                          </span></strong>
                   </p>
                 
                     <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">
@@ -2577,20 +2578,106 @@
           
           <ul>
             <li>Se ofrece remoto y/o presencial**</li>
-            <li>Segumiento de progreso</li>
+            <li>Seguimiento de progreso</li>
             <li>Sesiones semanales de 30/45 mins.</li>
             <li>Plan personalizado</li>
           </ul>
           <br>
-         
           <br>
           <small>**Oficina de la licenciada</small>
-          <a href="https://form.jotform.com/252265034696057" 
-          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
+          
+          <button onclick="openBookingModal()" 
+            style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
             Reservar Ahora
-       </a>
-         
+          </button>
         </div>
+        
+        <!-- Modal Pop-up -->
+        <div id="bookingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:1000; animation:fadeIn 0.3s ease;">
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding:40px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-width:500px; width:90%; animation:slideUp 0.4s ease;">
+            
+            <button onclick="closeBookingModal()" style="position:absolute; top:15px; right:15px; background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:24px; width:35px; height:35px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&times;</button>
+            
+            <div style="text-align:center; color:#fff;">
+              <div style="font-size:50px; margin-bottom:20px;">📅</div>
+              <h2 style="margin:0 0 15px 0; font-size:28px; font-weight:700;">¡Elige tu Sesión!</h2>
+              <p style="margin:0 0 30px 0; font-size:16px; line-height:1.6; color:#fff; font-weight:700;">
+                Las fechas para tu servicio se coordinarán directamente con la Dra. Vega vía WhatsApp. 
+                Podrás elegir la modalidad de tu preferencia: <strong>remoto o presencial</strong>.
+              </p>
+              
+              <div style="display:flex; flex-direction:column; gap:15px;">
+                <a href="https://buy.stripe.com/dRm5kE7NMexKfGZ2zzcQU08" 
+                  style="display:block; padding:18px 30px; background:#fff; color:#667eea; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
+                  🕐 Sesión de 30 minutos - $32
+                </a>
+                
+                <a href="https://buy.stripe.com/cNi3cwgki75i9iB7TTcQU07" 
+                  style="display:block; padding:18px 30px; background:#fff; color:#764ba2; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
+                  🕐 Sesión de 45 minutos - $42
+                </a>
+              </div>
+              
+              <p style="margin:25px 0 0 0; font-size:14px; color:#fff;">
+                💬 Después del pago, recibirás instrucciones para coordinar tu cita
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <style>
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from { 
+              opacity: 0;
+              transform: translate(-50%, -40%);
+            }
+            to { 
+              opacity: 1;
+              transform: translate(-50%, -50%);
+            }
+          }
+          
+          #bookingModal a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+          }
+          
+          #bookingModal button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+          }
+        </style>
+        
+        <script>
+          function openBookingModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+          }
+          
+          function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+          
+          // Cerrar al hacer clic fuera del modal
+          document.getElementById('bookingModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+              closeBookingModal();
+            }
+          });
+          
+          // Cerrar con la tecla ESC
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+              closeBookingModal();
+            }
+          });
+        </script>
         
     
         <!-- Servicio 3 -->
@@ -2641,11 +2728,86 @@
           <br>
           <small>**Oficina de la licenciada</small>
           <br>
-          <a href="https://form.jotform.com/252265034696057" 
-          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
-            Reservar Ahora
-       </a>
+          <button onclick="openEvaluationModal()" 
+          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
+          Reservar Ahora
+        </button>
       </div>
+      <!-- Modal Pop-up para Evaluación -->
+<div id="evaluationModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:1000; animation:fadeIn 0.3s ease;">
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding:40px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-width:500px; width:90%; animation:slideUp 0.4s ease;">
+    
+    <button onclick="closeEvaluationModal()" style="position:absolute; top:15px; right:15px; background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:24px; width:35px; height:35px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&times;</button>
+    
+    <div style="text-align:center; color:#fff;">
+      <div style="font-size:50px; margin-bottom:20px;">📋</div>
+      <h2 style="margin:0 0 15px 0; font-size:28px; font-weight:700;">¡Agenda tu Evaluación!</h2>
+      <p style="margin:0 0 30px 0; font-size:16px; line-height:1.6; color:#fff; font-weight:700;">
+        Las fechas para tu evaluación se coordinarán directamente con la Dra. Vega vía WhatsApp. 
+        Podrás elegir la modalidad de tu preferencia: <strong>remoto o presencial</strong>.
+      </p>
+      
+      <div style="display:flex; flex-direction:column; gap:15px;">
+        <a href="https://buy.stripe.com/6oU28s4BAdtG2Ud4HHcQU03" 
+          style="display:block; padding:18px 30px; background:#fff; color:#667eea; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
+          📋 Evaluación de 60 minutos - $80
+        </a>
+      </div>
+      
+      <p style="margin:25px 0 0 0; font-size:14px; color:#fff;">
+        💬 Después del pago, recibirás instrucciones para coordinar tu cita
+      </p>
+    </div>
+  </div>
+</div>
+        
+        <style>
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          
+          @keyframes slideUp {
+            from { 
+              opacity: 0;
+              transform: translate(-50%, -40%);
+            }
+            to { 
+              opacity: 1;
+              transform: translate(-50%, -50%);
+            }
+          }
+          
+          #bookingModal a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+          }
+          
+          #bookingModal button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+          }
+        </style>
+        
+        <script>
+          function openEvaluationModal() {
+            document.getElementById('evaluationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+          }
+          
+          function closeEvaluationModal() {
+            document.getElementById('evaluationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+          
+          // Cerrar al hacer clic fuera del modal
+          document.getElementById('evaluationModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+              closeEvaluationModal();
+            }
+          });
+        </script>
+        
     </section>
 
 
