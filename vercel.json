@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build || true",
+  "outputDirectory": "./",
+  "framework": "html",
+  "redirects": [
+    {
+      "source": "/old-page",
+      "destination": "/index.html",
+      "permanent": false
+    }
+  ]
+}

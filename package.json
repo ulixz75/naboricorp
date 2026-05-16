@@ -1,0 +1,13 @@
+{
+  "name": "naboricorp",
+  "version": "1.0.0",
+  "description": "Naboricorp website",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static site - no build needed'",
+    "start": "echo 'Start development server'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
