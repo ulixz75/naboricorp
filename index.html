@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
   <!-- Google tag (gtag.js) -->
   <script>
@@ -9,15 +8,11 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-
     // Activa Google Analytics solo si el usuario da consentimiento
     if (document.cookie.includes("cookieconsent_status=allow")) {
-      gtag('config', 'G-C20LSQR1DS');
+      gtag('config', 'G-4NCGYV9CKG');
     }
   </script>
-  <!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '528164316928164'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=528164316928164&ev=PageView&noscript=1"/></noscript><!-- End Meta Pixel Code -->
-
-
 
 
   <meta charset="UTF-8">
@@ -35,7 +30,6 @@
     rel="stylesheet">
   
 
-
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,7 +37,6 @@
       href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
     <meta name="description"
       content="NABORI Corp: Servicios personalizados de tutorías, terapia educativa, homeschooling y terapia del habla. Transformamos vidas a través de la educación.">
-
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -57,7 +50,7 @@
       "streetAddress": "Brighton Country Club",
       "addressLocality": "Dorado",
       "addressRegion": "PR",
-      "postalCode": "00646",
+      "postalCode": "00693",
       "addressCountry": "US"
     },
     "contactPoint": {
@@ -101,41 +94,20 @@
 </script>
 
 
-
-
-<!-- Google Fonts (ya lo tienes) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet">
-
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  integrity="sha512-papEJbG9nO+5X9Xn9eE4jXdp1yE1Q3kW0sG2HkO4T2ZkF2rSg5U1z6bI3b1F9w5E8"
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-
     
   </head>
 
 
 
 
-
-
-
-
   <title>NABORI Corp</title>
-
 
   <!-- Bootstrap core CSS -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-
 
 
 
@@ -146,294 +118,72 @@
   <link rel="stylesheet" href="css/animated.css">
   <link rel="stylesheet" href="css/owl.css">
 
-
 </head>
 <style>
-  /* --- INICIO CÓDIGO POP-UP CORREGIDO --- */
-  
-  /* #1: VARIABLES DE COLOR AÑADIDAS */
-  :root {
-      --neon-blue: #00f0ff;
-      --neon-purple: #8a2be2;
-      --text-light: #e0e0e0;
-      --text-dark: #f0f0f0;
-      --gradient-1: linear-gradient(90deg, #00f0ff, #8a2be2);
-      --gradient-2: linear-gradient(90deg, #8a2be2, #00f0ff);
-  }
-
-
   /* Estilos del popup */
   .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999; /* Aumentado para asegurar que esté por encima de todo */
-      animation: fadeIn 0.5s ease-out forwards;
-      overflow-y: auto;
-      padding: 20px;
-      box-sizing: border-box;
-  }
-
-
-  .popup-content {
-      background: rgba(26, 26, 46, 0.95);
-      backdrop-filter: blur(15px);
-      border-radius: 16px;
-      /* #2: TAMAÑO Y PADDING REDUCIDOS */
-      padding: 30px;
-      max-width: 500px; 
-      width: 95%;
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.3), 0 0 50px rgba(138, 43, 226, 0.2);
-      text-align: center;
-      position: relative;
-      animation: popIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-      border: 2px solid;
-      border-image: var(--gradient-1) 1;
-      box-sizing: border-box;
-      color: var(--text-dark);
-  }
-
-
-  .popup-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--neon-blue);
-      transition: transform 0.3s ease, color 0.3s ease;
-      text-shadow: 0 0 8px var(--neon-blue);
-  }
-
-
-  .popup-close:hover {
-      color: var(--neon-purple);
-      transform: scale(1.2) rotate(5deg);
-      text-shadow: 0 0 10px var(--neon-purple);
-  }
-
-
-  .popup-title {
-      font-family: 'Orbitron', sans-serif;
-      /* #2: TAMAÑO FUENTE REDUCIDO */
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--neon-blue);
-      margin-bottom: 20px;
-      text-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue);
-      animation: textGlow 1.5s infinite alternate;
-  }
-
-
-  .popup-description {
-      /* #2: TAMAÑO FUENTE REDUCIDO */
-      font-size: 16px;
-      color: var(--text-light);
-      margin-bottom: 25px;
-      line-height: 1.6;
-      padding: 0 10px;
-  }
-
-
-  .popup-offers {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 30px;
-      /* #2: TAMAÑO FUENTE REDUCIDO */
-      font-size: 15px;
-      color: var(--text-dark);
-      text-align: left;
-  }
-
-
-  .popup-offers li {
-      margin-bottom: 15px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding-left: 10px;
-      position: relative;
-  }
-
-
-  .popup-offers li::before {
-      content: '✦';
-      font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      color: var(--neon-purple);
-      text-shadow: 0 0 10px var(--neon-purple);
-      flex-shrink: 0;
-      margin-top: -2px;
-  }
-  .popup-offers strong {
-      color: var(--neon-blue);
-      text-shadow: 0 0 5px var(--neon-blue);
-  }
-
-
-  .popup-button {
-      background: var(--gradient-1);
-      color: white;
-      border: none;
-      /* #2: PADDING Y TAMAÑO FUENTE REDUCIDOS */
-      padding: 15px 30px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 600;
-      font-family: 'Montserrat', sans-serif;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-      margin: 8px;
-      touch-action: manipulation;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-      letter-spacing: 1px;
-      position: relative;
-      overflow: hidden;
-  }
-
-
-  .popup-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-      transition: 0.5s;
-  }
-
-
-  .popup-button:hover::before {
-      left: 100%;
-  }
-
-
-  .popup-button:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 40px rgba(138, 43, 226, 0.5);
-      background: var(--gradient-2);
-  }
-
-
-  .popup-button.secondary {
-      background: none;
-      border: 2px solid var(--neon-purple);
-      color: var(--neon-purple);
-      box-shadow: 0 0 15px rgba(138, 43, 226, 0.4);
-  }
-
-
-  .popup-button.secondary:hover {
-      background: rgba(138, 43, 226, 0.2);
-      color: white;
-      box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
-      transform: translateY(-5px) scale(1.03);
-  }
-
-
-  /* Animaciones */
-  @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-  }
-
-
-  @keyframes popIn {
-      from { transform: scale(0.7) translateY(50px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
-  }
-
-
-  @keyframes textGlow {
-      0% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
-      100% { text-shadow: 0 0 15px var(--neon-blue), 0 0 25px var(--neon-blue), 0 0 35px var(--neon-blue); }
-  }
-
-
-  .show {
-      display: flex;
-  }
-
-
-  /* Optimización para móviles */
-  @media (max-width: 768px) {
-      .popup-content {
-          /* #2: TAMAÑO Y PADDING REDUCIDOS PARA MÓVIL */
-          padding: 25px 15px;
-          width: 95%;
-          border-radius: 15px;
-          margin: 0 10px;
-      }
-      .popup-title {
-          font-size: 24px;
-          margin-bottom: 15px;
-      }
-      .popup-description {
-          font-size: 14px;
-          margin-bottom: 20px;
-      }
-      .popup-offers {
-          font-size: 14px;
-      }
-      .popup-offers li:nth-child(2) {
-  margin-top: 10px; /* ajusta a tu gusto */
-}
-
-      .popup-offers li::before {
-          font-size: 18px;
-      }
-      .popup-button {
-          padding: 14px 28px;
-          font-size: 15px;
-          width: 100%;
-          max-width: 280px;
-          margin: 6px auto;
-          display: block;
-      }
-      .popup-close {
-          font-size: 26px;
-          top: 10px;
-          right: 15px;
-      }
-  }
-
-
-  @media (max-width: 480px) {
-      .popup-content {
-          padding: 20px 15px;
-      }
-      .popup-title {
-          font-size: 22px;
-      }
-      .popup-description {
-          font-size: 13px;
-      }
-      .popup-button {
-          padding: 12px 24px;
-          font-size: 14px;
-      }
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;
+      z-index:1000;padding:10px;
     }
-  /* --- FIN CÓDIGO POP-UP --- */
-  
-  
+    .popup-content {
+      background:#fff;max-width:320px;width:100%;border-radius:14px;
+      overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      animation:popupAppear .35s ease;position:relative;
+    }
+    @keyframes popupAppear {0%{transform:scale(.9);opacity:0;}100%{transform:scale(1);opacity:1;}}
+    .popup-close {
+      position:absolute;top:8px;right:8px;background:#fff;border:none;cursor:pointer;
+      border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;
+      color:#555;font-size:14px;
+    }
+    .popup-close:hover{background:#fee2e2;color:#ef4444;}
+    
+    .popup-header {
+      background:linear-gradient(135deg,#5a3fe3,#2a69f6);
+      color:#fff;text-align:center;padding:14px;position:relative;
+    }
+    .popup-badge {
+      position:absolute;top:8px;right:-24px;background:#facc15;color:#1f2937;
+      font-size:11px;font-weight:600;padding:4px 20px;transform:rotate(45deg);
+    }
+    .popup-title {font-size:17px;font-weight:700;}
+    .popup-subtitle {color: #fff;       /* 🔹 Blanco */
+  font-weight: 700;}
+    
+    .popup-body {padding:12px;}
+    .popup-feature {
+      display:flex;align-items:center;background:#f9fafb;padding:8px;border-radius:8px;margin-bottom:8px;
+    }
+    .popup-feature-icon {
+      width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#5a3fe3,#2a69f6);
+      color:#fff;display:flex;align-items:center;justify-content:center;margin-right:8px;font-size:13px;
+    }
+    .popup-feature-title {font-size:13px;font-weight:600;color:#111;}
+    .popup-feature-desc {font-size:11px;color:#555;}
+    
+    .popup-discount {
+      background:linear-gradient(135deg,#fb923c,#f43f5e);
+      color:#fff;text-align:center;padding:10px;border-radius:8px;margin:10px 0;font-size:12px;
+    }
+    .popup-college {
+      text-align:center;background:#eff6ff;border-left:3px solid #2a69f6;
+      border-radius:8px;padding:8px;font-size:12px;color:#333;
+    }
+    .popup-button {
+      display:block;width:100%;padding:10px;background:linear-gradient(135deg,#5a3fe3,#2a69f6);
+      color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;
+      border-radius:0 0 14px 14px;
+    }
+    .popup-button:hover{background:#3b4fd1;}
   /* Base styles for About Us section */
   .about-us .section-heading {
     position: relative;
     padding: 0;
   }
 
-
   /* Media queries for mobile devices */
   @media screen and (max-width: 768px) {
-
 
     /* Fix alignment issues in About Us section */
     .about-us .section-heading {
@@ -445,7 +195,6 @@
       /* Force left alignment */
     }
 
-
     /* Ensure the text content is properly aligned */
     .about-us .section-heading p {
       text-align: left;
@@ -455,13 +204,11 @@
       /* Remove any existing left margin */
     }
 
-
     /* Fix container padding */
     .about-us .container {
       padding-left: 15px;
       padding-right: 15px;
     }
-
 
     /* Adjust column spacing */
     .about-us .col-lg-6 {
@@ -469,20 +216,17 @@
       padding-right: 15px;
     }
 
-
     /* Fix box items alignment */
     .about-us .box-item {
       text-align: center;
       padding-left: 0;
     }
 
-
     /* Ensure consistent text alignment in all child elements */
     .about-us .left-content {
       text-align: left;
       padding-left: 0;
     }
-
 
     /* Fix any floating issues */
     .about-us .row {
@@ -491,17 +235,14 @@
     }
   }
 
-
   /* First, we set up the base styles for the services section to ensure consistent formatting */
   .services .section-heading {
     position: relative;
     padding: 0;
   }
 
-
   /* Now we create specific rules for mobile devices */
   @media screen and (max-width: 768px) {
-
 
     /* Main heading container adjustments */
     .services .section-heading {
@@ -510,7 +251,6 @@
       text-align: left;
       /* Forces left alignment for the entire heading section */
     }
-
 
     /* Style the main heading text */
     .services .section-heading h4 {
@@ -521,7 +261,6 @@
       /* Adds space between heading and paragraph */
     }
 
-
     /* Adjust the description text under the heading */
     .services .section-heading p {
       text-align: left;
@@ -531,13 +270,11 @@
       /* Improves readability of paragraph text */
     }
 
-
     /* Container adjustments to ensure proper spacing */
     .services .container {
       padding-left: 15px;
       padding-right: 15px;
     }
-
 
     /* Individual service item formatting */
     .services .service-item {
@@ -547,13 +284,11 @@
       /* Adds space between service items */
     }
 
-
     /* Service item headings */
     .services .service-item h4 {
       text-align: left;
       margin-bottom: 15px;
     }
-
 
     /* Service item descriptions */
     .services .service-item p {
@@ -562,13 +297,11 @@
       margin-bottom: 15px;
     }
 
-
     /* Fix row spacing issues */
     .services .row {
       margin-left: 0;
       margin-right: 0;
     }
-
 
     /* Ensure proper column spacing */
     .services .col-lg-3,
@@ -579,7 +312,6 @@
       padding-left: 15px;
       padding-right: 15px;
     }
-
 
     /* Adjust any decorative images in the section */
     .services .section-heading img {
@@ -594,7 +326,6 @@
             gap: 15px;
             align-items: center;
         }
-
 
         .oval-button {
             display: inline-flex;
@@ -614,13 +345,11 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-
         .oval-button i {
             font-size: 18px;
             width: 20px;
             text-align: center;
         }
-
 
         /* WhatsApp Button */
         .whatsapp-button {
@@ -628,11 +357,9 @@
             color: #25D366;
         }
 
-
         .whatsapp-button i {
             color: #25D366;
         }
-
 
         .whatsapp-button:hover {
             background: #25D366;
@@ -642,11 +369,9 @@
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
-
         .whatsapp-button:hover i {
             color: white;
         }
-
 
         /* Email Button */
         .email-button {
@@ -654,11 +379,9 @@
             color: #666;
         }
 
-
         .email-button i {
             color: #666;
         }
-
 
         .email-button:hover {
             background: #666;
@@ -668,18 +391,15 @@
             box-shadow: 0 4px 15px rgba(102, 102, 102, 0.3);
         }
 
-
         .email-button:hover i {
             color: white;
         }
-
 
         /* Active effect */
         .oval-button:active {
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
-
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -694,7 +414,6 @@
             }
           }
 
-
   /* Additional adjustments for very small screens */
   @media screen and (max-width: 480px) {
     .services .section-heading h4 {
@@ -702,13 +421,11 @@
       /* Further reduced size for very small screens */
     }
 
-
     .services .service-item {
       padding: 20px 10px;
       /* Slightly reduced padding for very small screens */
     }
   }
-
 
   /* Base styles for the content container */
   .left-content.show-up.header-text {
@@ -716,17 +433,14 @@
     width: 100%;
   }
 
-
   /* Media query for mobile devices */
   @media screen and (max-width: 768px) {
-
 
     /* Target the column container */
     .col-lg-12 {
       padding-left: 15px;
       padding-right: 15px;
     }
-
 
     /* Specific styling for the h2 heading */
     .left-content.show-up.header-text h2 {
@@ -741,7 +455,6 @@
       /* Adjust font size for mobile */
     }
 
-
     /* Style the paragraph text */
     .left-content.show-up.header-text p {
       text-align: left;
@@ -755,7 +468,6 @@
       /* Improve readability */
     }
 
-
     /* Ensure strong tags maintain the proper alignment */
     .left-content.show-up.header-text p strong {
       display: inline-block;
@@ -764,7 +476,6 @@
       /* Full width for proper alignment */
     }
   }
-
 
   /* Additional refinements for very small screens */
   @media screen and (max-width: 480px) {
@@ -775,11 +486,8 @@
       /* Adjust spacing for smaller screens */
     }
 
-
   }
-  /* --- INICIO: ESTILOS MEJORADOS PARA LAS CARDS DE PRECIOS --- */
-
-
+/* ESTILOS EXCLUSIVOS PARA LAS CARDS DE PRECIOS (COMPACTAS) */
 .pricing-section {
   --pc-primary: #4361ee;
   --pc-secondary: #3a0ca3;
@@ -787,42 +495,37 @@
   --pc-success: #4cc9f0;
   --pc-dark: #2b2d42;
   --pc-light: #f8f9fa;
-  --pc-gray: #6c757d; /* Ligeramente más oscuro para mejor contraste */
-  --pc-card-bg: #ffffff;
-  --pc-card-border: #eef2f7;
-  /* Sombra más suave y moderna */
-  --pc-card-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 10px 20px rgba(0,0,0,0.06);
-  --pc-card-shadow-hover: 0 7px 14px rgba(0,0,0,0.06), 0 15px 30px rgba(0,0,0,0.1);
-  --pc-transition: all 0.3s ease-in-out; /* Transición más suave */
+  --pc-gray: #8d99ae;
+  --pc-card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  --pc-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-  padding: 60px 20px;
-  font-family: 'Roboto', sans-serif; /* Usando la fuente ya cargada en la web */
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 .pc-container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-
 .pc-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }
 
-
 .pc-header h2 {
-  font-size: 2.5rem; /* Un poco más grande */
-  font-weight: 700;
+  font-size: 2.2rem;
   color: var(--pc-dark);
   margin-bottom: 15px;
+  background: linear-gradient(45deg, var(--pc-secondary), var(--pc-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
-
 
 .pc-header p {
   font-size: 1.1rem;
@@ -830,179 +533,203 @@
   line-height: 1.6;
 }
 
-
 .pc-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px; /* Más espacio entre tarjetas */
+  gap: 20px;
 }
 
-
 .pc-card {
-  background: var(--pc-card-bg);
-  border-radius: 16px; /* Bordes más redondeados */
+  background: white;
+  border-radius: 12px;
   box-shadow: var(--pc-card-shadow);
-  border: 1px solid var(--pc-card-border);
-  width: 280px; /* Un poco más anchas */
-  padding: 25px 20px;
+  width: 250px;
+  padding: 20px 15px;
   position: relative;
   overflow: hidden;
   transition: var(--pc-transition);
+  transform: scale(1);
+  z-index: 1;
   display: flex;
-  flex-direction: column; /* Asegura el orden vertical */
+  flex-direction: column;
 }
-
 
 .pc-card:hover {
-  transform: translateY(-8px); /* Efecto de "levantarse" */
-  box-shadow: var(--pc-card-shadow-hover);
-  background-color: #FFD93D;
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
 }
 
-
-/* El plan popular destaca por defecto */
-.pc-card.popular {
-  border-color: var(--pc-primary);
-  transform: scale(1.05); /* Ligeramente más grande */
+.pc-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--pc-primary);
+  z-index: -1;
 }
 
-
-@media (max-width: 768px) {
-  .pc-card.popular {
-    transform: scale(1); /* Se desactiva el zoom en móvil para no ocupar tanto espacio */
-  }
+.pc-card.popular::before {
+  height: 6px;
+  background: linear-gradient(90deg, var(--pc-accent), var(--pc-success));
 }
-
 
 .pc-popular-tag {
   position: absolute;
-  top: 15px;
-  right: -35px;
-  background: linear-gradient(45deg, var(--pc-accent), var(--pc-primary));
+  top: 12px;
+  right: -30px;
+  background: linear-gradient(45deg, var(--pc-accent), var(--pc-success));
   color: white;
-  padding: 6px 40px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  padding: 5px 30px;
+  font-size: 0.75rem;
+  font-weight: 600;
   transform: rotate(45deg);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-
 .pc-plan-name {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--pc-dark);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-
 .pc-plan-name i {
-  background: linear-gradient(135deg, var(--pc-primary), var(--pc-success));
+  background: var(--pc-primary);
   color: white;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
-
 
 .pc-plan-price {
-  font-size: 2.5rem; /* Precio más grande y llamativo */
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--pc-dark);
-  margin-bottom: 5px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
 }
-
 
 .pc-plan-price span {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--pc-gray);
-  margin-left: 5px;
+  margin-top: 5px;
 }
-
 
 .pc-plan-billing {
   font-size: 0.85rem;
   color: var(--pc-gray);
-  margin-bottom: 15px;
-  min-height: 40px; /* Altura mínima para alinear tarjetas */
+  margin-bottom: 12px;
 }
-
 
 .pc-plan-button {
   display: block;
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   text-align: center;
   background: linear-gradient(to right, var(--pc-primary), var(--pc-secondary));
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--pc-transition);
-  margin-top: auto; /* Empuja el botón hacia abajo */
+  margin: 12px 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
   text-decoration: none;
 }
 
+.pc-plan-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(to right, var(--pc-accent), var(--pc-success));
+  transition: var(--pc-transition);
+  z-index: -1;
+}
+
+.pc-plan-button:hover::before {
+  width: 100%;
+}
 
 .pc-plan-button:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
 }
 
+.pc-contact-button {
+  background: linear-gradient(to right, #6c757d, #495057);
+}
+
+.pc-contact-button:hover {
+  box-shadow: 0 10px 20px rgba(108, 117, 125, 0.3);
+}
 
 .pc-no-credit {
   text-align: center;
   font-size: 0.8rem;
   color: var(--pc-gray);
-  margin-top: 10px; /* Espacio sobre el texto */
   margin-bottom: 20px;
 }
-
 
 .pc-divider {
   height: 1px;
-  background-color: var(--pc-card-border);
+  background: linear-gradient(90deg, transparent, var(--pc-gray), transparent);
   margin: 15px 0;
-  border: none;
+  opacity: 0.3;
 }
-
 
 .pc-features-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--pc-dark);
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+.pc-features-title i {
+  color: var(--pc-primary);
+}
 
 .pc-plan-features {
   list-style: none;
-  padding-left: 0;
-  margin-bottom: 20px;
-  flex-grow: 1; /* Permite que la lista crezca y alinee los botones */
+  margin-bottom: 15px;
+  flex-grow: 1;
 }
-
 
 .pc-plan-features li {
-  padding: 8px 0;
+  padding: 5px 0;
   position: relative;
-  padding-left: 25px;
-  color: #343a40; /* Texto de feature más oscuro */
-  font-size: 0.9rem;
-  line-height: 1.6;
+  padding-left: 22px;
+  color: var(--pc-dark);
+  transition: var(--pc-transition);
+  cursor: default;
+  font-size: 0.85rem;
 }
 
+.pc-plan-features li:hover {
+  color: var(--pc-accent);
+  transform: translateX(5px);
+}
 
 .pc-plan-features li::before {
   content: '\f00c';
@@ -1010,66 +737,119 @@
   font-weight: 900;
   position: absolute;
   left: 0;
-  top: 12px;
+  top: 8px;
   color: var(--pc-success);
-  font-size: 0.9rem;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 }
 
+.pc-feature-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dashed var(--pc-accent);
+  cursor: help;
+}
 
-/* NUEVO: Estilo para la característica destacada */
+.pc-feature-tooltip .pc-tooltip-text {
+  visibility: hidden;
+  width: 180px;
+  background-color: var(--pc-dark);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.pc-feature-tooltip .pc-tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--pc-dark) transparent transparent transparent;
+}
+
+.pc-feature-tooltip:hover .pc-tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
 .pc-feature-highlight {
-  font-weight: 700;
-  color: var(--pc-accent);
-}
-
-
-/* NUEVO: Estilo para el bloque de público objetivo */
-.pc-target-audience {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f7f5ff; /* Un color de fondo muy suave */
-  border-left: 4px solid var(--pc-accent);
+  background: linear-gradient(120deg, rgba(114, 9, 183, 0.1), rgba(67, 97, 238, 0.1));
+  padding: 2px 6px;
   border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
 }
 
-
-.pc-target-audience p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--pc-dark);
-  line-height: 1.5;
-}
-
-
-/* Media queries para responsividad */
 @media (max-width: 1100px) {
+  .pc-cards {
+    gap: 20px;
+  }
+  
   .pc-card {
-    width: 250px;
+    width: 230px;
   }
 }
-
 
 @media (max-width: 768px) {
   .pc-cards {
     flex-direction: column;
     align-items: center;
-    gap: 25px;
   }
   
   .pc-card {
     width: 100%;
-    max-width: 380px;
+    max-width: 350px;
   }
   
   .pc-header h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+  
+  .pc-header p {
+    font-size: 1rem;
   }
 }
 
+/* Animaciones */
+@keyframes pc-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
 
-/* --- FIN: ESTILOS MEJORADOS --- */
+.pc-card.popular {
+  animation: pc-float 4s ease-in-out infinite;
+}
 
+.pc-feature-icon {
+  margin-right: 6px;
+  color: var(--pc-primary);
+  font-size: 0.8rem;
+}
 
+/* Ajustes para textos pequeños en las cards */
+.pc-small-text {
+  font-size: 0.8rem;
+  color: var(--pc-gray);
+  margin-top: 5px;
+}
 
 
 /* === ESTILOS DE LA SECCIÓN DE SERVICIOS === */
@@ -1080,7 +860,6 @@
   text-align: center;
 }
 
-
 .services-title {
   font-size: 2.2rem;
   margin-bottom: 40px;
@@ -1090,7 +869,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1098,7 +876,6 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
 
 .service-card {
   background: #fff;
@@ -1110,13 +887,10 @@
   border-top: 4px solid #4a6fa5;
 }
 
-
 .service-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  background-color: #FFD93D;
 }
-
 
 .service-card h3 {
   color: #4a6fa5;
@@ -1124,19 +898,16 @@
   margin-bottom: 10px;
 }
 
-
 .service-card p {
   color: #343a40;
   margin-bottom: 15px;
 }
-
 
 .service-card ul {
   list-style: none;
   padding: 0;
   margin: 0 0 15px;
 }
-
 
 .service-card ul li {
   margin-bottom: 8px;
@@ -1145,7 +916,6 @@
   line-height: 1.6;
 }
 
-
 .service-card ul li::before {
   content: "✓";
   position: absolute;
@@ -1153,7 +923,6 @@
   color: #28a745;
   font-weight: bold;
 }
-
 
 .service-price {
   background: #ff6b6b;
@@ -1166,877 +935,13 @@
 }
 
 
-.payment-methods-section {
-            padding: 30px 40px;
-            background: #f8f9fa;
-            font-family: 'Segoe UI', sans-serif;
-            text-align: center;
-        }
-        
-        .payment-methods-title {
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 24px;
-        }
-        
-        .payment-methods-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .payment-method {
-            background: #fff;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-            min-width: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .payment-method:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        }
-        
-        .payment-logo {
-            height: 40px;
-            width: auto;
-            max-width: 80px;
-            object-fit: contain;
-        }
-        
-        .payment-subtitle {
-            color: #666;
-            font-size: 14px;
-            margin-top: 15px;
-            font-style: italic;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .payment-methods-container {
-                gap: 20px;
-            }
-            
-            .payment-method {
-                padding: 12px 15px;
-                min-width: 70px;
-            }
-            
-            .payment-logo {
-                height: 35px;
-                max-width: 70px;
-            }
-        }
-
-
-        /* Estilos para la sección de testimonios */
-       
-        .testimonials-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1e293b;
-        }
-
-
-        .section-subtitle {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-
-
-        .carousel-container {
-            position: relative;
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 1.2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.4s ease;
-            gap: 1rem;
-        }
-
-
-        .testimonial-card {
-            min-width: 100%;
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 1.2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            min-height: 280px;
-        }
-
-
-        .testimonial-text {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.2rem;
-            position: relative;
-            flex-grow: 1;
-            overflow: visible;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-
-        .testimonial-text::before {
-            content: '"';
-            font-size: 2rem;
-            color: #64748b;
-            opacity: 0.2;
-            position: absolute;
-            top: -0.5rem;
-            left: -0.3rem;
-            font-family: Georgia, serif;
-        }
-
-
-        .parent-info {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            margin-top: auto;
-        }
-
-
-        .parent-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border: 1px solid #e2e8f0;
-            flex-shrink: 0;
-        }
-
-
-        .parent-details {
-            flex: 1;
-            min-width: 0;
-        }
-
-
-        .parent-details h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.1rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        .parent-details p {
-            color: #64748b;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-
-        .rating {
-            display: flex;
-            gap: 0.1rem;
-            flex-shrink: 0;
-        }
-
-
-        .star {
-            color: #f59e0b;
-            font-size: 0.8rem;
-        }
-
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-
-        .carousel-btn {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-
-        .carousel-btn:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-        }
-
-
-        .carousel-btn svg {
-            width: 16px;
-            height: 16px;
-        }
-
-
-        .carousel-indicators {
-            display: flex;
-            gap: 0.4rem;
-        }
-
-
-        .indicator {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-
-        .indicator.active {
-            background: #64748b;
-            transform: scale(1.2);
-        }
-
-
-        .auto-play-btn {
-            background: #f1f5f9;
-            border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 1rem;
-        }
-
-
-        .auto-play-btn:hover {
-            background: #e2e8f0;
-        }
-
-
-        /* Responsive */
-        @media (min-width: 640px) {
-            .testimonial-card {
-                min-width: calc(50% - 0.5rem);
-                min-height: 260px;
-            }
-        }
-
-
-        @media (min-width: 1024px) {
-            .testimonial-card {
-                min-width: calc(33.333% - 0.67rem);
-                min-height: 250px;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1rem;
-            }
-        }
-
-
-        @media (max-width: 640px) {
-            .carousel-container {
-                padding: 1rem;
-            }
-            
-            .testimonial-card {
-                padding: 1rem;
-                min-height: 270px;
-            }
-            
-            .testimonial-text {
-                font-size: 0.88rem;
-                -webkit-line-clamp: 4;
-            }
-            
-            .carousel-controls {
-                margin-top: 1.2rem;
-            }
-            
-            body {
-                padding: 0.5rem;
-            }
-        }
-        /* === FIN ESTILOS DE LA SECCIÓN DE TESTIMONIOS === */
-        /*===comienzo infographic===*/
-        * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
-      
-        .infographic-container {
-        width: 100%;
-        max-width: 1200px;
-        background: white;
-        border-radius: 24px;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        padding: 60px 40px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .infographic-container::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 280px;
-        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-        z-index: -1;
-        border-radius: 0 0 50% 50%;
-        transform: scale(1.5);
-      }
-
-      .header {
-        text-align: center;
-        margin-bottom: 70px;
-        position: relative;
-      }
-
-      .header h1 {
-        font-size: 3.2rem;
-        font-weight: 800;
-        color: white;
-        margin-bottom: 15px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .header p {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .steps-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 40px;
-        position: relative;
-      }
-
-      .step {
-        flex: 1;
-        min-width: 300px;
-        max-width: 340px;
-        perspective: 1000px;
-        position: relative;
-      }
-
-      .step-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        transform-style: preserve-3d;
-        padding: 50px 30px 40px;
-        border-radius: 20px;
-        background: white;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(99, 102, 241, 0.1);
-        z-index: 2;
-      }
-
-      .step-inner:hover {
-        transform: translateY(-15px) rotateY(5deg) rotateX(5deg);
-        box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
-      }
-
-      .step-number {
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #f1f163, #4f46e5);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 2.8rem;
-        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
-        z-index: 3;
-      }
-
-      .step-icon {
-        width: 140px;
-        height: 140px;
-        margin: 0 auto 30px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform-style: preserve-3d;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .step:nth-child(1) .step-icon {
-        animation-delay: 0s;
-        color: #6366f1;
-      }
-
-      .step:nth-child(2) .step-icon {
-        animation-delay: 0.7s;
-        color: #10b981;
-      }
-
-      .step:nth-child(3) .step-icon {
-        animation-delay: 1.4s;
-        color: #f59e0b;
-      }
-
-      .step-icon-inner {
-        font-size: 70px;
-        transform: translateZ(25px);
-      }
-
-      .step-title {
-        font-size: 1.7rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-        color: #1e293b;
-        position: relative;
-        display: inline-block;
-      }
-
-      .step-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50px;
-        height: 4px;
-        background: linear-gradient(to right, #6366f1, #4f46e5);
-        border-radius: 4px;
-      }
-
-      .step:nth-child(2) .step-title::after {
-        background: linear-gradient(to right, #10b981, #059669);
-      }
-
-      .step:nth-child(3) .step-title::after {
-        background: linear-gradient(to right, #f59e0b, #d97706);
-      }
-
-      .step-description {
-        color: #64748b;
-        line-height: 1.7;
-        margin-top: 25px;
-        font-size: 1.05rem;
-      }
-
-      .step-highlight {
-        display: inline-block;
-        background: linear-gradient(135deg, #6366f1, #4f46e5);
-        color: white;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-weight: 600;
-        margin-top: 20px;
-        font-size: 0.9rem;
-      }
-
-      .step:nth-child(2) .step-highlight {
-        background: linear-gradient(135deg, #10b981, #059669);
-      }
-
-      .step:nth-child(3) .step-highlight {
-        background: linear-gradient(135deg, #f59e0b, #d97706);
-      }
-
-      .connector {
-        position: absolute;
-        top: 50%;
-        right: -20px;
-        width: 40px;
-        height: 4px;
-        background: linear-gradient(to right, #c7d2fe, #6366f1, #c7d2fe);
-        z-index: 1;
-      }
-
-      .connector::before,
-      .connector::after {
-        content: "";
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #6366f1;
-        top: -4px;
-      }
-
-      .connector::before {
-        left: 0;
-      }
-
-      .connector::after {
-        right: 0;
-      }
-
-      .step:nth-child(2) .connector {
-        background: linear-gradient(to right, #a7f3d0, #10b981, #a7f3d0);
-      }
-
-      .step:nth-child(2) .connector::before,
-      .step:nth-child(2) .connector::after {
-        background: #10b981;
-      }
-
-      .step:nth-child(3) .connector {
-        background: linear-gradient(to right, #fde68a, #f59e0b, #fde68a);
-      }
-
-      .step:nth-child(3) .connector::before,
-      .step:nth-child(3) .connector::after {
-        background: #f59e0b;
-      }
-
-      /* Animaciones */
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0) rotate3d(0.5, 1, 0, 0deg);
-        }
-        50% {
-          transform: translateY(-20px) rotate3d(0.5, 1, 0, 12deg);
-        }
-      }
-
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.05);
-          opacity: 0.8;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      .cta-container {
-        text-align: center;
-        margin-top: 70px;
-        padding: 40px;
-        background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
-        border-radius: 16px;
-        color: white;
-        animation: pulse 4s ease-in-out infinite;
-      }
-
-      .cta-container h2 {
-        font-size: 2.2rem;
-        margin-bottom: 20px;
-        font-weight: 700;
-      }
-
-      .cta-container p {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-        
-      }
-
-      .cta-button {
-        display: inline-block;
-        background: white;
-        color: #6366f1;
-        padding: 16px 40px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 1.1rem;
-        text-decoration: none;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-      }
-
-      .cta-button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      /* Responsive Design */
-      @media (max-width: 1200px) {
-        .header h1 {
-          font-size: 2.8rem;
-        }
-
-        .step {
-          min-width: 280px;
-        }
-      }
-
-      @media (max-width: 992px) {
-        .steps-container {
-          gap: 70px;
-        }
-
-        .step {
-          min-width: 100%;
-          max-width: 500px;
-        }
-
-        .connector {
-          display: none;
-        }
-
-        .step-inner {
-          padding: 45px 25px 35px;
-        }
-
-        .step-icon {
-          width: 130px;
-          height: 130px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .infographic-container {
-          padding: 50px 30px;
-        }
-
-        .header h1 {
-          font-size: 2.4rem;
-        }
-
-        .header p {
-          font-size: 1.1rem;
-        }
-
-        .step-title {
-          font-size: 1.5rem;
-        }
-
-        .step-description {
-          font-size: 1rem;
-        }
-
-        .cta-container {
-          padding: 30px 20px;
-        }
-
-        .cta-container h2 {
-          font-size: 1.8rem;
-        }
-      }
-
-      @media (max-width: 576px) {
-        body {
-          padding: 20px 15px;
-        }
-
-        .infographic-container {
-          padding: 40px 20px;
-          border-radius: 18px;
-        }
-
-        .infographic-container::before {
-          height: 200px;
-        }
-
-        .header {
-          margin-bottom: 50px;
-        }
-
-        .header h1 {
-          font-size: 2rem;
-        }
-
-        .header p {
-          font-size: 1rem;
-        }
-
-        .step-inner {
-          padding: 40px 20px 30px;
-        }
-
-        .step-number {
-          width: 70px;
-          height: 70px;
-          font-size: 2.5rem;
-          top: -20px;
-        }
-
-        .step-icon {
-          width: 110px;
-          height: 110px;
-          margin-bottom: 25px;
-        }
-
-        .step-icon-inner {
-          font-size: 55px;
-        }
-
-        .step-title {
-          font-size: 1.4rem;
-        }
-
-        .step-description {
-          margin-top: 20px;
-        }
-
-        .cta-container {
-          margin-top: 50px;
-          padding: 25px 15px;
-        }
-
-        .cta-container h2 {
-          font-size: 1.6rem;
-        }
-
-        .cta-container p {
-          font-size: 1rem;
-        }
-
-        .cta-button {
-          padding: 14px 30px;
-          font-size: 1rem;
-        }
-      }
-
-      @media (max-width: 400px) {
-        .header h1 {
-          font-size: 1.8rem;
-        }
-
-        .step-inner {
-          padding: 35px 15px 25px;
-        }
-
-        .step-icon {
-          width: 100px;
-          height: 100px;
-        }
-
-        .step-icon-inner {
-          font-size: 50px;
-        }
-      }
-      /* Agregar esto al final de tu CSS */
-@media (min-width: 1200px) {
-  body {
-    padding: 0;
-    min-width: 1200px;
-  }
-}
-/* === SOLUCIÓN PARA CENTRAR EL INFOGRÁFICO === */
-.infographic-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-/* Ajustes específicos para desktop y laptop */
-@media (min-width: 1024px) {
-  .infographic-wrapper {
-    padding: 60px 40px;
-  }
-  
-  .infographic-container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-}
-
-/* Para pantallas muy grandes */
-@media (min-width: 1400px) {
-  .infographic-wrapper {
-    padding: 80px 60px;
-  }
-  
-  .infographic-container {
-    max-width: 1200px;
-  }
-}
-      
-
-
 
 
         
         
 </style>
 
-
 <body>
-
 
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
@@ -2050,43 +955,37 @@
     </div>
   </div>
   <!-- ***** Preloader End ***** -->
-  <!-- Popup compacto y moderno -->
-  <div id="popupOverlay" class="popup-overlay">
-   <div class="popup-content">
-    <span id="popupClose" class="popup-close">X</span>
-    <h2 class="popup-title">🚀 Comienza 2026 con nuestra promoción especial</h2>
-    <p class="popup-description">
-        Prepárate para el semestre 2026 con éxito.
-    </p>
-
- <ul class="popup-offers">
-  <li>
-    <strong>SESIÓN INICIAL:</strong>Sesión exploratoria<br>
-    (30 min. gratis)*
-  </li>
-  <li><strong>DESCUENTO:</strong> Pagas 4 sesiones obtén 1 gratis*².</li>
-  <li><strong>VIGENCIA:</strong> Del 19 ene al 20 mayo 2026 (11:59pm ET)*.</li>
-</ul>
-
-
-
-    <button class="popup-button" onclick="closePopup(); location.href='#pricing';">
-      RECLAMAR PROMOCIÓN*
-    </button>
-    <br>
-    <small>*No aplica a Servicios Especializados.</small>
-     <small>²Sesiones de 50 min.</small>
-
-    
-
-    
-</div>
-
-</div>
-
-
+    <!-- Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup-content">
+        <button class="popup-close" id="popupClose"><i class="fas fa-times"></i></button>
+        <div class="popup-header">
+          <div class="popup-badge">OFERTA</div>
+          <h3 class="popup-title">¡Solo por Tiempo Limitado!</h3>
+          <p class="popup-subtitle">FREE TRIAL*</p>
+        </div>
+        <div class="popup-body">
+          <div class="popup-feature">
+            <div class="popup-feature-icon"><i class="fas fa-percent"></i></div>
+            <div><h4 class="popup-feature-title">Hasta 30% Off</h4><p class="popup-feature-desc">En paquetes de servicios²</p></div>
+          </div>
+          <div class="popup-feature">
+            <div class="popup-feature-icon"><i class="fas fa-clock"></i></div>
+            <div><h4 class="popup-feature-title">*Una Sesión Gratis</h4><p class="popup-feature-desc">*30 min de prueba</p></div>
+          </div>
+          <div class="popup-feature">
+            <div class="popup-feature-icon"><i class="fas fa-user-graduate"></i></div>
+            <div><h4 class="popup-feature-title">Tutores Expertos</h4><p class="popup-feature-desc">Enfocados en tu meta</p></div>
+          </div>
+          <div class="popup-discount">4 sesiones 10% | 8 sesiones 20% | 10 sesiones 30%</div>
+          <div class="popup-college"><i class="fas fa-star"></i>²Excluye Preparación para College Board <br>Terapia del Habla y Educativa</div>
+          
+        </div>
+        
+        
+      </div>
+    </div>
    
-
 
   <!-- ***** Header Area Start ***** -->
   <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
@@ -2096,13 +995,7 @@
           <nav class="main-nav">
             <!-- ***** Logo Start ***** -->
             <a href="#" class="logo">
-              <h1>
-                <strong style="color: black;">NABORI</strong> 
-                <span style="color: violet;">Corp</span>
-              </h1>
-              
-
-
+              <h1><span style="color: violet;"><strong>NABORI Corp</strong></span></h1>
 
 
               <!-- ***** Logo End ***** -->
@@ -2110,13 +1003,11 @@
               <ul class="nav">
                 <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
                 <li class="scroll-to-section"><a href="#services">Servicios</a></li>
-                <li class="scroll-to-section"><a href="#contactanos">Contáctanos</a></li>
-                <li class="scroll-to-section"><a href="#testimonios">Testimonios</a></li>
+                <li class="scroll-to-section"><a href="https://naboricorpreservas.setmore.com/">Reservas/Clientes
+                    activos</a></li>
                 <li class="scroll-to-section"><a href="#about">Conócenos</a></li>
                 <li class="scroll-to-section"><a href="#pricing">Precios</a></li>
-                <li class="scroll-to-section"><a href="https://centroaprendizaje.netlify.app/">C.D.A.N</a></li>
-                
-
+                <li class="scroll-to-section"><a href="#newsletter">Carreras</a></li>
 
               </ul>
               <a class='menu-trigger'>
@@ -2132,9 +1023,6 @@
 
 
 
-
-
-
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">
       <div class="row">
@@ -2145,11 +1033,10 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <h2>NABORI <span style="color: violet;">Corp</span></h2>
-                    <p><strong>En NABORI Corp somos más que una compañía; somos facilitadores de crecimiento y
+                    <p><strong>En NABORI Corp somos más que una compañía; somos facilitadores de crecimiento y
                         aprendizaje. Combinamos la experiencia y
-                        la empatía para crear entornos de aprendizaje personalizados. Ofrecemos servicios remotos de Tutorías, Terapia Educativa, Homeschooling & Evaluación y Terapia del Habla y
+                        la empatía para crear entornos de aprendizaje personalizados. Ofrecemos servicios remotos de Tutorías, Terapia Educativa, Homeschooling & Evaluación y Terapia del Habla y
                         Lenguaje.
-
 
                         La diversidad transformando vidas.
                       </strong></p>
@@ -2183,7 +1070,6 @@
     </div>
   </div>
 
-
  <div id="services" class="services section">
     <div class="container">
       <div class="row">
@@ -2201,7 +1087,9 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="service-item first-service">
-            
+            <div class="icon">
+              <i class="fas fa-graduation-cap" style="font-size: 3rem; color: #4A90E2; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Tutorías/Repaso de College Board</h4>
             <p>En nuestro servicios de Tutorías, nos enfocamos en brindar tutorías y programas de educación
               personalizada, adaptados a
@@ -2209,12 +1097,13 @@
               de cada
               solicitante, permitiéndonos diseñar estrategias de aprendizaje eficaces y personalizadas.</p>
 
-
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item second-service">
-            
+            <div class="icon">
+              <i class="fas fa-home" style="font-size: 3rem; color: #50C878; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Homeschooling</h4>
             <p>Nuestro programa de Homeschooling ofrece una experiencia educativa completamente personalizada,
               ajustándose a las
@@ -2222,15 +1111,15 @@
               implementamos
               estrategias y recursos específicos para alcanzar objetivos académicos de manera efectiva.
 
-
             </p>
-
 
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item third-service">
-            
+            <div class="icon">
+              <i class="fas fa-brain" style="font-size: 3rem; color: #FF6B6B; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Terapia Educativa</h4>
             <p>Nuestra terapia educativa está diseñada para abordar las necesidades únicas de cada estudiante. Con
               técnicas
@@ -2238,12 +1127,13 @@
               para potenciar
               las habilidades académicas, cognitivas y conductuales, fomentando su desarrollo integral.</p>
 
-
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item fourth-service">
-           
+            <div class="icon">
+              <i class="fas fa-comments" style="font-size: 3rem; color: #FFD93D; margin-bottom: 15px; display: block;"></i>
+            </div>
             <h4>Evaluación &amp; Terapia del Habla y Lenguaje</h4>
             <p>Ofrecemos evaluación y terapia del habla y lenguaje, ya sea en entornos naturales o de forma remota.
               Nuestros terapeutas
@@ -2252,13 +1142,11 @@
               habla y el lenguaje en situaciones reales de la vida cotidiana.
             </p>
 
-
           </div>
         </div>
       </div>
     </div>
   </div>
-
 
   <div id="about" class="about-us section">
     <div class="container">
@@ -2267,31 +1155,44 @@
           <div class="section-heading">
             <h4>Acerca&nbsp;<em>de nosotros</em></h4>
             <img src="images/heading-line-dec.png" alt="apoyar el crecimiento y desarrollo académico y personal ">
-            <p><strong>NABORI Corp, corporación puertorriqueña fundada en 2021 en Dorado, se especializa en bienestar educativo integral desde kindergarten hasta universidad. Basamos nuestro trabajo en empatía y relaciones saludables como pilares del éxito. Nuestros profesionales garantizan resultados excepcionales, asegurando que cada estudiante alcance su máximo potencial académico, emocional y social.
+            <p><strong>NABORI Corp es una corporación orgullosamente puertorriqueña fundada en 2021 con sede en Dorado, Puerto Rico. Nuestro compromiso es con el bienestar educativo integral de estudiantes desde kindergarten hasta la universidad, especializándonos en servicios diseñados para apoyar el crecimiento académico y personal. Fundamentamos nuestro trabajo en la empatía y la construcción de relaciones saludables, reconociendo estos elementos como pilares esenciales para el éxito educativo de cada estudiante.
+              Nuestro equipo de profesionales dedicados trabaja incansablemente para proporcionar un sistema de apoyo que garantiza resultados excepcionales, donde cada estudiante recibe las mejores oportunidades para alcanzar su máximo potencial. En NABORI Corp, no solo nos dedicamos a la excelencia académica, sino que también valoramos y cultivamos el bienestar emocional y social de cada estudiante, asegurando un futuro brillante y prometedor para todos.
               <br>
-              </strong><span style="color: #f40d43;">-Dra. Lilliam Vega Lassús</span></p>
-
+            </strong><span style="color: #f40d43;">-Dra. Lilliam Vega Lassús</span></p>
 
           </div>
-
           <div class="row">
             <div class="col-lg-6">
-              
+              <div class="box-item">
+                <h4><a href="mailto:naboricorp6@gmail.com?subject=Solicito%20más%20información">Correo electrónico</a>
+                </h4>
+                <p><strong>naboricorp6@gmail.com</strong></p>
+              </div>
             </div>
             <div class="col-lg-6">
-              
+              <div class="box-item">
+                <h4><a href="https://eu.jotform.com/agent/019548ba3122731aa27bc6c6d6c087290bf3">24/7 Servicio al
+                    cliente</a></h4>
+                <p><strong>Preguntas frecuentes</strong></p>
+              </div>
             </div>
             <div class="col-lg-6">
-              
+              <div class="box-item">
+                <h4><a href="tel:+17274264414">Contáctanos</a></h4>
+                <p><strong>(727) 426-4414 &nbsp; |&nbsp;(813) 816-2624</strong></p>
+              </div>
             </div>
             <div class="col-lg-6">
-              
+              <div class="box-item">
+                <h4><a href="https://wa.me/7274264414">Whatsapp</a></h4>
+                <p><strong>Escríbenos&nbsp;(enlace directo)</strong></p>
+              </div>
             </div>
             <div class="col-lg-12">
-              <p><strong>¡Reserva una evaluación gratis, hoy!</strong></p>
+              <p><strong>¡Reserva una consulta gratuita, hoy!</strong></p>
               <div class="gradient-button">
                 <a href="https://bookings.setmore.com/scheduleappointment/1f0a34aa-4436-4fda-8967-6a435b503d83">Reservar
-                  Evaluación</a>
+                  consulta</a>
               </div>
               <span>*Sin compromiso</span>
             </div>
@@ -2305,76 +1206,9 @@
       </div>
     </div>
   </div>
-  <!--infographic-->
-  <div class="infographic-wrapper">
-    <div class="infographic-container">
-    <div class="header">
-      <h1>Nuestro Proceso en 3 Pasos</h1>
-      <p>
-        Descubre cómo nuestra consulta con la Dra. Vega te ayudará a alcanzar
-        tus objetivos académicos.
-      </p>
-    </div>
 
-    <div class="steps-container">
-      <!-- Paso 1 -->
-      <div class="step">
-        <div class="step-inner">
-          <div class="step-number">1</div>
-          
-           
-          <h3 class="step-title">Evaluación gratis con la Dra. Vega</h3>
-          <p class="step-description">
-            Agenda una consulta inicial sin costo para evaluar tus necesidades.
-            
-          </p>
-          <div class="step-highlight">Sin compromisos</div>
-        </div>
-        <div class="connector"></div>
-      </div>
-
-      <!-- Paso 2 -->
-      <div class="step">
-        <div class="step-inner">
-          <div class="step-number">2</div>
-          
-          <h3 class="step-title">Reservar servicio</h3>
-          <p class="step-description">
-            Una vez seleccionado el servicio, programa tu cita en el 
-            horario que más te convenga. Recibirás recordatorios oportunos.
-          </p>
-          <div class="step-highlight">Flexibilidad horaria</div>
-        </div>
-        <div class="connector"></div>
-      </div>
-
-      <!-- Paso 3 -->
-      <div class="step">
-        <div class="step-inner">
-          <div class="step-number">3</div>
-         
-          <h3 class="step-title">Emitir pago</h3>
-          <p class="step-description">
-            Realiza el pago de manera segura a través de nuestros múltiples
-            métodos de pago disponibles. Transacciones 100% seguras.
-          </p>
-          <div class="step-highlight">Pago seguro</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cta-container">
-      <h2>¡Comienza hoy!</h2>
-      <p style="color: white;">
-        Reserva tu evaluación gratuita
-       </p>
-      <a href="https://wa.me/17274264414?text=Hola,%20quiero%20agendar%20una%20evaluaci%C3%B3n%20gratis%20para%20los%20servicios%20de%20NABORI%20Corp,%20mi%20nombre%20es%20" class="cta-button">Agendar ahora</a>
-    </div>
-  </div>
-  </div>
-<!--end infographic -->
   <!-- INICIO DEL COMPONENTE DE PRECIOS -->
-  <section id="pricing" class="pricing-section">
+    <section class="pricing-section">
         <div class="pc-container">
             <div class="pc-header">
                 <h2>Planes de Innovación Educativa </h2>
@@ -2382,174 +1216,147 @@
             </div>
             
             <div class="pc-cards">
-              <!-- Plan FREE -->
-              <div class="pc-card">
-                  <div class="pc-plan-name">
-                      <i class="fas fa-chalkboard-teacher"></i>
-                      Tutorías
-                  </div>
-                  <div class="pc-plan-price">$22<span>/sesión³</span></div>
-                  <p class="pc-plan-billing">Aprendizaje personalizado y guiado</p>
-                  <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">Agendar</a>
-                  <p class="pc-no-credit">³sesión de 50 min.</p>
-                  
-                  <hr class="pc-divider">
-                  
-                  <div class="pc-features-title">
-                      Características principales:
-                  </div>
-                  <ul class="pc-plan-features">
-                    <li>Sesión personalizada 1-a-1 con tutor especializado</li>
-                    <li>Material de estudio adaptado a nivel del estudiante</li>
-                    <li>Acceso a banco de ejercicios interactivos (plataforma propia)</li>
-                    <li>Seguimiento académico con reportes mensuales</li>
-                    <li>[NUEVO] Análisis de errores automático: IA detecta patrones de dificultad</li>
-                    <li>[NUEVO] Generador de resúmenes automáticos de temas después de cada clase</li>
-                </ul>
-                <div class="pc-target-audience">
-                  <p><strong>Sugerido a:</strong>estudiantes que necesitan apoyo personalizado y reforzar temas específicos.</p>
+                <!-- Plan FREE -->
+                <div class="pc-card">
+                    <div class="pc-plan-name">
+                        <i class="fas fa-gift"></i>
+                        FREE
+                    </div>
+                    <div class="pc-plan-price">$0<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">Ideal para empezar</p>
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">PROBAR GRATIS</a>
+                    <p class="pc-no-credit">No se requiere tarjeta de crédito<br>²sesión de 30 min.</p>
+                    
+                    <div class="pc-divider"></div>
+                    
+                    <div class="pc-features-title">
+                        <i class="fas fa-star"></i>
+                        Características principales
+                    </div>
+                    <ul class="pc-plan-features">
+                      <li><i class="fas fa-clock pc-feature-icon"></i> Sesión de prueba de 30 minutos</li>
+                      <li><i class="fas fa-lightbulb pc-feature-icon"></i> Conozca nuestra metodología de enseñanza personalizada</li>
+                      <li><i class="fas fa-robot pc-feature-icon"></i> Descubra cómo utilizamos herramientas de IA para potenciar el aprendizaje</li>
+                      <li><i class="fas fa-chalkboard-teacher pc-feature-icon"></i> Experimente la tutoría uno a uno con un experto</li>
+                      <li><i class="fas fa-book pc-feature-icon"></i> Explore los materiales y recursos que ofrecemos en nuestros planes completos</li>
+                      <li><i class="fas fa-star pc-feature-icon"></i> Sienta la experiencia de aprendizaje y decida si desea continuar</li>
+                  </ul>
                   
                 </div>
-              </div>
                 
                 <!-- Plan SEMANAL -->
-                <!-- Plan BASE – Edición Navidad -->
-                <!-- Plan SEMANAL (Ajustado con Promoción de Navidad) -->
-                <!--  <div class="pc-card christmas-offer">
-                  <div id="promo-offer-badge" class="pc-popular-tag"
-                  style="background: #c62828 !important; background-image: none !important;
-                         color: #ffffff !important; border-color: #b71c1c !important;
-                         box-shadow: none !important;">
-               PROMO 2026
-             </div>-->
-             
-             
-                
-                    
-                    <!-- Lazo decorativo de Navidad -->
-                    
-                <div class="pc-plan-name">
-                  <i class="fas fa-chart-line"></i>  
-                  Preparación de examenes
+                <div class="pc-card">
+                    <div class="pc-plan-name">
+                        <i class="fas fa-calendar-week"></i>
+                        BASE✨
                     </div>
-                
-                    <!-- Precio con descuento -->
-                    <div class="pc-plan-price">
-                      $25 <span>/sesión²</span>
-                  </div>
-                
-                    <!-- Explicación del nuevo paquete -->
-                   <p class="pc-plan-billing">Preparación efectiva para exámenes</p>
-                  </p>
-                
-                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">
-                        Agendar
-                    </a>
+                    <div class="pc-plan-price">$25*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*4 sesiones por estudiante, facturado mensualmente</p>
+                   
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
                     
-                    <p class="pc-no-credit">²Sesiones de 60 minutos.</p>
+                    <div class="pc-divider"></div>
                     
-                
-                    <hr class="pc-divider">
-                
                     <div class="pc-features-title">
-                        Incluye:
+                        <i class="fas fa-star"></i>
+                        Todo en FREE, más:
                     </div>
-                
                     <ul class="pc-plan-features">
-                        <li class="pc-feature-highlight">Sesiones online enfocadas en preparación para exámenes y refuerzo académico</li>
-                        <li class="pc-feature-highlight">Plan de estudio personalizado según el tema y nivel del estudiante</li>
-                        <li class="pc-feature-highlight">Material de repaso resumido y organizado para estudiar de forma eficiente</li>
-                        <li class="pc-feature-highlight">Acceso a ejercicios prácticos y preguntas de evaluación interactivas</li>
-                        <li class="pc-feature-highlight">Simulacros de examen para practicar antes de la fecha oficial</li>
-                        <li class="pc-feature-highlight">[NUEVO] Análisis inteligente de errores: identifica patrones y áreas débiles</li>
-                        <li class="pc-feature-highlight">[NUEVO] Recomendaciones automáticas de estudio según el desempeño del estudiante</li>
-                        <li class="pc-feature-highlight">Técnicas y estrategias para mejorar la preparación y el rendimiento en exámenes</li>
-                    </ul>
-                
-                    <div class="pc-target-audience">
-                        <p><strong>Sugerido a:</strong>estudiantes con rezago académico, dificultad para organizar el estudio o próximos exámenes importantes.</p>
-                        
-                    </div>
-                </div>
-                
+                      <li><i class="fas fa-book pc-feature-icon"></i> Materiales esenciales para reforzar lo aprendido</li>
+                      <li><i class="fas fa-user-friends pc-feature-icon"></i> Sesiones privadas 1:1 </li>
+                      <li><i class="fas fa-magic pc-feature-icon"></i> Introducción a herramientas de IA para el aprendizaje</li>
+                      <li><i class="fas fa-lightbulb pc-feature-icon"></i> Estrategias prácticas para mejorar hábitos de estudio</li>
+                      <li><i class="fas fa-laptop pc-feature-icon"></i> Acceso a recursos digitales exclusivos</li>
+                      <li><i class="fas fa-envelope pc-feature-icon"></i> Tips semanales por email para mejorar habilidades</li>
+                      <li><i class="fas fa-cogs pc-feature-icon"></i> Asesoría tecnológica ligera para aprender a usar apps educativas</li>
+                      
+                  </ul>
+                  
+                  
+                    <small style="color: #e74c3c; font-weight: bold; font-style: italic; font-size: 10px;">
+                      Sugerido a: Estudiantes que necesitan un poco de apoyo puntual.
+                      </small>
+                      
 
+                </div>
                 
                 <!-- Plan BUSINESS -->
                 <div class="pc-card popular">
-                 <!-- <div class="pc-popular-tag">POPULAR</div>-->
+                  <div class="pc-popular-tag">POPULAR</div>
                     <div class="pc-plan-name">
-                        <i class="fas fa-laptop"></i> 
-                        Homeschooling 
+                        <i class="fas fa-briefcase"></i>
+                        NEXO🧠 
                     </div>
-                    <div class="pc-plan-price">$30<span>/sesión²</span></div>
-                    <p class="pc-plan-billing">Educación flexible adaptada al estudiante</p>
+                    <div class="pc-plan-price">$22*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*8 sesiones por estudiante, facturado mensualmente</p>
                     
-                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">Agendar</a>
-                    <p class="pc-no-credit">²sesiones de 80 min.</p>
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
                     
-                    <hr class="pc-divider">
+                    <div class="pc-divider"></div>
                     
                     <div class="pc-features-title">
-                        Incluye:
+                        <i class="fas fa-star"></i>
+                        Todo en BASE, más:
                     </div>
                     <ul class="pc-plan-features">
-                      <li class="pc-feature-highlight">Sesión extendida 1-a-1 para múltiples materias</li>
-                      <li class="pc-feature-highlight">Currículo personalizado alineado a objetivos educativos</li>
-                      <li class="pc-feature-highlight">Planificación semanal de aprendizaje</li>
-                      <li class="pc-feature-highlight">Evaluaciones formativas y progresivas</li>
-                      <li class="pc-feature-highlight">[NUEVO] Planes de aprendizaje generados por IA (adaptativos)</li>
-                      <li class="pc-feature-highlight">[NUEVO] Sistema de recomendaciones para ajustar ritmo y dificultad</li>
-                      <li class="pc-feature-highlight">[NUEVO] Portafolio digital de progreso</li>
-                      <li class="pc-feature-highlight">[NUEVO] Aclaración de dudas vía chat con IA entre sesiones</li>
                       
+                      <li><i class="fas fa-rocket pc-feature-icon"></i> Sesiones adicionales para consolidar conceptos y habilidades</li>
+                      <li><i class="fas fa-chart-line pc-feature-icon"></i> Actividades prácticas guiadas y feedback detallado</li>
+                      <li><i class="fas fa-robot pc-feature-icon"></i> Acceso a herramienta de IA para tareas y práctica académica</li>
                       
-                      
+
+                      <li><i class="fas fa-lightbulb pc-feature-icon"></i> Estrategias avanzadas para utilizar IA en el estudio</li>
+                      <li><i class="fas fa-certificate pc-feature-icon"></i> Certificado mensual de participación</li>
                   </ul>
-                  <div class="pc-target-audience">
-                    <p><strong>Sugerido a:</strong> familias que buscan educación flexible y aprendizaje adaptado al ritmo del estudiante.</p>
-                    
-                  </div>
+                  
+                    <small style="color: #e74c3c; font-weight: bold; font-style: italic; font-size: 10px;">
+                      Sugerido a: Estudiantes que requieren apoyo constante y reforzamiento de sus habilidades
+                      </small>
                 </div>
                 
                 <!-- Plan ENTERPRISE -->
                 <div class="pc-card">
-                  
+                  <div class="pc-popular-tag">AHORRO</div>
                     <div class="pc-plan-name">
-                        <i class="fas fa-university"></i> 
-                        Repaso de College Board
+                        <i class="fas fa-rocket"></i>
+                        AVANZA🏆
                     </div>
-                    <div class="pc-plan-price">$120*<span></span></div>
-                    <p class="pc-plan-billing">*4 horas por estudiante.</p>
+                    <div class="pc-plan-price">$20*<span>/sesión²</span></div>
+                    <p class="pc-plan-billing">*10 sesiones por estudiante, facturado mensualmente</p>
                     
-                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button">Agendar</a>
+                    <a href="https://form.jotform.com/252265034696057" class="pc-plan-button pc-contact-button">COMENZAR</a>
+                    <p class="pc-no-credit">²sesiones de 50 min.</p>
                     
-                    
-                    <hr class="pc-divider">
+                    <div class="pc-divider"></div>
                     
                     <div class="pc-features-title">
-                        Incluye:
+                        <i class="fas fa-star"></i>
+                        Todo en NEXO, más:
                     </div>
                     <ul class="pc-plan-features">
-                      <li class="pc-feature-highlight">Coaching especializado SAT/PAA con estrategia comprobada</li>
-                      <li class="pc-feature-highlight">Análisis detallado de fortalezas y áreas de mejora</li>
-                      <li class="pc-feature-highlight">Pruebas de práctica oficial y evaluaciones simuladas</li>
-                      <li class="pc-feature-highlight">Técnicas de time management y test-taking strategies</li>
-                      <li class="pc-feature-highlight">[NUEVO] Análisis predictivo de score con IA (estimación de puntuación final)</li>
-                      <li class="pc-feature-highlight">[NUEVO] Plan de estudio dinámico: IA ajusta focus según debilidades detectadas</li>
-                      <li class="pc-feature-highlight">[NUEVO] Análisis de ensayos con feedback automático (escritura + estructura)</li>
-                      <li class="pc-feature-highlight">[NUEVO] Banco de ejercicios categorizados + recomendaciones personalizadas</li>
-                      <li class="pc-feature-highlight">[NUEVO] Reporte de progreso semanal</li>
+                      
+                      <li><i class="fas fa-chalkboard-teacher pc-feature-icon"></i> Tutoría intensiva y personalizada según necesidades críticas</li>
+                      <li><i class="fas fa-project-diagram pc-feature-icon"></i> Plan de recuperación académica enfocado en áreas rezagadas</li>
+                      <li><i class="fas fa-robot pc-feature-icon"></i> Acceso completo a herramienta de IA para reforzamiento diario</li>
+                      <li><i class="fas fa-comments pc-feature-icon"></i> Comunicación directa con el tutor en cualquier momento</li>
+                      <li><i class="fas fa-tasks pc-feature-icon"></i> Evaluaciones periódicas con análisis detallado y plan de mejora</li>
+                      <li><i class="fas fa-star pc-feature-icon"></i> Proyectos personalizados para recuperación académica</li>
+                      <li><i class="fas fa-film pc-feature-icon"></i> Acceso a contenidos premium (videos, casos prácticos, tips avanzados)</li>
+                      <li><i class="fas fa-map-signs pc-feature-icon"></i> Orientación inicial para planificar su camino de aprendizaje</li>
+                     
+                     <li><i class="fas fa-cogs pc-feature-icon"></i> Asesoría tecnológica completa para maximizar el uso de IA y apps educativas</li>
                   </ul>
-                  <div class="pc-target-audience">
-                    <p><strong>Sugerido a:</strong>estudiantes que desean mejorar puntuaciones y prepararse para exámenes de admisión.</p>
-                    
-                  </div>
+                  
+                    <small style="color: #e74c3c; font-weight: bold; font-style: italic; font-size: 10px;">
+                      Sugerido a: Estudiantes con rezago académico que necesitan intervención intensiva y acompañamiento cercano.
+                      </small>
                 </div>
-          
+            </div>
         </div>
     </section>
     <!-- FIN DEL COMPONENTE DE PRECIOS -->
-
 
     <!--Tabs-->
     
@@ -2559,423 +1366,64 @@
       <div class="services-grid">
         <!-- Servicio 1 -->
         <div class="service-card">
-          
           <h3>Terapia Educativa</h3>
-          <h3>$32/sesión</h3>
           <p>Apoyo personalizado para fortalecer habilidades académicas.</p>
-          <br>
           <ul>
-            <li>Se ofrece remoto/presencial</li>
             <li>Clases individuales</li>
             <li>Refuerzo escolar</li>
             <li>Plan adaptado</li>
-            <li>Informe de progreso</li>
-            <li>Sesión de 45 mins.</li>
           </ul>
-          <br>
-          <br>
-          <a href="https://form.jotform.com/252265034696057" 
-          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
-            Reservar Ahora
-       </a>
-       
-          
+          <div class="service-price">$120 / mes</div>
         </div>
-         
+    
         <!-- Servicio 2 -->
         <div class="service-card">
           <h3>Terapia del Habla</h3>
-          <h3>$32/30 mins.  $42/45 mins.</h3>
           <p>Mejora de la comunicación con apoyo profesional.</p>
-          
           <ul>
-            <li>Se ofrece remoto y/o presencial**</li>
-            <li>Seguimiento de progreso</li>
-            <li>Sesiones semanales de 30/45 mins.</li>
-            <li>Plan personalizado</li>
+            <li>Evaluación inicial gratuita</li>
+            <li>Sesiones semanales</li>
+            <li>Orientación a padres</li>
           </ul>
-          <br>
-          <br>
-          <small>**Oficina de la licenciada</small>
-          
-          <button onclick="openBookingModal()" 
-            style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
-            Reservar Ahora
-            
-          </button>
+          <div class="service-price">$150 / mes</div>
         </div>
-        
-        <!-- Modal Pop-up -->
-        <div id="bookingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:1000; animation:fadeIn 0.3s ease;">
-          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding:40px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-width:500px; width:90%; animation:slideUp 0.4s ease;">
-            
-            <button onclick="closeBookingModal()" style="position:absolute; top:15px; right:15px; background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:24px; width:35px; height:35px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&times;</button>
-            
-            <div style="text-align:center; color:#fff;">
-              <div style="font-size:50px; margin-bottom:20px;">📅</div>
-              <h2 style="margin:0 0 15px 0; font-size:28px; font-weight:700;">¡Elige tu Sesión!</h2>
-              <p style="margin:0 0 30px 0; font-size:16px; line-height:1.6; color:#fff; font-weight:700;">
-                Las fechas para tu servicio se coordinarán directamente con la Dra. Vega vía WhatsApp. 
-                Podrás elegir la modalidad de tu preferencia: <strong>remoto o presencial</strong>.
-              </p>
-              
-              <div style="display:flex; flex-direction:column; gap:15px;">
-                <a href="https://buy.stripe.com/dRm5kE7NMexKfGZ2zzcQU08" 
-                  style="display:block; padding:18px 30px; background:#fff; color:#667eea; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
-                  🕐 Sesión de 30 minutos - $32<br>
-                      Continuar ➜
-                </a>
-                
-                <a href="https://buy.stripe.com/cNi3cwgki75i9iB7TTcQU07" 
-                  style="display:block; padding:18px 30px; background:#fff; color:#764ba2; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
-                  🕐 Sesión de 45 minutos - $42<br>
-                    Continuar➜
-                </a>
-              </div>
-              
-              <p style="margin:25px 0 0 0; font-size:14px; color:#fff;">
-                💬 Después del pago, recibirás instrucciones para coordinar tu cita
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <style>
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          
-          @keyframes slideUp {
-            from { 
-              opacity: 0;
-              transform: translate(-50%, -40%);
-            }
-            to { 
-              opacity: 1;
-              transform: translate(-50%, -50%);
-            }
-          }
-          
-          #bookingModal a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-          }
-          
-          #bookingModal button:hover {
-            background: rgba(255,255,255,0.3);
-            transform: rotate(90deg);
-          }
-        </style>
-        
-        <script>
-          function openBookingModal() {
-            document.getElementById('bookingModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-          }
-          
-          function closeBookingModal() {
-            document.getElementById('bookingModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-          
-          // Cerrar al hacer clic fuera del modal
-          document.getElementById('bookingModal')?.addEventListener('click', function(e) {
-            if (e.target === this) {
-              closeBookingModal();
-            }
-          });
-          
-          // Cerrar con la tecla ESC
-          document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-              closeBookingModal();
-            }
-          });
-        </script>
-        
     
-        <!-- Servicio 3 
+        <!-- Servicio 3 -->
         <div class="service-card">
-          
-          <h3>Repaso College Board</h3>
-          <p>Repaso NO grupal guiado por especialistas certificados.</p>
-          <br>
+          <h3>Homeschooling</h3>
+          <p>Educación en casa guiada por especialistas certificados.</p>
           <ul>
-            <li>Planes de:
-              
-              <ul>
-                <li>1 sesión gratis de evaluación</li>
-                <li>Sesión de 1 hora</li>
-                <li>4 sesiones/mes: $180</li>
-                <li>8 sesiones/mes: $340</li>
-                <li>10 sesiones/mes: $380</li>
-              </ul>
-            </li>
+            <li>Currículo completo</li>
+            <li>Clases en vivo</li>
+            <li>Plan de progreso</li>
           </ul>
-          <br>
-          
-          <small>*Precio Reg.$50/sesión</small>
-          <br>
-          
-          <a href="https://form.jotform.com/252265034696057" 
-          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; text-decoration:none; border-radius:8px; font-weight:bold; font-size:16px;">
-           Reservar Ahora
-       </a>
-         
-        </div>-->
-        
-
+          <div class="service-price">$200 / mes</div>
+        </div>
     
         <!-- Servicio 4 -->
         <div class="service-card">
           <h3>Evaluación del Habla</h3>
-          <h3>$80 única vez</h3>
-          <p>Diagnóstico inicial.</p>
-        
+          <p>Diagnóstico inicial para detectar necesidades específicas.</p>
           <ul>
-            <li>Se ofrece remoto y/o presencial**</li>
             <li>Informe detallado</li>
             <li>Recomendaciones profesionales</li>
             <li>Plan de acción personalizado</li>
-            <li>Duración de 1 hora</li>
           </ul>
-          <br>
-          <small>**Oficina de la licenciada</small>
-          <br>
-          <button onclick="openEvaluationModal()" 
-          style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; font-size:16px; cursor:pointer;">
-          Reservar Ahora
-        </button>
-      </div>
-      <!-- Modal Pop-up para Evaluación -->
-<div id="evaluationModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:1000; animation:fadeIn 0.3s ease;">
-  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding:40px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-width:500px; width:90%; animation:slideUp 0.4s ease;">
-    
-    <button onclick="closeEvaluationModal()" style="position:absolute; top:15px; right:15px; background:rgba(255,255,255,0.2); border:none; color:#fff; font-size:24px; width:35px; height:35px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.3s;">&times;</button>
-    
-    <div style="text-align:center; color:#fff;">
-      <div style="font-size:50px; margin-bottom:20px;">📋</div>
-      <h2 style="margin:0 0 15px 0; font-size:28px; font-weight:700;">¡Agenda tu Evaluación!</h2>
-      <p style="margin:0 0 30px 0; font-size:16px; line-height:1.6; color:#fff; font-weight:700;">
-        Las fechas para tu evaluación se coordinarán directamente con la Dra. Vega vía WhatsApp. 
-        Podrás elegir la modalidad de tu preferencia: <strong>remoto o presencial</strong>.
-      </p>
-      
-      <div style="display:flex; flex-direction:column; gap:15px;">
-        <a href="https://buy.stripe.com/6oU28s4BAdtG2Ud4HHcQU03" 
-          style="display:block; padding:18px 30px; background:#fff; color:#667eea; text-decoration:none; border-radius:12px; font-weight:bold; font-size:18px; transition:all 0.3s; box-shadow:0 5px 15px rgba(0,0,0,0.2);">
-          📋 Evaluación de 60 minutos - $80<br>
-             Continuar ➜ 
-        </a>
-      </div>
-      
-      <p style="margin:25px 0 0 0; font-size:14px; color:#fff;">
-        💬 Después del pago, recibirás instrucciones para coordinar tu cita
-      </p>
-    </div>
-  </div>
-</div>
-        
-        <style>
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          
-          @keyframes slideUp {
-            from { 
-              opacity: 0;
-              transform: translate(-50%, -40%);
-            }
-            to { 
-              opacity: 1;
-              transform: translate(-50%, -50%);
-            }
-          }
-          
-          #bookingModal a:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-          }
-          
-          #bookingModal button:hover {
-            background: rgba(255,255,255,0.3);
-            transform: rotate(90deg);
-          }
-        </style>
-        
-        <script>
-          function openEvaluationModal() {
-            document.getElementById('evaluationModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-          }
-          
-          function closeEvaluationModal() {
-            document.getElementById('evaluationModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-          
-          // Cerrar al hacer clic fuera del modal
-          document.getElementById('evaluationModal')?.addEventListener('click', function(e) {
-            if (e.target === this) {
-              closeEvaluationModal();
-            }
-          });
-        </script>
-        
-    </section>
-
-
-
-
-    <!-- Sección de Métodos de Pago -->
-    <section class="payment-methods-section">
-        <h3 class="payment-methods-title"><strong>Métodos de Pago Aceptados</strong></h3>
-        
-        <div class="payment-methods-container">
-            <div class="payment-method">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/9.0.0/visa.svg" alt="Visa" class="payment-logo" style="filter: invert(13%) sepia(94%) saturate(7151%) hue-rotate(230deg) brightness(88%) contrast(124%);">
-                 Debit/Credit
-              </div>
-            
-            <div class="payment-method">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-logo">
-                Debit/Credit
-              </div>
-            
-            <div class="payment-method">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-logo">
-            </div>
-            
-            <div class="payment-method">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" class="payment-logo">
-            </div>
-            
-            <div class="payment-method">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="payment-logo">
-            </div>
-            
-            <div class="payment-method">
-              <img src="https://static.wixstatic.com/media/af3a4a_708585fdb7fc4345a2e68f56538ac72a~mv2.png" alt="Ath Movil" class="payment-logo">
-                 <strong>727-426-4414</strong>   
-                </div>
-            </div>
+          <div class="service-price">$80 / única vez</div>
         </div>
-        
-        <p class="payment-subtitle">🛡️Procesamos tus pagos de forma segura y protegida</p>
+      </div>
     </section>
     
+ 
 
-
-     <!--Sección de testimonios -->
-     <section id="testimonios" class="testimonials-section">
-      <div class="section-header">
-          <h2 class="section-title">Lo que dicen los padres</h2>
-          <p class="section-subtitle">Experiencias de familias que han confiado en nuestros servicios</p>
-      </div>
-
-
-      <div class="carousel-container">
-          <div class="carousel-track" id="carouselTrack">
-              <!-- Testimonio 1 -->
-              <div class="testimonial-card">
-                  <p class="testimonial-text">
-                      Desde que comenzamos con sus servicios, hemos visto un cambio increíble en nuestro hijo. Los profesionales son excepcionales.
-                  </p>
-                  <div class="parent-info">
-                      <div class="parent-avatar">MG</div>
-                      <div class="parent-details">
-                          <h4>María González</h4>
-                          <p>Madre de Santiago, 8 años</p>
-                      </div>
-                      <div class="rating">
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                      </div>
-                  </div>
-              </div>
-
-
-              <!-- Testimonio 2 -->
-              <div class="testimonial-card">
-                  <p class="testimonial-text">
-                      La atención que recibimos es extraordinaria. Cada sesión está cuidadosamente planificada y adaptada a nuestras necesidades.
-                  </p>
-                  <div class="parent-info">
-                      <div class="parent-avatar">CR</div>
-                      <div class="parent-details">
-                          <h4>Carlos Rodríguez</h4>
-                          <p>Padre de Isabella, 16 años</p>
-                      </div>
-                      <div class="rating">
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                      </div>
-                  </div>
-              </div>
-
-
-              <!-- Testimonio 3 -->
-              <div class="testimonial-card">
-                  <p class="testimonial-text">
-                      Lo que más valoramos es la comunicación constante. Siempre estamos informados del progreso y recibimos orientación.
-                  </p>
-                  <div class="parent-info">
-                      <div class="parent-avatar">LM</div>
-                      <div class="parent-details">
-                          <h4>Laura Martínez</h4>
-                          <p>Madre de Diego, 10 años</p>
-                      </div>
-                      <div class="rating">
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                          <span class="star">★</span>
-                      </div>
-                  </div>
-              </div>
-         </div>
-
-
-          <div class="carousel-controls">
-              <button class="carousel-btn" id="prevBtn">
-                  <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M15 18L9 12L15 6" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-              </button>
-              
-              <div class="carousel-indicators" id="indicators"></div>
-              
-              <button class="carousel-btn" id="nextBtn">
-                  <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M9 18L15 12L9 6" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-              </button>
-          </div>
-          
-          <div style="text-align: center;">
-              <button class="auto-play-btn" id="autoPlayBtn">⏸️ Pausar</button>
-          </div>
-      </div>
-  </section>
-
-
-  <!-- ***** Footer Start ***** -->
   <footer id="newsletter">
-    
     <div class="container">
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-heading">
-            
+            <h4>Se necesita empatía,carisma y deseo para impactar vidas. Únete!&nbsp;<a
+                href="https://form.jotform.com/241113071630036" class="main-button"><strong><u>Aplicar</u> </strong></a>
+            </h4>
           </div>
         </div>
         <div class="col-lg-6 offset-lg-3">
@@ -2983,11 +1431,8 @@
             <div class="row">
               <div class="col-lg-6 col-sm-6">
 
-
               </div>
               <div class="col-lg-6 col-sm-6">
-
-
 
 
               </div>
@@ -2997,21 +1442,28 @@
       </div>
       <div class="row">
         <div class="col-lg-3">
-         
-        
-        </div>
-        
-        <div class="col-lg-3">
-          <div class="footer-widget" id="contactanos">
+          <div class="footer-widget">
             <h4>Contáctanos</h4>
-            <ul>
-              <li><strong>Brighton Country Club, Dorado PR 00646</strong></li>
-              <li><strong>727-426-4414&nbsp;|&nbsp;813-816-2624</strong></li>
-              <li>naboricorp6@gmail.com</li>
-            </ul>
+            <p>Brighton Country Club, Dorado PR 00693</p>
+            <p><a href="tel:+17274264414">727-426-4414&nbsp;|&nbsp;813-816-2624</a></p>
+            <p><a href="mailto:naboricorp6@gmail.com">naboricorp6@gmail.com</a></p>
+            <p><a href="https://eu.jotform.com/agent/019548ba3122731aa27bc6c6d6c087290bf3"><strong>preguntas y
+                  respuestas 24/7 </strong></a></p>
           </div>
         </div>
-        
+        <div class="col-lg-3">
+          <div class="footer-widget">
+            <h4>About Us</h4>
+            <ul>
+              <li><a href="#top">Inicio</a></li>
+              <li><a href="#services">Servicios</a></li>
+              <li><a href="#about">Conócenos</a></li>
+              <li><a href="https://naboricorpreservas.setmore.com/">Reservas</a></li>
+              <li><a href="#pricing">Precios</a></li>
+            </ul>
+
+          </div>
+        </div>
         <div class="col-lg-3">
           <div class="footer-widget">
             <h4>Síguenos</h4>
@@ -3023,14 +1475,10 @@
               <!--<li><a href="https://t.me/NBRCorp"><i class="fab fa-telegram-plane"></i> Telegram</a></li>-->
               <li><a href="https://wa.me/7274264414"><i class="fab fa-whatsapp"></i> Whatsapp</a></li>
               <li><a href="lms.html"><i class="fas fa-graduation-cap"></i> Examenes</a></li>
-              <li><a href="https://centroaprendizaje.netlify.app/"><i class="fas fa-users"></i></i> C.D.A.N</a></li>
-               <li><a href="https://arcus-editorial.vercel.app/"><i class="fas fa-book-open"></i> Editorial Arcus</a></li>
-             
               
             </ul>
           </div>
         </div>
-
 
         <div class="col-lg-3">
           <div class="footer-widget">
@@ -3039,13 +1487,11 @@
               <img src="images/learning with NBR.png" alt="La diversidad transformando vidas">
             </div>
 
-
           </div>
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
             <p>Copyright © 2020 NABORI Corp. All Rights Reserved.
-
 
           </div>
         </div>
@@ -3053,8 +1499,6 @@
     </div>
   </footer>
   
-
-
 
 
   <!-- Scripts -->
@@ -3066,181 +1510,86 @@
   <script src="js/popup.js"></script>
   <script src="js/custom.js"></script>
 
-
-  
-    <!-- Script para el popup -->
-    <script>
-      // Envolvemos el código en un evento para asegurar que la página esté cargada
-      document.addEventListener("DOMContentLoaded", function() {
-          // Asumiendo que quieres que el pop-up aparezca al cargar la página
-          // Con un pequeño retraso para que no sea tan abrupto
-          setTimeout(function() {
-              document.getElementById('popupOverlay').classList.add('show');
-              document.body.style.overflow = 'hidden';
-          }, 1000); // 1 segundo de retraso
-      });
-
-
-      function closePopup() {
-          document.getElementById('popupOverlay').classList.remove('show');
-          document.body.style.overflow = 'auto';
-      }
-
-
-      // Cierra el pop-up si se hace clic fuera del contenido
-      document.getElementById('popupOverlay').addEventListener('click', function(event) {
-          if (event.target === this) {
-              closePopup();
-          }
-      });
-
-
-      document.getElementById('popupClose').addEventListener('click', closePopup);
-
-
-      function claimOffer() {
-          // Redirige al usuario a la sección de precios
-          window.location.href = '#pricing';
-          closePopup();
-      }
-  </script>
-  <!-- Script para testimonios -->
+  <!-- Script para el popup -->
   <script>
-    let currentSlide = 0;
-    let isAutoPlaying = true;
-    let autoPlayInterval;
-    let slidesPerView = getSlidesPerView();
-    const track = document.getElementById('carouselTrack');
-    const cards = document.querySelectorAll('.testimonial-card');
-    const totalSlides = cards.length;
-    const maxSlide = Math.max(0, totalSlides - slidesPerView);
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupClose = document.getElementById('popupClose');
+    const popupCta = document.getElementById('popupCta');
 
+    // Mostrar popup después de 3 segundos
+    setTimeout(() => {
+      popupOverlay.style.display = 'flex';
+    }, 3000);
 
-    function getSlidesPerView() {
-        if (window.innerWidth >= 1024) return 3;
-        if (window.innerWidth >= 640) return 2;
-        return 1;
-    }
-
-
-    function createIndicators() {
-        const indicatorsContainer = document.getElementById('indicators');
-        indicatorsContainer.innerHTML = '';
-        const totalIndicators = Math.ceil(totalSlides / slidesPerView);
-        
-        for (let i = 0; i < totalIndicators; i++) {
-            const indicator = document.createElement('div');
-            indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
-            indicator.addEventListener('click', () => goToSlide(i * slidesPerView));
-            indicatorsContainer.appendChild(indicator);
-        }
-    }
-
-
-    function updateSlide() {
-        const slideWidth = 100 / slidesPerView;
-        const offset = -(currentSlide * slideWidth);
-        track.style.transform = `translateX(${offset}%)`;
-        
-        // Update indicators
-        const indicators = document.querySelectorAll('.indicator');
-        const activeIndicator = Math.floor(currentSlide / slidesPerView);
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === activeIndicator);
-        });
-        
-        // Update button states
-        document.getElementById('prevBtn').disabled = currentSlide === 0;
-        document.getElementById('nextBtn').disabled = currentSlide >= maxSlide;
-    }
-
-
-    function changeSlide(direction) {
-        const newSlide = currentSlide + (direction * slidesPerView);
-        if (newSlide >= 0 && newSlide <= maxSlide) {
-            currentSlide = newSlide;
-            updateSlide();
-        }
-    }
-
-
-    function goToSlide(slideIndex) {
-        if (slideIndex >= 0 && slideIndex <= maxSlide) {
-            currentSlide = slideIndex;
-            updateSlide();
-        }
-    }
-
-
-    function nextSlide() {
-        if (currentSlide >= maxSlide) {
-            currentSlide = 0;
-        } else {
-            currentSlide += slidesPerView;
-            if (currentSlide > maxSlide) currentSlide = maxSlide;
-        }
-        updateSlide();
-    }
-
-
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 4000);
-    }
-
-
-    function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
-    }
-
-
-    function toggleAutoPlay() {
-        const btn = document.getElementById('autoPlayBtn');
-        if (isAutoPlaying) {
-            stopAutoPlay();
-            btn.textContent = '▶️ Reproducir';
-            isAutoPlaying = false;
-        } else {
-            startAutoPlay();
-            btn.textContent = '⏸️ Pausar';
-            isAutoPlaying = true;
-        }
-    }
-
-
-    // Event listeners
-    document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
-    document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
-    document.getElementById('autoPlayBtn').addEventListener('click', toggleAutoPlay);
-
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        const newSlidesPerView = getSlidesPerView();
-        if (newSlidesPerView !== slidesPerView) {
-            slidesPerView = newSlidesPerView;
-            currentSlide = 0;
-            createIndicators();
-            updateSlide();
-        }
+    // Botón cerrar
+    popupClose.addEventListener('click', () => {
+      popupOverlay.style.display = 'none';
     });
 
+    
 
-    // Handle hover pause
-    const carouselContainer = document.querySelector('.carousel-container');
-    carouselContainer.addEventListener('mouseenter', () => {
-        if (isAutoPlaying) stopAutoPlay();
+    // Cerrar si se hace clic fuera
+    popupOverlay.addEventListener('click', (e) => {
+      if (e.target === popupOverlay) {
+        popupOverlay.style.display = 'none';
+      }
     });
-    carouselContainer.addEventListener('mouseleave', () => {
-        if (isAutoPlaying) startAutoPlay();
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        popupOverlay.style.display = 'none';
+      }
     });
-
-
-    // Initialize
-    createIndicators();
-    updateSlide();
-    if (isAutoPlaying) startAutoPlay();
-</script>
-
+  </script>
+   <!-- Script para las tabs de servicios -->
+   <script>
+     document.addEventListener('DOMContentLoaded', function() {
+       const tabBtns = document.querySelectorAll('.services-tab-btn');
+       const tabPanes = document.querySelectorAll('.services-tab-pane');
+       
+       // Función para cambiar pestañas
+       function switchTab(tabId) {
+         // Remover clase active de todos los botones
+         tabBtns.forEach(b => b.classList.remove('active'));
+         // Añadir clase active al botón clickeado
+         document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+         
+         // Ocultar todos los paneles
+         tabPanes.forEach(pane => pane.classList.remove('active'));
+         
+         // Mostrar el panel correspondiente
+         document.getElementById(tabId).classList.add('active');
+       }
+       
+       // Event listeners para los botones de pestañas
+       tabBtns.forEach(btn => {
+         btn.addEventListener('click', function() {
+           const tabId = this.getAttribute('data-tab');
+           switchTab(tabId);
+         });
+         
+         // Soporte para teclado
+         btn.addEventListener('keydown', function(e) {
+           if (e.key === 'Enter' || e.key === ' ') {
+             e.preventDefault();
+             const tabId = this.getAttribute('data-tab');
+             switchTab(tabId);
+           }
+         });
+       });
+       
+       // Detectar si estamos en un dispositivo táctil para mejorar UX
+       let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+       
+       if (isTouchDevice) {
+         document.querySelectorAll('.services-tab-btn').forEach(btn => {
+           btn.style.padding = '18px 20px';
+         });
+       }
+     });
+   </script>
+   
 
   
   <!-- Cookie Consent by Osano -->
@@ -3256,7 +1605,7 @@
         },
         theme: "classic",
         content: {
-          message: "Usamos cookies.",
+          message: "Usamos cookies para mejorar tu experiencia.",
           dismiss: "Aceptar",
           link: "Más información",
           href: "https://www.naboricorp.com/politica-de-privacidad.html"
@@ -3291,42 +1640,11 @@
         }
     });
 </script>
-<!--script de infographic-->
-<script>
-  // Añadir efecto de aparición suave al hacer scroll
-  document.addEventListener("DOMContentLoaded", function () {
-    const steps = document.querySelectorAll(".step-inner");
-
-    steps.forEach((step, index) => {
-      // Añadir delay para animación escalonada
-      step.style.transitionDelay = `${index * 0.1}s`;
-    });
-
-    // Efecto de escritura para el título
-    const title = document.querySelector(".header h1");
-    const originalText = title.textContent;
-    title.textContent = "";
-
-    let i = 0;
-    const typeWriter = setInterval(function () {
-      if (i < originalText.length) {
-        title.textContent += originalText.charAt(i);
-        i++;
-      } else {
-        clearInterval(typeWriter);
-      }
-    }, 50);
-  });
-</script>
-
 
  <script src='https://cdn.jotfor.ms/agent/embedjs/019548ba3122731aa27bc6c6d6c087290bf3/embed.js'>
 </script>
 
 
-
-
 </body>
-
 
 </html>
