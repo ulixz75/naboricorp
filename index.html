@@ -2370,10 +2370,44 @@
   </div>
   </div>
 <!--end infographic -->
-  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
-<stripe-pricing-table pricing-table-id="prctbl_1TYpMJKb3IsDzrkBcY5CuVlF"
-publishable-key="pk_live_51Ibv2pKb3IsDzrkBXlAxacRVbO07k8tIxqxW8pRfdoRYxvDPOkCaEfgRpoYt9lqJdRu0LiXZt0FlIjj4UMboEBEl00RtWmdhYO">
-</stripe-pricing-table>
+  <div style="margin-top:40px; position:relative;" id="pricingContainer">
+    <style>
+      #athTooltip {
+        background:#ffffff; border-radius:16px; padding:18px 24px; 
+        box-shadow:0 12px 35px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(0,0,0,0.05); 
+        display:flex; align-items:center; gap:20px; margin: 0 auto 30px; max-width: 650px; 
+        position:relative; z-index:5;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+      @media (max-width: 600px) {
+        #athTooltip { flex-direction:column; text-align:center; padding:32px 20px 20px; gap:14px; }
+        #athTooltip .tooltip-text { text-align:center !important; }
+        #athTooltip .tooltip-btn { width:100%; text-align:center; }
+      }
+    </style>
+    
+    <!-- TOOLTIP ATH MOVIL -->
+    <div id="athTooltip">
+      <img src="images/athMovil.png" alt="ATH Móvil" style="height:45px; width:auto; object-fit:contain; flex-shrink:0;">
+      <div class="tooltip-text" style="flex-grow:1; text-align:left;">
+        <strong style="display:block; font-family:'Nunito',sans-serif; font-size:1.05rem; color:#1d1d1f; margin-bottom:4px; font-weight:800;">Pagos mediante ATH Móvil</strong>
+        <span style="font-family:'Poppins',sans-serif; font-size:0.9rem; color:#515154; line-height:1.4; display:block; margin-bottom:4px;">Complete el formulario de ATH Móvil para seleccionar sus servicios y coordinar su pago de manera directa.</span>
+        <span style="font-family:'Poppins',sans-serif; font-size:0.85rem; color:#7e7e82; line-height:1.4; display:block;">Para otros métodos de pago, seleccione el plan de su preferencia a continuación.</span>
+      </div>
+      <button id="athMovilPayBtn"
+              onclick="if(window.athFormsApp) { window.athFormsApp.open(); } else { console.log('El widget aún no se ha cargado'); }"
+              style="background:#ffffff; border:2px solid #ff7a00; padding:10px 18px; border-radius:12px; transition:transform 0.2s, box-shadow 0.2s, background-color 0.2s; box-shadow:0 4px 14px rgba(255,122,0,0.12); align-self:center; display:flex; align-items:center; justify-content:center; cursor:pointer; outline:none; flex-shrink:0;"
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 18px rgba(255,122,0,0.25)'; this.style.backgroundColor='#fffbf7';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 14px rgba(255,122,0,0.12)'; this.style.backgroundColor='#ffffff';">
+        <img src="images/athMovil.png" alt="Pagar con ATH Móvil" style="height:28px; width:auto; display:block;">
+      </button>
+    </div>
+
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1TYpMJKb3IsDzrkBcY5CuVlF"
+    publishable-key="pk_live_51Ibv2pKb3IsDzrkBXlAxacRVbO07k8tIxqxW8pRfdoRYxvDPOkCaEfgRpoYt9lqJdRu0LiXZt0FlIjj4UMboEBEl00RtWmdhYO">
+    </stripe-pricing-table>
+  </div>
 
 
     <!--Tabs-->
@@ -3119,8 +3153,10 @@ publishable-key="pk_live_51Ibv2pKb3IsDzrkBXlAxacRVbO07k8tIxqxW8pRfdoRYxvDPOkCaEf
  <script src='https://cdn.jotfor.ms/agent/embedjs/019548ba3122731aa27bc6c6d6c087290bf3/embed.js'>
 </script>
 
-
-
+  <!-- FORMS.APP EMBED (ATH MOVIL WIDGET) -->
+  <script src="https://cdn.forms.app/embed.js" type="text/javascript" async defer 
+          onload="window.athFormsApp = new formsapp('6a0f3fdea7a40272eff031cf', 'slider', {'overlay':'rgba(45,45,45,0.5)','width':'767px','height':'100vh','align':'right'}, 'https://d6ycqicy.forms.app');">
+  </script>
 
 </body>
 
