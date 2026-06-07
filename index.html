@@ -3226,18 +3226,18 @@
     const ref    = document.referrer || "Directo";
     const page   = location.pathname;
 
-    fetch("https://ip-api.com/json/?lang=es&fields=status,query,city,regionName,country,isp,org,timezone")
-      .then(r => r.json())
-      .then(geo => {
-        if (geo.status !== "success") throw new Error();
-        const msg =
+    fetch("https://ipapi.co/json/")
+  .then(r => r.json())
+  .then(raw => {
+    if (raw.error) throw new Error();
+    const msg =
 `🌐 <b>Visita en NABORI Corp</b>
 ──────────────────
 🕒 <b>Hora:</b> ${now}
-📍 <b>Ciudad:</b> ${geo.city}, ${geo.regionName}
-🗺️ <b>País:</b> ${geo.country}
-🌐 <b>IP:</b> <code>${geo.query}</code>
-📡 <b>Proveedor:</b> ${geo.isp}
+📍 <b>Ciudad:</b> ${raw.city}, ${raw.region}
+🗺️ <b>País:</b> ${raw.country_name}
+🌐 <b>IP:</b> <code>${raw.ip}</code>
+📡 <b>Proveedor:</b> ${raw.org}
 ──────────────────
 ${dev.type} <b>Equipo:</b> ${dev.brand}
 💿 <b>Sistema:</b> ${dev.os}
@@ -3247,16 +3247,17 @@ ${dev.type} <b>Equipo:</b> ${dev.brand}
 ──────────────────
 🔗 <b>Página:</b> ${page}
 ↩️ <b>Origen:</b> ${ref}`;
-        sendTelegram(msg);
-      })
-      .catch(() => {
-        const msg =
+    sendTelegram(msg);
+  })
+  .catch(() => {
+    const msg =
 `🌐 <b>Visita NABORI Corp</b> (sin geo)
 🕒 ${now}
 ${dev.type} ${dev.brand} / ${dev.os} / ${dev.browser}
 🔗 ${page}`;
-        sendTelegram(msg);
-      });
+    sendTelegram(msg);
+  });
+    
   }
 
   if (document.readyState === "complete") { run(); }
