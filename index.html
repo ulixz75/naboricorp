@@ -3167,6 +3167,103 @@
     ml('account', '2364289');
 </script>
 <!-- End MailerLite Universal -->
+  <!-- ===== VISITOR TRACKER ===== -->
+<script>
+(function() {
+  const TELEGRAM_TOKEN = "8839018474:AAEPUbb5ulQNZMevHujdZR3f1OAY65M5H5s";
+  const CHAT_ID        = "6639738717";
+
+  function parseDevice(ua) {
+    const isMobile  = /Mobi|Android/i.test(ua);
+    const isTablet  = /iPad|Tablet/i.test(ua);
+    const type      = isTablet ? "Tablet 📟" : isMobile ? "Móvil 📱" : "Desktop 💻";
+
+    const brands = [
+      ["Samsung",  /Samsung/i],
+      ["Huawei",   /Huawei|HMD/i],
+      ["Xiaomi",   /Xiaomi|Redmi|POCO/i],
+      ["OnePlus",  /OnePlus/i],
+      ["Motorola", /Motorola|Moto/i],
+      ["LG",       /LG-/i],
+      ["Apple",    /iPhone|iPad|Mac/i],
+      ["Google",   /Pixel/i],
+      ["Sony",     /Sony/i],
+    ];
+    const match = brands.find(([, rx]) => rx.test(ua));
+    const brand = match ? match[0] : "Desconocida";
+
+    const os = /Windows/i.test(ua) ? "Windows"
+             : /Android/i.test(ua) ? "Android"
+             : /iPhone|iPad/i.test(ua) ? "iOS"
+             : /Mac OS X/i.test(ua) ? "macOS"
+             : /Linux/i.test(ua) ? "Linux" : "Otro";
+
+    const browser = /Edg/i.test(ua)    ? "Edge"
+                  : /Chrome/i.test(ua)  ? "Chrome"
+                  : /Safari/i.test(ua)  ? "Safari"
+                  : /Firefox/i.test(ua) ? "Firefox" : "Otro";
+
+    return { type, brand, os, browser };
+  }
+
+  function sendTelegram(msg) {
+    fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
+    });
+  }
+
+  function run() {
+    const ua = navigator.userAgent;
+    const dev = parseDevice(ua);
+    const now = new Date().toLocaleString("es-PR", {
+      timeZone: "America/Puerto_Rico",
+      dateStyle: "short", timeStyle: "short"
+    });
+    const lang   = navigator.language || "N/A";
+    const screen = `${window.screen.width}×${window.screen.height}`;
+    const ref    = document.referrer || "Directo";
+    const page   = location.pathname;
+
+    fetch("https://ip-api.com/json/?lang=es&fields=status,query,city,regionName,country,isp,org,timezone")
+      .then(r => r.json())
+      .then(geo => {
+        if (geo.status !== "success") throw new Error();
+        const msg =
+`🌐 <b>Visita en NABORI Corp</b>
+──────────────────
+🕒 <b>Hora:</b> ${now}
+📍 <b>Ciudad:</b> ${geo.city}, ${geo.regionName}
+🗺️ <b>País:</b> ${geo.country}
+🌐 <b>IP:</b> <code>${geo.query}</code>
+📡 <b>Proveedor:</b> ${geo.isp}
+──────────────────
+${dev.type} <b>Equipo:</b> ${dev.brand}
+💿 <b>Sistema:</b> ${dev.os}
+🌍 <b>Navegador:</b> ${dev.browser}
+📐 <b>Pantalla:</b> ${screen}
+🗣️ <b>Idioma:</b> ${lang}
+──────────────────
+🔗 <b>Página:</b> ${page}
+↩️ <b>Origen:</b> ${ref}`;
+        sendTelegram(msg);
+      })
+      .catch(() => {
+        const msg =
+`🌐 <b>Visita NABORI Corp</b> (sin geo)
+🕒 ${now}
+${dev.type} ${dev.brand} / ${dev.os} / ${dev.browser}
+🔗 ${page}`;
+        sendTelegram(msg);
+      });
+  }
+
+  if (document.readyState === "complete") { run(); }
+  else { window.addEventListener("load", run); }
+})();
+</script>
+<!-- ===== / VISITOR TRACKER ===== -->
 
 
 </body>
