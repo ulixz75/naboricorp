@@ -3168,22 +3168,20 @@
 </script>
 <!-- End MailerLite Universal -->
 
-<!-- ===== / VISITOR TRACKER ===== -->
 <!-- ===== VISITOR TRACKER ===== -->
 <script>
 (function() {
 
-  // ── Variables compartidas (scope global del IIFE) ──
-  let dev   = { type: "?", brand: "?", os: "?", browser: "?" };
-  let page  = location.pathname;
+  // Variables compartidas
+  let dev  = { type: "?", brand: "?", os: "?", browser: "?" };
+  const page      = location.pathname;
   const startTime = Date.now();
 
   function parseDevice(ua) {
     const isMobile = /Mobi|Android/i.test(ua);
     const isTablet = /iPad|Tablet/i.test(ua);
     const type     = isTablet ? "Tablet 📟" : isMobile ? "Móvil 📱" : "Desktop 💻";
-
-    const brands = [
+    const brands   = [
       ["Samsung",  /Samsung/i],
       ["Huawei",   /Huawei|HMD/i],
       ["Xiaomi",   /Xiaomi|Redmi|POCO/i],
@@ -3194,37 +3192,32 @@
       ["Google",   /Pixel/i],
       ["Sony",     /Sony/i],
     ];
-    const match = brands.find(([, rx]) => rx.test(ua));
-    const brand = match ? match[0] : "Desconocida";
-
-    const os = /Windows/i.test(ua) ? "Windows"
-             : /Android/i.test(ua) ? "Android"
-             : /iPhone|iPad/i.test(ua) ? "iOS"
-             : /Mac OS X/i.test(ua) ? "macOS"
-             : /Linux/i.test(ua) ? "Linux" : "Otro";
-
+    const match   = brands.find(([, rx]) => rx.test(ua));
+    const brand   = match ? match[0] : "Desconocida";
+    const os      = /Windows/i.test(ua) ? "Windows"
+                  : /Android/i.test(ua) ? "Android"
+                  : /iPhone|iPad/i.test(ua) ? "iOS"
+                  : /Mac OS X/i.test(ua) ? "macOS"
+                  : /Linux/i.test(ua) ? "Linux" : "Otro";
     const browser = /Edg/i.test(ua)    ? "Edge"
                   : /Chrome/i.test(ua)  ? "Chrome"
                   : /Safari/i.test(ua)  ? "Safari"
                   : /Firefox/i.test(ua) ? "Firefox" : "Otro";
-
     return { type, brand, os, browser };
   }
 
-  // ── Envío vía serverless (token seguro en Vercel) ──
+  // Llamada directa a Telegram (fetch normal)
   function sendTelegram(msg) {
-    fetch("/api/notify", {
+    fetch("https://api.telegram.org/bot8839018474:AAEPUbb5ulQNZMevHujdZR3f1OAY65M5H5s/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: msg })
+      body: JSON.stringify({ chat_id: "6639738717", text: msg, parse_mode: "HTML" })
     });
   }
 
-  // ── Visita inicial ──
+  // Visita inicial
   function run() {
-    const ua = navigator.userAgent;
-    dev = parseDevice(ua); // asigna a la variable del scope exterior
-
+    dev = parseDevice(navigator.userAgent);
     const now    = new Date().toLocaleString("es-PR", {
       timeZone: "America/Puerto_Rico",
       dateStyle: "short", timeStyle: "short"
@@ -3237,7 +3230,7 @@
       .then(r => r.json())
       .then(raw => {
         if (raw.error) throw new Error();
-        const msg =
+        sendTelegram(
 `🌐 <b>Visita en NABORI Corp</b>
 ──────────────────
 🕒 <b>Hora:</b> ${now}
@@ -3253,46 +3246,45 @@ ${dev.type} <b>Equipo:</b> ${dev.brand}
 🗣️ <b>Idioma:</b> ${lang}
 ──────────────────
 🔗 <b>Página:</b> ${page}
-↩️ <b>Origen:</b> ${ref}`;
-        sendTelegram(msg);
+↩️ <b>Origen:</b> ${ref}`);
       })
       .catch(() => {
-        const msg =
+        sendTelegram(
 `🌐 <b>Visita NABORI Corp</b> (sin geo)
 🕒 ${now}
 ${dev.type} ${dev.brand} / ${dev.os} / ${dev.browser}
-🔗 ${page}`;
-        sendTelegram(msg);
+🔗 ${page}`);
       });
   }
 
-  // ── Tiempo en página ──
-  let durationSent = false; // evita enviar doble
+  // Tiempo en página
+  let durationSent = false;
 
   function sendDuration() {
     if (durationSent) return;
     durationSent = true;
-
     const seconds = Math.round((Date.now() - startTime) / 1000);
     if (seconds < 5) return;
-
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
+    const mins     = Math.floor(seconds / 60);
+    const secs     = seconds % 60;
     const duration = mins > 0 ? `${mins} min ${secs} seg` : `${secs} seg`;
 
-    const msg =
+    const blob = new Blob([JSON.stringify({
+      chat_id:    "6639738717",
+      text:
 `⏱️ <b>Tiempo en NABORI Corp</b>
 ──────────────────
 ⏳ <b>Duración:</b> ${duration}
 ${dev.type} <b>Equipo:</b> ${dev.brand}
 💿 <b>Sistema:</b> ${dev.os}
-🔗 <b>Página:</b> ${page}`;
+🔗 <b>Página:</b> ${page}`,
+      parse_mode: "HTML"
+    })], { type: "application/json" });
 
-    const blob = new Blob(
-      [JSON.stringify({ message: msg })],
-      { type: "application/json" }
+    navigator.sendBeacon(
+      "https://api.telegram.org/bot8839018474:AAEPUbb5ulQNZMevHujdZR3f1OAY65M5H5s/sendMessage",
+      blob
     );
-    navigator.sendBeacon("/api/notify", blob);
   }
 
   window.addEventListener("visibilitychange", () => {
@@ -3300,13 +3292,13 @@ ${dev.type} <b>Equipo:</b> ${dev.brand}
   });
   window.addEventListener("beforeunload", sendDuration);
 
-  // ── Init ──
   if (document.readyState === "complete") { run(); }
   else { window.addEventListener("load", run); }
 
 })();
 </script>
 <!-- ===== / VISITOR TRACKER ===== -->
+
 
 </body>
 
