@@ -3262,6 +3262,42 @@ ${dev.type} ${dev.brand} / ${dev.os} / ${dev.browser}
 
   if (document.readyState === "complete") { run(); }
   else { window.addEventListener("load", run); }
+
+  // ── TIEMPO EN PÁGINA ──────────────────────────────
+  const startTime = Date.now();
+
+  function sendDuration() {
+    const seconds = Math.round((Date.now() - startTime) / 1000);
+    if (seconds < 5) return; // ignora rebotes accidentales
+
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    const duration = mins > 0
+      ? `${mins} min ${secs} seg`
+      : `${secs} seg`;
+
+    const msg =
+`⏱️ <b>Tiempo en NABORI Corp</b>
+──────────────────
+🕒 <b>Duración:</b> ${duration}
+${dev.type} <b>Equipo:</b> ${dev.brand}
+💿 <b>Sistema:</b> ${dev.os}
+🔗 <b>Página:</b> ${page}`;
+
+    // sendBeacon es más confiable al cerrar la pestaña
+    const blob = new Blob(
+      [JSON.stringify({ message: msg })],
+      { type: "application/json" }
+    );
+    navigator.sendBeacon("/api/notify", blob);
+  }
+
+  window.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") sendDuration();
+  });
+
+  window.addEventListener("beforeunload", sendDuration);
+  // ── / TIEMPO EN PÁGINA ────────────────────────────
 })();
 </script>
 <!-- ===== / VISITOR TRACKER ===== -->
