@@ -3167,16 +3167,21 @@
     ml('account', '2364289');
 </script>
 <!-- End MailerLite Universal -->
-  <!-- ===== VISITOR TRACKER ===== -->
+
+<!-- ===== / VISITOR TRACKER ===== -->
+<!-- ===== VISITOR TRACKER ===== -->
 <script>
 (function() {
-  const TELEGRAM_TOKEN = "8839018474:AAEPUbb5ulQNZMevHujdZR3f1OAY65M5H5s";
-  const CHAT_ID        = "6639738717";
+
+  // ── Variables compartidas (scope global del IIFE) ──
+  let dev   = { type: "?", brand: "?", os: "?", browser: "?" };
+  let page  = location.pathname;
+  const startTime = Date.now();
 
   function parseDevice(ua) {
-    const isMobile  = /Mobi|Android/i.test(ua);
-    const isTablet  = /iPad|Tablet/i.test(ua);
-    const type      = isTablet ? "Tablet 📟" : isMobile ? "Móvil 📱" : "Desktop 💻";
+    const isMobile = /Mobi|Android/i.test(ua);
+    const isTablet = /iPad|Tablet/i.test(ua);
+    const type     = isTablet ? "Tablet 📟" : isMobile ? "Móvil 📱" : "Desktop 💻";
 
     const brands = [
       ["Samsung",  /Samsung/i],
@@ -3206,31 +3211,33 @@
     return { type, brand, os, browser };
   }
 
+  // ── Envío vía serverless (token seguro en Vercel) ──
   function sendTelegram(msg) {
-    fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+    fetch("/api/notify", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
+      body: JSON.stringify({ message: msg })
     });
   }
 
+  // ── Visita inicial ──
   function run() {
     const ua = navigator.userAgent;
-    const dev = parseDevice(ua);
-    const now = new Date().toLocaleString("es-PR", {
+    dev = parseDevice(ua); // asigna a la variable del scope exterior
+
+    const now    = new Date().toLocaleString("es-PR", {
       timeZone: "America/Puerto_Rico",
       dateStyle: "short", timeStyle: "short"
     });
     const lang   = navigator.language || "N/A";
     const screen = `${window.screen.width}×${window.screen.height}`;
     const ref    = document.referrer || "Directo";
-    const page   = location.pathname;
 
     fetch("https://ipapi.co/json/")
-  .then(r => r.json())
-  .then(raw => {
-    if (raw.error) throw new Error();
-    const msg =
+      .then(r => r.json())
+      .then(raw => {
+        if (raw.error) throw new Error();
+        const msg =
 `🌐 <b>Visita en NABORI Corp</b>
 ──────────────────
 🕒 <b>Hora:</b> ${now}
@@ -3247,44 +3254,40 @@ ${dev.type} <b>Equipo:</b> ${dev.brand}
 ──────────────────
 🔗 <b>Página:</b> ${page}
 ↩️ <b>Origen:</b> ${ref}`;
-    sendTelegram(msg);
-  })
-  .catch(() => {
-    const msg =
+        sendTelegram(msg);
+      })
+      .catch(() => {
+        const msg =
 `🌐 <b>Visita NABORI Corp</b> (sin geo)
 🕒 ${now}
 ${dev.type} ${dev.brand} / ${dev.os} / ${dev.browser}
 🔗 ${page}`;
-    sendTelegram(msg);
-  });
-    
+        sendTelegram(msg);
+      });
   }
 
-  if (document.readyState === "complete") { run(); }
-  else { window.addEventListener("load", run); }
-
-  // ── TIEMPO EN PÁGINA ──────────────────────────────
-  const startTime = Date.now();
+  // ── Tiempo en página ──
+  let durationSent = false; // evita enviar doble
 
   function sendDuration() {
+    if (durationSent) return;
+    durationSent = true;
+
     const seconds = Math.round((Date.now() - startTime) / 1000);
-    if (seconds < 5) return; // ignora rebotes accidentales
+    if (seconds < 5) return;
 
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    const duration = mins > 0
-      ? `${mins} min ${secs} seg`
-      : `${secs} seg`;
+    const duration = mins > 0 ? `${mins} min ${secs} seg` : `${secs} seg`;
 
     const msg =
 `⏱️ <b>Tiempo en NABORI Corp</b>
 ──────────────────
-🕒 <b>Duración:</b> ${duration}
+⏳ <b>Duración:</b> ${duration}
 ${dev.type} <b>Equipo:</b> ${dev.brand}
 💿 <b>Sistema:</b> ${dev.os}
 🔗 <b>Página:</b> ${page}`;
 
-    // sendBeacon es más confiable al cerrar la pestaña
     const blob = new Blob(
       [JSON.stringify({ message: msg })],
       { type: "application/json" }
@@ -3295,13 +3298,15 @@ ${dev.type} <b>Equipo:</b> ${dev.brand}
   window.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") sendDuration();
   });
-
   window.addEventListener("beforeunload", sendDuration);
-  // ── / TIEMPO EN PÁGINA ────────────────────────────
+
+  // ── Init ──
+  if (document.readyState === "complete") { run(); }
+  else { window.addEventListener("load", run); }
+
 })();
 </script>
 <!-- ===== / VISITOR TRACKER ===== -->
-
 
 </body>
 
