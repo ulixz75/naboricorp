@@ -1,0 +1,19 @@
+# NABORI Corp
+
+> Empresa de servicios educativos en Puerto Rico especializada en tutoría, preparación para el SAT/College Board, terapia educativa, homeschooling y servicios de habla y lenguaje.
+
+## Descripción
+NABORI Corp ofrece servicios educativos personalizados para estudiantes de todos los niveles en Puerto Rico. Nuestro equipo de tutores certificados y terapeutas educativos trabaja para cerrar brechas académicas y preparar a los estudiantes para el éxito universitario.
+
+## Servicios principales
+- Tutoría académica personalizada (matemáticas, inglés, español, ciencias)
+- Preparación para el SAT y College Board
+- Terapia educativa para dificultades de aprendizaje
+- Programa de homeschooling estructurado
+- Servicios de habla y lenguaje
+
+## Ubicación
+Puerto Rico
+
+## URL
+https://naboricorp.vercel.app
