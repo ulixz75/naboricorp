@@ -1,57 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-
-    // Activa Google Analytics solo si el usuario da consentimiento
-    if (document.cookie.includes("cookieconsent_status=allow")) {
-      gtag('config', 'G-C20LSQR1DS');
-    }
-  </script>
-  <!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '528164316928164'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=528164316928164&ev=PageView&noscript=1"/></noscript><!-- End Meta Pixel Code -->
-
-
-
-
+  <!-- ===================== CHARSET & VIEWPORT ===================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" type="image/x-icon"
-    href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
-  <meta name="description"
-    content="NABORI Corp: Servicios personalizados de tutorías, terapia educativa, homeschooling y terapia del habla. Transformamos vidas a través de la educación.">
-  <meta name="keywords"
-    content="tutorías, terapia educativa, homeschooling, terapia del habla, evaluación, Puerto Rico,educación privada,apoyo escolar,apoyo académico">
+
+  <!-- ===================== SEO / IA ===================== -->
+  <title>NABORI Corp — Servicios Educativos en Puerto Rico</title>
+  <meta name="description" content="NABORI Corp: tutoría, SAT/College Board, terapia educativa, homeschooling y habla y lenguaje en Puerto Rico. Transformamos vidas a través de la educación.">
+  <meta name="keywords" content="tutoría Puerto Rico, SAT prep, College Board, terapia educativa, homeschooling, habla y lenguaje, NABORI, Dorado PR">
   <meta name="author" content="Dra. Lilliam Vega Lassús">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-    rel="stylesheet">
-  
+  <meta name="robots" content="index, follow, max-snippet:-1">
 
+  <!-- ===================== OPEN GRAPH ===================== -->
+  <meta property="og:title" content="NABORI Corp — Servicios Educativos en Puerto Rico">
+  <meta property="og:description" content="Tutoría, SAT/College Board, terapia educativa, homeschooling y habla y lenguaje en Puerto Rico.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naboricorp.vercel.app">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/x-icon"
-      href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
-    <meta name="description"
-      content="NABORI Corp: Servicios personalizados de tutorías, terapia educativa, homeschooling y terapia del habla. Transformamos vidas a través de la educación.">
+  <!-- ===================== FAVICON ===================== -->
+  <link rel="icon" type="image/x-icon" href="https://static.wixstatic.com/ficons/af3a4a_24624697283f4b119a4bf0d70423c02b~mv2.ico">
 
-
-    <!-- Datos estructurados -->
-    <script type="application/ld+json">
+  <!-- ===================== SCHEMA.ORG JSON-LD ===================== -->
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "EducationalOrganization",
     "name": "NABORI Corp",
-    "url": "https://naboricorp.com",
+    "description": "Servicios educativos en Puerto Rico: tutoría, SAT/College Board, terapia educativa, homeschooling y habla y lenguaje.",
+    "url": "https://naboricorp.vercel.app",
+    "areaServed": "Puerto Rico",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Brighton Country Club",
@@ -64,88 +43,87 @@
       "@type": "ContactPoint",
       "telephone": "+1-727-426-4414",
       "contactType": "Customer Service"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios Educativos",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tutoría Académica" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Preparación SAT/College Board" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Terapia Educativa" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Homeschooling" }},
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Habla y Lenguaje" }}
+      ]
     }
   }
   </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Qué servicios ofrece NABORI Corp?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ofrecemos tutorías, homeschooling, terapia educativa y terapia del habla y lenguaje, tanto presenciales como remotas."
-      }
-    },
-         {
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué servicios ofrece NABORI Corp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ofrecemos tutorías, homeschooling, terapia educativa y terapia del habla y lenguaje, tanto presenciales como remotas."
+        }
+      },
+      {
         "@type": "Question",
         "name": "¿Dónde están ubicados?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nuestra oficina esta en Brighton Country Club, Dorado, Puerto Rico, pero los servicios son en el hogar y/o remoto."
+          "text": "Nuestra oficina está en Brighton Country Club, Dorado, Puerto Rico, pero los servicios son en el hogar y/o remoto."
         }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cómo puedo reservar una consulta gratuita?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Puedes reservar una consulta gratuita directamente desde nuestro sitio web, haciendo clic en el botón 'Reservar consulta'."
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo puedo reservar una consulta gratuita?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puedes reservar una consulta gratuita directamente desde nuestro sitio web, haciendo clic en el botón 'Reservar consulta'."
+        }
       }
+    ]
+  }
+  </script>
+
+  <!-- ===================== GOOGLE ANALYTICS ===================== -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    if (document.cookie.includes("cookieconsent_status=allow")) {
+      gtag('config', 'G-C20LSQR1DS');
     }
-  ]
-}
-</script>
+  </script>
 
+  <!-- ===================== META PIXEL ===================== -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '528164316928164');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=528164316928164&ev=PageView&noscript=1"/></noscript>
 
+  <!-- ===================== FONTS ===================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-
-<!-- Google Fonts (ya lo tienes) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet">
-
-<!-- Font Awesome -->
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  integrity="sha512-papEJbG9nO+5X9Xn9eE4jXdp1yE1Q3kW0sG2HkO4T2ZkF2rSg5U1z6bI3b1F9w5E8"
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-
-    
-  </head>
-
-
-
-
-
-
-
-
-  <title>NABORI Corp</title>
-
-
-  <!-- Bootstrap core CSS -->
+  <!-- ===================== CSS ===================== -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="css/templatemo-chain-app-dev.css">
   <link rel="stylesheet" href="css/animated.css">
   <link rel="stylesheet" href="css/owl.css">
-
 
 </head>
 <style>
