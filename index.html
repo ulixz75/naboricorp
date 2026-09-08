@@ -46,10 +46,19 @@
       "postalCode": "00646",
       "addressCountry": "US"
     },
+    "legalName": "NABORI Corp",
+    "foundingDate": "2021",
+    "identifier": "352078",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-727-426-4414",
       "contactType": "Customer Service"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Dra. Lilliam Vega Lassús",
+      "jobTitle": "Fundadora",
+      "description": "Educadora con más de 20 años de trayectoria, doctorado en Educación Especial y experiencia internacional en Puerto Rico, Estados Unidos, Brasil y España."
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -177,6 +186,14 @@
           "@type": "Answer",
           "text": "Puedes reservar una consulta gratuita directamente desde nuestro sitio web, haciendo clic en el botón 'Reservar consulta'."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "¿NABORI Corp está legalmente registrada?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. NABORI Corp es una corporación puertorriqueña debidamente registrada en el Departamento de Estado de Puerto Rico, Núm. Registro 352078. Puedes verificarlo en https://rceweb.estado.pr.gov/es/ y https://www.estado.pr.gov/corporaciones"
+        }
       }
     ]
   }
@@ -194,6 +211,18 @@
     "uploadDate": "2026-08-28",
     "duration": "PT30S",
     "publisher": { "@type": "Organization", "name": "NABORI Corp", "logo": { "@type": "ImageObject", "url": "https://naboricorp.vercel.app/images/logo.png" } }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dra. Lilliam Vega Lassús",
+    "jobTitle": "Fundadora de NABORI Corp",
+    "description": "Educadora con más de 20 años de trayectoria, doctorado en Educación Especial y experiencia internacional en Puerto Rico, Estados Unidos, Brasil y España.",
+    "worksFor": { "@type": "Organization", "name": "NABORI Corp", "identifier": "352078" },
+    "knowsAbout": ["Educación Especial", "Tutorías", "Terapia Educativa", "Homeschooling", "Habla y Lenguaje"]
   }
   </script>
 
@@ -2462,28 +2491,40 @@
           <div class="section-heading">
             <h4>Acerca&nbsp;<em>de nosotros</em></h4>
             <img src="images/heading-line-dec.png" alt="apoyar el crecimiento y desarrollo académico y personal ">
-            <p><strong>NABORI Corp, corporación puertorriqueña fundada en 2021 en Dorado, se especializa en bienestar educativo integral desde kindergarten hasta universidad. Basamos nuestro trabajo en empatía y relaciones saludables como pilares del éxito. Nuestros profesionales garantizan resultados excepcionales, asegurando que cada estudiante alcance su máximo potencial académico, emocional y social.
-              <br>
-              </strong><span style="color: #f40d43;">-Dra. Lilliam Vega Lassús</span></p>
+            <p><strong>NABORI Corp</strong> es una corporación puertorriqueña de bienestar educativo integral —desde kindergarten hasta universidad— <strong>fundada en 2021 en Dorado, Puerto Rico</strong>. Basamos nuestro trabajo en la <em>empatía y las relaciones saludables</em> como pilares del éxito. Nuestros profesionales garantizan resultados excepcionales, asegurando que cada estudiante alcance su máximo potencial académico, emocional y social.</p>
+            <p id="registro-nabori" style="margin-top:12px; font-size:14px; color:#1e293b; background:#f1f8ff; border-left:4px solid #4a6fa5; padding:10px 12px; border-radius:6px; line-height:1.5;"><i class="fas fa-shield-alt" style="color:#4a6fa5;"></i> <strong>Corporación debidamente registrada en el Departamento de Estado de Puerto Rico</strong> — Núm. Registro <strong>352078</strong>. <a href="https://rceweb.estado.pr.gov/es/" target="_blank" rel="noopener" style="color:#4a6fa5; font-weight:700; text-decoration:underline;">Verificar registro ↗</a> <span style="color:#64748b;">|</span> <a href="https://www.estado.pr.gov/corporaciones" target="_blank" rel="noopener" style="color:#64748b; font-size:13px; text-decoration:underline;">estado.pr.gov/corporaciones</a></p>
+            <p style="margin-top:12px;"><button type="button" id="vegaTrigger" onclick="openVegaModal()" aria-haspopup="dialog" aria-controls="vegaModal" style="background:none; border:none; padding:0; color:#f40d43; font-weight:700; font-size:16px; cursor:pointer; border-bottom:1.5px dashed #f40d43; display:inline-flex; align-items:center; gap:6px;"><span>-Dra. Lilliam Vega Lassús</span> <span style="font-size:13px; color:#f40d43; background:#fff0f3; padding:2px 8px; border-radius:20px; border:1px solid #ffd1dc;">ⓘ Conoce su trayectoria →</span></button></p>
 
 
           </div>
 
-          <div class="row">
-            <div class="col-lg-6">
-              
+          <div class="row" style="margin-top:16px;">
+            <div class="col-lg-6" style="padding:6px;">
+              <div style="display:flex; gap:10px; align-items:center; background:#fff; border:1px solid #eef2f7; border-radius:10px; padding:12px; box-shadow:0 4px 10px rgba(0,0,0,0.04); border-left:4px solid #22c55e; height:100%;">
+                <i class="fas fa-certificate" style="color:#22c55e; font-size:22px; flex-shrink:0;"></i>
+                <div style="text-align:left; font-size:13px; line-height:1.4;"><strong>Registrada Dept. Estado PR</strong><br><span style="color:#334155;">Núm. <strong>352078</strong> · <a href="https://rceweb.estado.pr.gov/es/" target="_blank" rel="noopener" style="color:#4a6fa5; text-decoration:underline;">Verificar</a></span></div>
+              </div>
             </div>
-            <div class="col-lg-6">
-              
+            <div class="col-lg-6" style="padding:6px;">
+              <div style="display:flex; gap:10px; align-items:center; background:#fff; border:1px solid #eef2f7; border-radius:10px; padding:12px; box-shadow:0 4px 10px rgba(0,0,0,0.04); border-left:4px solid #4a6fa5; height:100%;">
+                <i class="fas fa-calendar-check" style="color:#4a6fa5; font-size:22px; flex-shrink:0;"></i>
+                <div style="text-align:left; font-size:13px; line-height:1.4;"><strong>Operando desde 2021</strong><br><span style="color:#334155;">Dorado, Puerto Rico</span></div>
+              </div>
             </div>
-            <div class="col-lg-6">
-              
+            <div class="col-lg-6" style="padding:6px;">
+              <div style="display:flex; gap:10px; align-items:center; background:#fff; border:1px solid #eef2f7; border-radius:10px; padding:12px; box-shadow:0 4px 10px rgba(0,0,0,0.04); border-left:4px solid #764ba2; height:100%;">
+                <i class="fas fa-graduation-cap" style="color:#764ba2; font-size:22px; flex-shrink:0;"></i>
+                <div style="text-align:left; font-size:13px; line-height:1.4;"><strong>K a Universidad</strong><br><span style="color:#334155;">CDAN · College Board · SAT</span></div>
+              </div>
             </div>
-            <div class="col-lg-6">
-              
+            <div class="col-lg-6" style="padding:6px;">
+              <div style="display:flex; gap:10px; align-items:center; background:#fff; border:1px solid #eef2f7; border-radius:10px; padding:12px; box-shadow:0 4px 10px rgba(0,0,0,0.04); border-left:4px solid #f59e0b; height:100%;">
+                <i class="fas fa-check-circle" style="color:#f59e0b; font-size:22px; flex-shrink:0;"></i>
+                <div style="text-align:left; font-size:13px; line-height:1.4;"><strong>Evaluación gratis</strong><br><span style="color:#334155;">Sin compromiso</span></div>
+              </div>
             </div>
-            <div class="col-lg-12">
-              <p><strong>¡Reserva una evaluación gratis, hoy!</strong></p>
+            <div class="col-lg-12" style="padding:6px 6px 0 6px;">
+              <p style="margin:8px 0 8px 0;"><strong>¡Reserva una evaluación gratis, hoy!</strong></p>
               <div class="gradient-button">
                 <a href="https://bookings.setmore.com/scheduleappointment/1f0a34aa-4436-4fda-8967-6a435b503d83">Reservar
                   Evaluación</a>
@@ -2500,7 +2541,62 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal Dra. Vega -->
+  <div id="vegaModal" role="dialog" aria-modal="true" aria-labelledby="vegaTitle" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:10000; animation:fadeIn 0.3s ease;">
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:32px 28px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-width:520px; width:90%; animation:slideUp 0.4s ease; max-height:85vh; overflow-y:auto;">
+      <button onclick="closeVegaModal()" aria-label="Cerrar" style="position:absolute; top:14px; right:14px; background:#f1f5f9; border:none; color:#334155; font-size:22px; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center;">&times;</button>
+      <div style="text-align:left;">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,#4a6fa5,#764ba2); color:#fff; padding:6px 12px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:0.5px; margin-bottom:14px;"><i class="fas fa-user-graduate"></i> FUNDADORA</div>
+        <h2 id="vegaTitle" style="margin:0 0 10px 0; font-size:22px; font-weight:800; color:#1e293b; line-height:1.3;" tabindex="-1">Dra. Lilliam Vega Lassús</h2>
+        <p style="margin:0 0 14px 0; font-size:14px; line-height:1.6; color:#475569;">Educadora con <strong>más de 20 años de trayectoria</strong>, <strong>doctorado en Educación Especial</strong> y <strong>experiencia internacional en Puerto Rico, Estados Unidos, Brasil y España</strong>.</p>
+        <p style="margin:0 0 14px 0; font-size:14px; line-height:1.6; color:#475569;">Fundadora de <strong>NABORI Corp</strong> — corporación registrada en el Departamento de Estado de Puerto Rico, <strong>Núm. 352078</strong>. Su enfoque une <em>empatía y relaciones saludables</em> para potenciar el desarrollo académico, emocional y social de cada estudiante.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin:14px 0;">
+          <span style="background:#f1f5ff; border:1px solid #dbeafe; color:#1e40af; padding:6px 10px; border-radius:20px; font-size:12px; font-weight:600;"><i class="fas fa-award"></i> 20+ años</span>
+          <span style="background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; padding:6px 10px; border-radius:20px; font-size:12px; font-weight:600;"><i class="fas fa-graduation-cap"></i> Doctorado Ed. Especial</span>
+          <span style="background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; padding:6px 10px; border-radius:20px; font-size:12px; font-weight:600;"><i class="fas fa-globe-americas"></i> 4 países</span>
+          <span style="background:#fdf2f8; border:1px solid #fbcfe8; color:#9d174d; padding:6px 10px; border-radius:20px; font-size:12px; font-weight:600;"><i class="fas fa-child"></i> K–Universidad</span>
+        </div>
+        <p style="margin:14px 0 0 0; font-size:12px; color:#64748b; background:#f8fafc; border-left:3px solid #4a6fa5; padding:8px 10px; border-radius:6px;"><i class="fas fa-shield-alt" style="color:#4a6fa5;"></i> Reg. Dept. Estado PR #352078 · <a href="https://rceweb.estado.pr.gov/es/" target="_blank" rel="noopener" style="color:#4a6fa5; font-weight:700;">Verificar registro ↗</a></p>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:18px;">
+          <a href="https://bookings.setmore.com/scheduleappointment/1f0a34aa-4436-4fda-8967-6a435b503d83" style="display:block; text-align:center; padding:14px 20px; background:linear-gradient(135deg,#4a6fa5,#764ba2); color:#fff; text-decoration:none; border-radius:10px; font-weight:700; font-size:15px;">Reservar Evaluación Gratis</a>
+          <a href="https://wa.me/17274264414?text=Hola,%20quiero%20m%C3%A1s%20info%20sobre%20la%20Dra.%20Vega%20y%20NABORI%20Corp" target="_blank" rel="noopener" style="display:block; text-align:center; padding:12px 20px; background:#fff; color:#128C7E; border:2px solid #25D366; text-decoration:none; border-radius:10px; font-weight:700; font-size:14px;"><i class="fab fa-whatsapp"></i> Hablar por WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function(){
+      var lastFocus=null;
+      window.openVegaModal=function(){
+        var m=document.getElementById('vegaModal');
+        if(!m) return;
+        lastFocus=document.activeElement;
+        m.style.display='block';
+        document.body.style.overflow='hidden';
+        var t=document.getElementById('vegaTitle');
+        if(t) t.focus();
+      };
+      window.closeVegaModal=function(){
+        var m=document.getElementById('vegaModal');
+        if(!m) return;
+        m.style.display='none';
+        document.body.style.overflow='auto';
+        if(lastFocus && lastFocus.focus) lastFocus.focus();
+      };
+      document.getElementById('vegaModal')?.addEventListener('click', function(e){
+        if(e.target===this) closeVegaModal();
+      });
+      document.addEventListener('keydown', function(e){
+        if(e.key==='Escape'){
+          var m=document.getElementById('vegaModal');
+          if(m && m.style.display==='block') closeVegaModal();
+        }
+      });
+    })();
+  </script>
   <!--infographic-->
+
   <div class="infographic-wrapper">
     <div class="infographic-container">
     <div class="header">
@@ -3045,6 +3141,7 @@
               <li><strong>Brighton Country Club, Dorado PR 00646</strong></li>
               <li><strong>727-426-4414&nbsp;|&nbsp;813-816-2624</strong></li>
               <li>naboricorp6@gmail.com</li>
+              <li style="margin-top:6px; font-size:13px; color:#a8b2c0;"><i class="fas fa-shield-alt"></i> Reg. Dept. Estado PR <strong style="color:#fff;">#352078</strong> · <a href="https://rceweb.estado.pr.gov/es/" target="_blank" rel="noopener" style="color:#4cc9f0; text-decoration:underline;">Verificar registro</a></li>
             </ul>
           </div>
         </div>
@@ -3080,7 +3177,7 @@
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
-            <p>Copyright © 2020 NABORI Corp. All Rights Reserved.
+            <p>Copyright © 2021–2026 NABORI Corp. All Rights Reserved.
 
 
           </div>
